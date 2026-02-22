@@ -20,10 +20,13 @@ interface GameStore {
   isGameOver: boolean;
   correctCount: number;
   totalChoices: number;
+  completedAreas: string[];
 
   setPhase: (phase: GamePhase) => void;
   selectCharacter: (character: Character) => void;
   startGame: () => void;
+  selectArea: (areaIndex: number) => void;
+  quitToAreaSelect: () => void;
   makeChoice: (situationId: string, choice: Choice) => void;
   proceedAfterFeedback: () => void;
   resetGame: () => void;
@@ -50,6 +53,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   isGameOver: false,
   correctCount: 0,
   totalChoices: 0,
+  completedAreas: [],
 
   setPhase: (phase) => set({ phase }),
 
@@ -65,9 +69,21 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   startGame: () =>
     set({
-      phase: "area-intro",
-      currentAreaIndex: 0,
+      phase: "area-select",
+    }),
+
+  selectArea: (areaIndex: number) =>
+    set({
+      currentAreaIndex: areaIndex,
       currentSituationIndex: 0,
+      phase: "area-intro",
+    }),
+
+  quitToAreaSelect: () =>
+    set({
+      phase: "area-select",
+      currentSituationIndex: 0,
+      lastChoice: null,
     }),
 
   makeChoice: (situationId, choice) => {
@@ -112,15 +128,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const nextSitIdx = state.currentSituationIndex + 1;
 
     if (nextSitIdx >= area.situations.length) {
-      const nextAreaIdx = state.currentAreaIndex + 1;
-      if (nextAreaIdx >= allAreas.length) {
-        set({ phase: "ending" });
+      const newCompleted = [...state.completedAreas];
+      if (!newCompleted.includes(area.id)) {
+        newCompleted.push(area.id);
+      }
+      if (newCompleted.length >= allAreas.length) {
+        set({ completedAreas: newCompleted, phase: "ending" });
       } else {
-        set({
-          currentAreaIndex: nextAreaIdx,
-          currentSituationIndex: 0,
-          phase: "area-intro",
-        });
+        set({ completedAreas: newCompleted, phase: "area-select" });
       }
     } else {
       set({
@@ -146,6 +161,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       isGameOver: false,
       correctCount: 0,
       totalChoices: 0,
+      completedAreas: [],
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],

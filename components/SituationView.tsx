@@ -9,9 +9,11 @@ import ResourceBar from "./ResourceBar";
 
 export default function SituationView() {
   const makeChoice = useGameStore((s) => s.makeChoice);
+  const quitToAreaSelect = useGameStore((s) => s.quitToAreaSelect);
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
   const currentSituationIndex = useGameStore((s) => s.currentSituationIndex);
   const [isChoosing, setIsChoosing] = useState(false);
+  const [showQuitConfirm, setShowQuitConfirm] = useState(false);
 
   const area = allAreas[currentAreaIndex];
   const situation = area?.situations[currentSituationIndex];
@@ -37,6 +39,13 @@ export default function SituationView() {
         <div className="max-w-2xl w-full">
           <div className="flex items-center justify-between mb-4">
             <div className="flex items-center gap-2">
+              <button
+                onClick={() => setShowQuitConfirm(true)}
+                className="px-3 py-1 rounded-full bg-white/5 border border-white/10
+                           text-xs text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors"
+              >
+                ← 영역 선택
+              </button>
               {subArea && (
                 <span className="px-3 py-1 rounded-full bg-white/10 text-xs text-white/60">
                   {subArea.title}
@@ -47,6 +56,33 @@ export default function SituationView() {
               {currentSituationIndex + 1} / {area.situations.length}
             </span>
           </div>
+
+          {/* Quit confirmation dialog */}
+          {showQuitConfirm && (
+            <div className="mb-4 p-4 rounded-xl bg-orange-500/10 border border-orange-500/20">
+              <p className="text-orange-300 text-sm mb-3">
+                이 영역을 포기하고 영역 선택 화면으로 돌아갈까요?
+                <br />
+                <span className="text-orange-300/60 text-xs">현재 영역의 진행 상황은 초기화됩니다.</span>
+              </p>
+              <div className="flex gap-2">
+                <button
+                  onClick={quitToAreaSelect}
+                  className="px-4 py-2 rounded-lg bg-orange-500/20 text-orange-300 text-sm font-medium
+                             hover:bg-orange-500/30 transition-colors"
+                >
+                  포기하기
+                </button>
+                <button
+                  onClick={() => setShowQuitConfirm(false)}
+                  className="px-4 py-2 rounded-lg bg-white/5 text-white/60 text-sm
+                             hover:bg-white/10 transition-colors"
+                >
+                  계속하기
+                </button>
+              </div>
+            </div>
+          )}
 
           <div className="game-card overflow-hidden mb-6">
             <IllustrationCard

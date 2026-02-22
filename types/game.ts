@@ -68,6 +68,7 @@ export type GamePhase =
   | "title"
   | "character-select"
   | "intro"
+  | "area-select"
   | "area-intro"
   | "playing"
   | "feedback"

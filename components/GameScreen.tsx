@@ -4,6 +4,7 @@ import { useGameStore } from "@/store/useGameStore";
 import TitleScreen from "./TitleScreen";
 import CharacterSelect from "./CharacterSelect";
 import IntroScreen from "./IntroScreen";
+import AreaSelect from "./AreaSelect";
 import AreaIntro from "./AreaIntro";
 import SituationView from "./SituationView";
 import FeedbackOverlay from "./FeedbackOverlay";
@@ -19,6 +20,8 @@ export default function GameScreen() {
       return <CharacterSelect />;
     case "intro":
       return <IntroScreen />;
+    case "area-select":
+      return <AreaSelect />;
     case "area-intro":
       return <AreaIntro />;
     case "playing":

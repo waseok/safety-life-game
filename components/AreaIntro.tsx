@@ -6,6 +6,7 @@ import IllustrationCard from "./IllustrationCard";
 
 export default function AreaIntro() {
   const setPhase = useGameStore((s) => s.setPhase);
+  const quitToAreaSelect = useGameStore((s) => s.quitToAreaSelect);
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
 
   const area = allAreas[currentAreaIndex];
@@ -13,6 +14,15 @@ export default function AreaIntro() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 phase-transition">
+      <div className="max-w-2xl w-full">
+        <button
+          onClick={quitToAreaSelect}
+          className="mb-4 px-4 py-2 rounded-full bg-white/5 border border-white/10
+                     text-sm text-white/40 hover:text-white/70 hover:bg-white/10 transition-colors"
+        >
+          ← 영역 선택으로
+        </button>
+      </div>
       <div className="max-w-2xl w-full game-card overflow-hidden">
         <IllustrationCard
           src={area.coverImage}
