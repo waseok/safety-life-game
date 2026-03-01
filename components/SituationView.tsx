@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
 import { Choice } from "@/types/game";
@@ -17,6 +17,11 @@ export default function SituationView() {
 
   const area = allAreas[currentAreaIndex];
   const situation = area?.situations[currentSituationIndex];
+
+  const shuffledChoices = useMemo(() => {
+    if (!situation) return [];
+    return [...situation.choices].sort(() => Math.random() - 0.5);
+  }, [situation?.id]);
 
   if (!area || !situation) return null;
 
@@ -104,7 +109,7 @@ export default function SituationView() {
 
           <div className="space-y-3">
             <p className="text-sm text-white/40 mb-2">어떻게 하시겠습니까?</p>
-            {situation.choices.map((choice, idx) => (
+            {shuffledChoices.map((choice, idx) => (
               <button
                 key={choice.id}
                 onClick={() => handleChoice(choice)}
