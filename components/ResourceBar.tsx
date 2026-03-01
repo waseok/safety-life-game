@@ -1,6 +1,5 @@
 "use client";
 
-import { useMemo } from "react";
 import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
 
@@ -12,19 +11,11 @@ export default function ResourceBar() {
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
   const currentSituationIndex = useGameStore((s) => s.currentSituationIndex);
 
-  const progress = useMemo(() => {
-    let completed = 0;
-    let total = 0;
-    for (let i = 0; i < allAreas.length; i++) {
-      total += allAreas[i].situations.length;
-      if (i < currentAreaIndex) {
-        completed += allAreas[i].situations.length;
-      } else if (i === currentAreaIndex) {
-        completed += currentSituationIndex;
-      }
-    }
-    return { current: completed, total, percent: total > 0 ? (completed / total) * 100 : 0 };
-  }, [currentAreaIndex, currentSituationIndex]);
+  const area = allAreas[currentAreaIndex];
+  const situationsInArea = area?.situations.length ?? 0;
+  const areaPercent = situationsInArea > 0
+    ? (currentSituationIndex / situationsInArea) * 100
+    : 0;
 
   const lifePercent = Math.max(0, (life / maxLife) * 100);
   const mentalPercent = Math.max(0, (mental / maxMental) * 100);
@@ -37,16 +28,18 @@ export default function ResourceBar() {
   return (
     <div className="w-full bg-black/40 backdrop-blur-md border-b border-white/10 px-4 py-3 sticky top-0 z-50">
       <div className="max-w-2xl mx-auto space-y-2">
-        <div className="flex items-center justify-between text-xs text-white/50 mb-1">
-          <span>진행률</span>
-          <span>
-            {progress.current} / {progress.total}
+        <div className="flex items-center justify-between text-xs mb-1">
+          <span className="text-white/70 font-medium">
+            {area ? `${area.icon} ${area.title}` : "진행 중"}
+          </span>
+          <span className="text-white/50">
+            영역 {currentAreaIndex + 1}/{allAreas.length} · 상황 {currentSituationIndex + 1}/{situationsInArea}
           </span>
         </div>
-        <div className="h-1 bg-white/10 rounded-full overflow-hidden mb-3">
+        <div className="h-2.5 bg-white/10 rounded-full overflow-hidden mb-3">
           <div
-            className="h-full bg-blue-500/70 rounded-full transition-all duration-700"
-            style={{ width: `${progress.percent}%` }}
+            className="h-full bg-blue-500 rounded-full transition-all duration-700"
+            style={{ width: `${areaPercent}%` }}
           />
         </div>
 
