@@ -157,23 +157,24 @@ export default function AreaSelect() {
                 <div className="flex items-start justify-between mb-3">
                   <span className="text-3xl">{area.icon}</span>
                   {isCompleted && badge ? (
-                    /* 이수 뱃지 */
-                    <div className="flex flex-col items-end gap-1">
+                    /* 이수 뱃지 - 크고 강조 */
+                    <div className="flex flex-col items-center gap-1">
                       <div
-                        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl text-xs font-black"
+                        className="flex flex-col items-center justify-center w-16 h-16 rounded-full"
                         style={{
-                          background: badge.bg,
-                          color: badge.color,
-                          border: `1.5px solid ${badge.border}`,
-                          boxShadow: `0 2px 8px ${badge.bg}`,
+                          background: `radial-gradient(circle, ${badge.bg} 0%, rgba(255,255,255,0.6) 100%)`,
+                          border: `3px solid ${badge.border}`,
+                          boxShadow: `0 0 0 4px ${badge.bg}, 0 4px 12px ${badge.bg}`,
                         }}
                       >
-                        <span>{badge.icon}</span>
-                        <span>{badge.label}</span>
+                        <span className="text-2xl">{badge.icon}</span>
                       </div>
+                      <span className="text-xs font-black" style={{ color: badge.color }}>
+                        {badge.label}
+                      </span>
                       {result && (
-                        <span className="text-[10px] font-bold" style={{ color: badge.color }}>
-                          정답률 {Math.round((result.correctCount / result.totalChoices) * 100)}%
+                        <span className="text-xs font-bold" style={{ color: badge.color }}>
+                          {Math.round((result.correctCount / result.totalChoices) * 100)}%
                         </span>
                       )}
                     </div>
