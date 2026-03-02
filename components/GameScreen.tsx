@@ -8,6 +8,7 @@ import AreaSelect from "./AreaSelect";
 import AreaIntro from "./AreaIntro";
 import SituationView from "./SituationView";
 import FeedbackOverlay from "./FeedbackOverlay";
+import AreaComplete from "./AreaComplete";
 import EndingScreen from "./EndingScreen";
 
 export default function GameScreen() {
@@ -28,6 +29,8 @@ export default function GameScreen() {
       return <SituationView />;
     case "feedback":
       return <FeedbackOverlay />;
+    case "area-complete":
+      return <AreaComplete />;
     case "ending":
       return <EndingScreen />;
     default:

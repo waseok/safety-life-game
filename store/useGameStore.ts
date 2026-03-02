@@ -5,6 +5,12 @@ import { Character, Choice, ChoiceRecord, GamePhase } from "@/types/game";
 import { allAreas } from "@/data/areas";
 import { endings } from "@/data/endings";
 
+export interface AreaResult {
+  areaId: string;
+  correctCount: number;
+  totalChoices: number;
+}
+
 interface GameStore {
   phase: GamePhase;
   selectedCharacter: Character | null;
@@ -21,6 +27,9 @@ interface GameStore {
   correctCount: number;
   totalChoices: number;
   completedAreas: string[];
+  areaSessionCorrect: number;
+  areaSessionTotal: number;
+  areaResults: AreaResult[];
 
   setPhase: (phase: GamePhase) => void;
   selectCharacter: (character: Character) => void;
@@ -29,6 +38,7 @@ interface GameStore {
   quitToAreaSelect: () => void;
   makeChoice: (situationId: string, choice: Choice) => void;
   proceedAfterFeedback: () => void;
+  proceedFromAreaComplete: () => void;
   resetGame: () => void;
   getCurrentArea: () => (typeof allAreas)[number] | undefined;
   getCurrentSituation: () => ReturnType<GameStore["getCurrentArea"]> extends undefined
@@ -54,6 +64,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
   correctCount: 0,
   totalChoices: 0,
   completedAreas: [],
+  areaSessionCorrect: 0,
+  areaSessionTotal: 0,
+  areaResults: [],
 
   setPhase: (phase) => set({ phase }),
 
@@ -77,6 +90,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       currentAreaIndex: areaIndex,
       currentSituationIndex: 0,
       phase: "area-intro",
+      areaSessionCorrect: 0,
+      areaSessionTotal: 0,
     }),
 
   quitToAreaSelect: () =>
@@ -84,6 +99,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       phase: "area-select",
       currentSituationIndex: 0,
       lastChoice: null,
+      areaSessionCorrect: 0,
+      areaSessionTotal: 0,
     }),
 
   makeChoice: (situationId, choice) => {
@@ -106,6 +123,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       choiceHistory: [...state.choiceHistory, record],
       correctCount: state.correctCount + (choice.isCorrect ? 1 : 0),
       totalChoices: state.totalChoices + 1,
+      areaSessionCorrect: state.areaSessionCorrect + (choice.isCorrect ? 1 : 0),
+      areaSessionTotal: state.areaSessionTotal + 1,
       phase: "feedback",
       isGameOver: newLife <= 0 || newMental <= 0,
     });
@@ -132,16 +151,33 @@ export const useGameStore = create<GameStore>((set, get) => ({
       if (!newCompleted.includes(area.id)) {
         newCompleted.push(area.id);
       }
-      if (newCompleted.length >= allAreas.length) {
-        set({ completedAreas: newCompleted, phase: "ending" });
-      } else {
-        set({ completedAreas: newCompleted, phase: "area-select" });
-      }
+      const newAreaResults: AreaResult[] = [
+        ...state.areaResults.filter((r) => r.areaId !== area.id),
+        {
+          areaId: area.id,
+          correctCount: state.areaSessionCorrect,
+          totalChoices: state.areaSessionTotal,
+        },
+      ];
+      set({
+        completedAreas: newCompleted,
+        areaResults: newAreaResults,
+        phase: "area-complete",
+      });
     } else {
       set({
         currentSituationIndex: nextSitIdx,
         phase: "playing",
       });
+    }
+  },
+
+  proceedFromAreaComplete: () => {
+    const state = get();
+    if (state.completedAreas.length >= allAreas.length) {
+      set({ phase: "ending" });
+    } else {
+      set({ phase: "area-select" });
     }
   },
 
@@ -162,6 +198,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       correctCount: 0,
       totalChoices: 0,
       completedAreas: [],
+      areaSessionCorrect: 0,
+      areaSessionTotal: 0,
+      areaResults: [],
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],
