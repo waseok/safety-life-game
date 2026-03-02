@@ -14,108 +14,109 @@ export default function ResourceBar() {
   const area = allAreas[currentAreaIndex];
   const situationsInArea = area?.situations.length ?? 0;
   const areaPercent = situationsInArea > 0
-    ? (currentSituationIndex / situationsInArea) * 100
+    ? ((currentSituationIndex + 1) / situationsInArea) * 100
     : 0;
 
   const lifePercent = Math.max(0, (life / maxLife) * 100);
   const mentalPercent = Math.max(0, (mental / maxMental) * 100);
 
-  const lifeColor =
-    lifePercent > 60 ? "#22c55e" : lifePercent > 30 ? "#fbbf24" : "#ef4444";
-  const mentalColor =
-    mentalPercent > 60 ? "#8b5cf6" : mentalPercent > 30 ? "#fbbf24" : "#ef4444";
+  const lifeColor = lifePercent > 60 ? "#16a34a" : lifePercent > 30 ? "#f59e0b" : "#dc2626";
+  const mentalColor = mentalPercent > 60 ? "#0284c7" : mentalPercent > 30 ? "#f59e0b" : "#dc2626";
 
   return (
     <div
       className="w-full sticky top-0 z-50 px-4 py-3"
       style={{
-        background: "rgba(8, 15, 30, 0.97)",
-        borderBottom: "1px solid rgba(249, 115, 22, 0.25)",
+        background: "rgba(255,255,255,0.97)",
+        borderBottom: "2px solid rgba(2,132,199,0.2)",
         backdropFilter: "blur(16px)",
-        boxShadow: "0 4px 24px rgba(0,0,0,0.4)",
+        boxShadow: "0 2px 16px rgba(2,132,199,0.1)",
       }}
     >
       <div className="max-w-2xl mx-auto">
-        {/* 헤더 */}
+        {/* 진행 현황 헤더 */}
         <div className="flex items-center justify-between mb-2">
+          <span
+            className="px-3 py-1 rounded-full text-sm font-bold"
+            style={{
+              background: "rgba(2,132,199,0.1)",
+              border: "1px solid rgba(2,132,199,0.25)",
+              color: "#0284c7",
+            }}
+          >
+            {area ? `${area.icon} ${area.title}` : "진행 중"}
+          </span>
+          {/* 진행률 숫자 - 크고 선명하게 */}
           <div className="flex items-center gap-2">
+            <span className="text-xl font-black" style={{ color: "#0284c7" }}>
+              {currentSituationIndex + 1}
+            </span>
+            <span className="text-base font-bold" style={{ color: "#4a7090" }}>
+              / {situationsInArea}
+            </span>
             <span
-              className="px-2.5 py-0.5 rounded-full text-xs font-bold"
+              className="text-sm font-black px-2.5 py-0.5 rounded-full"
               style={{
-                background: "rgba(249,115,22,0.15)",
-                border: "1px solid rgba(249,115,22,0.3)",
-                color: "#fb923c",
+                background: "rgba(2,132,199,0.12)",
+                color: "#0284c7",
+                border: "1px solid rgba(2,132,199,0.25)",
               }}
             >
-              {area ? `${area.icon} ${area.title}` : "진행 중"}
+              {Math.round(areaPercent)}%
             </span>
           </div>
-          <span className="text-xs font-mono" style={{ color: "rgba(249,115,22,0.6)" }}>
-            {currentSituationIndex + 1} / {situationsInArea}
-          </span>
         </div>
 
-        {/* 영역 진행 바 */}
+        {/* 영역 진행 바 - 두껍고 선명하게 */}
         <div
-          className="h-1.5 rounded-full overflow-hidden mb-3"
-          style={{ background: "rgba(255,255,255,0.06)" }}
+          className="h-3 rounded-full overflow-hidden mb-3"
+          style={{ background: "rgba(2,132,199,0.12)" }}
         >
           <div
             className="h-full rounded-full transition-all duration-700"
             style={{
               width: `${areaPercent}%`,
-              background: "linear-gradient(90deg, #f97316, #fbbf24)",
+              background: "linear-gradient(90deg, #0284c7, #38bdf8)",
+              boxShadow: "0 0 6px rgba(2,132,199,0.45)",
             }}
           />
         </div>
 
         {/* 스탯 바 */}
         <div className="grid grid-cols-2 gap-4">
-          {/* 생명력 */}
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold flex items-center gap-1" style={{ color: lifeColor }}>
-                ❤️ 생명력
-              </span>
-              <span className="text-xs font-mono font-bold" style={{ color: "rgba(240,244,255,0.7)" }}>
-                {life}<span style={{ color: "rgba(240,244,255,0.3)" }}>/{maxLife}</span>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm font-bold" style={{ color: lifeColor }}>❤️ 생명력</span>
+              <span className="text-sm font-black" style={{ color: lifeColor }}>
+                {life}<span className="text-xs font-normal" style={{ color: "#9ab4c8" }}>/{maxLife}</span>
               </span>
             </div>
-            <div
-              className="h-3 rounded-full overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.08)" }}
-            >
+            <div className="h-3.5 rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.07)" }}>
               <div
                 className="h-full rounded-full transition-all duration-700 ease-out"
                 style={{
                   width: `${lifePercent}%`,
-                  background: `linear-gradient(90deg, ${lifeColor}aa, ${lifeColor})`,
-                  boxShadow: `0 0 8px ${lifeColor}60`,
+                  background: `linear-gradient(90deg, ${lifeColor}bb, ${lifeColor})`,
+                  boxShadow: `0 0 6px ${lifeColor}60`,
                 }}
               />
             </div>
           </div>
 
-          {/* 정신 에너지 */}
           <div>
-            <div className="flex items-center justify-between mb-1.5">
-              <span className="text-xs font-bold flex items-center gap-1" style={{ color: mentalColor }}>
-                🧠 정신 에너지
-              </span>
-              <span className="text-xs font-mono font-bold" style={{ color: "rgba(240,244,255,0.7)" }}>
-                {mental}<span style={{ color: "rgba(240,244,255,0.3)" }}>/{maxMental}</span>
+            <div className="flex items-center justify-between mb-1">
+              <span className="text-sm font-bold" style={{ color: mentalColor }}>🧠 정신 에너지</span>
+              <span className="text-sm font-black" style={{ color: mentalColor }}>
+                {mental}<span className="text-xs font-normal" style={{ color: "#9ab4c8" }}>/{maxMental}</span>
               </span>
             </div>
-            <div
-              className="h-3 rounded-full overflow-hidden"
-              style={{ background: "rgba(255,255,255,0.08)" }}
-            >
+            <div className="h-3.5 rounded-full overflow-hidden" style={{ background: "rgba(0,0,0,0.07)" }}>
               <div
                 className="h-full rounded-full transition-all duration-700 ease-out"
                 style={{
                   width: `${mentalPercent}%`,
-                  background: `linear-gradient(90deg, ${mentalColor}aa, ${mentalColor})`,
-                  boxShadow: `0 0 8px ${mentalColor}60`,
+                  background: `linear-gradient(90deg, ${mentalColor}bb, ${mentalColor})`,
+                  boxShadow: `0 0 6px ${mentalColor}60`,
                 }}
               />
             </div>

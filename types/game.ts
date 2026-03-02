@@ -72,6 +72,7 @@ export type GamePhase =
   | "area-intro"
   | "playing"
   | "feedback"
+  | "area-complete"
   | "ending";
 
 export interface ChoiceRecord {
