@@ -3,11 +3,15 @@
 @tailwind utilities;
 
 :root {
-  --color-bg: #0f1729;
-  --color-surface: #1a2332;
-  --color-surface-2: #243044;
-  --color-text: #e2e8f0;
-  --color-text-muted: #94a3b8;
+  --color-bg: #080f1e;
+  --color-surface: #0e1a2e;
+  --color-surface-2: #162340;
+  --color-text: #f0f4ff;
+  --color-text-muted: #7b90b8;
+  --color-accent: #f97316;
+  --color-accent-2: #fbbf24;
+  --color-safe: #22c55e;
+  --color-danger: #ef4444;
 }
 
 * {
@@ -19,39 +23,107 @@ body {
   color: var(--color-text);
   min-height: 100dvh;
   overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse at 20% 10%, rgba(249,115,22,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(251,191,36,0.04) 0%, transparent 50%);
 }
 
 @layer components {
+  /* 기본 게임 카드 */
   .game-card {
-    @apply rounded-2xl border border-white/10 bg-gradient-to-b from-white/5 to-transparent
-           backdrop-blur-sm shadow-xl transition-all duration-300;
+    @apply rounded-2xl shadow-2xl transition-all duration-300;
+    background: linear-gradient(145deg, #0e1a2e 0%, #080f1e 100%);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.05), 0 20px 60px rgba(0, 0, 0, 0.5);
   }
   .game-card:hover {
-    @apply border-white/20 shadow-2xl;
+    border-color: rgba(249, 115, 22, 0.35);
+    box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.1), 0 25px 70px rgba(0, 0, 0, 0.6), 0 0 30px rgba(249, 115, 22, 0.08);
   }
 
+  /* 선택지 버튼 */
   .choice-btn {
-    @apply relative w-full rounded-xl px-6 py-4 text-left text-base font-medium
-           transition-all duration-200 border-2
-           bg-white/5 border-white/10 text-white/90
-           hover:bg-white/10 hover:border-white/30 hover:scale-[1.02]
-           active:scale-[0.98] cursor-pointer;
+    @apply relative w-full rounded-xl px-5 py-4 text-left text-base font-medium
+           transition-all duration-200 cursor-pointer;
+    background: rgba(14, 26, 46, 0.9);
+    border: 2px solid rgba(249, 115, 22, 0.15);
+    color: rgba(240, 244, 255, 0.85);
+  }
+  .choice-btn:hover {
+    background: rgba(249, 115, 22, 0.08);
+    border-color: rgba(249, 115, 22, 0.4);
+    transform: scale(1.015);
+    color: #f0f4ff;
+    box-shadow: 0 0 20px rgba(249, 115, 22, 0.1);
+  }
+  .choice-btn:active {
+    transform: scale(0.99);
   }
 
+  /* 리소스 바 */
   .resource-bar {
     @apply h-4 rounded-full transition-all duration-700 ease-out;
   }
 
+  /* 삽화 프레임 */
   .illustration-frame {
     @apply relative overflow-hidden rounded-2xl aspect-[16/9] w-full;
   }
 
+  /* 그라디언트 오버레이 */
   .gradient-overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent;
+    @apply absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent;
   }
 
+  /* 페이즈 전환 애니메이션 */
   .phase-transition {
     animation: fadeIn 0.5s ease-out, slideUp 0.4s ease-out;
+  }
+
+  /* 안전 배지 */
+  .safety-badge {
+    @apply inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-semibold;
+    background: rgba(249, 115, 22, 0.12);
+    border: 1px solid rgba(249, 115, 22, 0.3);
+    color: #fb923c;
+  }
+
+  /* 경고 스트라이프 장식 */
+  .warning-stripe {
+    background: repeating-linear-gradient(
+      -45deg,
+      rgba(251, 191, 36, 0.08),
+      rgba(251, 191, 36, 0.08) 6px,
+      transparent 6px,
+      transparent 20px
+    );
+  }
+
+  /* 안전 팁 박스 */
+  .safety-tip-box {
+    @apply rounded-xl p-5 border;
+    background: rgba(249, 115, 22, 0.06);
+    border-color: rgba(249, 115, 22, 0.2);
+  }
+
+  /* HUD 패널 */
+  .hud-panel {
+    @apply rounded-xl px-4 py-2;
+    background: rgba(8, 15, 30, 0.95);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    backdrop-filter: blur(12px);
+  }
+
+  /* 정답 피드백 */
+  .feedback-correct {
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.15) 0%, rgba(16, 185, 129, 0.08) 100%);
+    border: 2px solid rgba(34, 197, 94, 0.3);
+  }
+
+  /* 오답 피드백 */
+  .feedback-wrong {
+    background: linear-gradient(135deg, rgba(239, 68, 68, 0.15) 0%, rgba(249, 115, 22, 0.08) 100%);
+    border: 2px solid rgba(239, 68, 68, 0.3);
   }
 }
 
@@ -61,7 +133,7 @@ body {
 }
 
 @keyframes slideUp {
-  0% { opacity: 0; transform: translateY(20px); }
+  0% { opacity: 0; transform: translateY(24px); }
   100% { opacity: 1; transform: translateY(0); }
 }
 
@@ -70,10 +142,28 @@ body {
   100% { background-position: 200% 0; }
 }
 
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 20px rgba(249, 115, 22, 0.3); }
+  50% { box-shadow: 0 0 40px rgba(249, 115, 22, 0.6); }
+}
+
+@keyframes shield-float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
 .shimmer {
-  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent);
+  background: linear-gradient(90deg, transparent, rgba(249,115,22,0.06), transparent);
   background-size: 200% 100%;
-  animation: shimmer 2s infinite;
+  animation: shimmer 2.5s infinite;
+}
+
+.shield-float {
+  animation: shield-float 3s ease-in-out infinite;
+}
+
+.pulse-glow {
+  animation: pulse-glow 2s ease-in-out infinite;
 }
 
 ::-webkit-scrollbar {
@@ -83,6 +173,9 @@ body {
   background: transparent;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(255,255,255,0.15);
+  background: rgba(249, 115, 22, 0.2);
   border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(249, 115, 22, 0.4);
 }
