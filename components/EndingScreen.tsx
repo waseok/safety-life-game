@@ -37,23 +37,22 @@ export default function EndingScreen() {
   const accuracy = totalChoices > 0 ? Math.round((correctCount / totalChoices) * 100) : 0;
 
   const theme = {
-    good:     { border: "rgba(34,197,94,0.35)",   glow: "rgba(34,197,94,0.1)",   btnGrad: "linear-gradient(135deg,#22c55e,#10b981)", btnShadow: "rgba(34,197,94,0.35)",   label: "#4ade80" },
-    normal:   { border: "rgba(249,115,22,0.35)",  glow: "rgba(249,115,22,0.08)", btnGrad: "linear-gradient(135deg,#f97316,#fbbf24)", btnShadow: "rgba(249,115,22,0.35)",  label: "#fb923c" },
-    bad:      { border: "rgba(251,191,36,0.35)",  glow: "rgba(251,191,36,0.06)", btnGrad: "linear-gradient(135deg,#f59e0b,#f97316)", btnShadow: "rgba(251,191,36,0.3)",   label: "#fbbf24" },
-    gameover: { border: "rgba(239,68,68,0.35)",   glow: "rgba(239,68,68,0.08)",  btnGrad: "linear-gradient(135deg,#ef4444,#f97316)", btnShadow: "rgba(239,68,68,0.35)",   label: "#f87171" },
+    good:     { border: "rgba(22,163,74,0.4)",  bg: "rgba(22,163,74,0.06)",   btnGrad: "linear-gradient(135deg,#16a34a,#0d9488)",  btnShadow: "rgba(22,163,74,0.35)",   labelColor: "#15803d",  statBg: "rgba(22,163,74,0.08)" },
+    normal:   { border: "rgba(245,158,11,0.4)", bg: "rgba(245,158,11,0.05)", btnGrad: "linear-gradient(135deg,#f59e0b,#f97316)",  btnShadow: "rgba(245,158,11,0.35)", labelColor: "#b45309",  statBg: "rgba(245,158,11,0.08)" },
+    bad:      { border: "rgba(220,38,38,0.4)",  bg: "rgba(220,38,38,0.05)",  btnGrad: "linear-gradient(135deg,#dc2626,#f97316)",  btnShadow: "rgba(220,38,38,0.3)",   labelColor: "#b91c1c",  statBg: "rgba(220,38,38,0.07)" },
+    gameover: { border: "rgba(220,38,38,0.5)",  bg: "rgba(220,38,38,0.06)",  btnGrad: "linear-gradient(135deg,#dc2626,#9f1239)",  btnShadow: "rgba(220,38,38,0.4)",   labelColor: "#991b1b",  statBg: "rgba(220,38,38,0.08)" },
   }[ending.type];
 
-  const accuracyColor =
-    accuracy >= 80 ? "#4ade80" : accuracy >= 60 ? "#fbbf24" : "#f87171";
+  const accuracyColor = accuracy >= 80 ? "#16a34a" : accuracy >= 60 ? "#d97706" : "#dc2626";
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 phase-transition">
       <div
-        className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-2xl"
+        className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg"
         style={{
-          background: "linear-gradient(145deg, #0e1a2e 0%, #080f1e 100%)",
-          border: `1px solid ${theme.border}`,
-          boxShadow: `0 20px 60px rgba(0,0,0,0.6), 0 0 60px ${theme.glow}`,
+          background: "#ffffff",
+          border: `2px solid ${theme.border}`,
+          boxShadow: `0 12px 40px ${theme.bg}`,
         }}
       >
         <IllustrationCard
@@ -63,48 +62,48 @@ export default function EndingScreen() {
           overlay
         />
 
-        <div className="p-6 md:p-8 text-center">
+        <div className="p-6 md:p-8 text-center" style={{ background: theme.bg }}>
           <h2
             className="text-3xl md:text-4xl font-black mb-3"
-            style={{ color: theme.label }}
+            style={{ color: theme.labelColor }}
           >
             {ending.title}
           </h2>
 
-          <p className="text-sm md:text-base leading-relaxed whitespace-pre-line mb-8" style={{ color: "rgba(240,244,255,0.65)" }}>
+          <p className="text-base md:text-lg leading-relaxed whitespace-pre-line mb-8" style={{ color: "#1e4a72" }}>
             {ending.body}
           </p>
 
           {/* 결과 스탯 */}
-          <div className="grid grid-cols-3 gap-3 mb-6">
+          <div className="grid grid-cols-3 gap-3 mb-4">
             <div
               className="rounded-xl p-4"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "rgba(2,132,199,0.06)", border: "1.5px solid rgba(2,132,199,0.2)" }}
             >
               <p className="text-2xl font-black" style={{ color: accuracyColor }}>{accuracy}%</p>
-              <p className="text-xs mt-1" style={{ color: "rgba(240,244,255,0.35)" }}>정답률</p>
+              <p className="text-sm font-semibold mt-1" style={{ color: "#4a7090" }}>정답률</p>
             </div>
             <div
               className="rounded-xl p-4"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "rgba(22,163,74,0.06)", border: "1.5px solid rgba(22,163,74,0.2)" }}
             >
-              <p className="text-2xl font-black" style={{ color: "#f87171" }}>
-                {life}<span className="text-sm" style={{ color: "rgba(240,244,255,0.25)" }}>/{maxLife}</span>
+              <p className="text-2xl font-black" style={{ color: "#16a34a" }}>
+                {life}<span className="text-sm font-normal" style={{ color: "#4a7090" }}>/{maxLife}</span>
               </p>
-              <p className="text-xs mt-1" style={{ color: "rgba(240,244,255,0.35)" }}>생명력</p>
+              <p className="text-sm font-semibold mt-1" style={{ color: "#4a7090" }}>생명력</p>
             </div>
             <div
               className="rounded-xl p-4"
-              style={{ background: "rgba(255,255,255,0.04)", border: "1px solid rgba(255,255,255,0.06)" }}
+              style={{ background: "rgba(2,132,199,0.06)", border: "1.5px solid rgba(2,132,199,0.2)" }}
             >
-              <p className="text-2xl font-black" style={{ color: "#c084fc" }}>
-                {mental}<span className="text-sm" style={{ color: "rgba(240,244,255,0.25)" }}>/{maxMental}</span>
+              <p className="text-2xl font-black" style={{ color: "#0284c7" }}>
+                {mental}<span className="text-sm font-normal" style={{ color: "#4a7090" }}>/{maxMental}</span>
               </p>
-              <p className="text-xs mt-1" style={{ color: "rgba(240,244,255,0.35)" }}>정신 에너지</p>
+              <p className="text-sm font-semibold mt-1" style={{ color: "#4a7090" }}>정신 에너지</p>
             </div>
           </div>
 
-          <div className="text-xs mb-6" style={{ color: "rgba(240,244,255,0.25)" }}>
+          <div className="text-sm font-semibold mb-6" style={{ color: "#4a7090" }}>
             {correctCount}/{totalChoices} 문항 정답
           </div>
 
