@@ -2,25 +2,56 @@
 
 import { useEffect } from "react";
 import { useGameStore } from "@/store/useGameStore";
+import { allAreas } from "@/data/areas";
 import ResourceBar from "./ResourceBar";
 import { useSound } from "@/hooks/useSound";
 
+// 🧭 나침반 5분 안전교육 영역별 영상
+const AREA_VIDEOS: Record<string, { title: string; url: string }[]> = {
+  "daily-safety": [
+    { title: "화재 대피 요령", url: "https://youtu.be/Y6BvFIYYRo4" },
+    { title: "감염병 예방 수칙", url: "https://youtu.be/0gJlY7Ekh-M" },
+  ],
+  "traffic-safety": [
+    { title: "통학버스 승하차 안전", url: "https://youtu.be/vzP1nlpiaWs" },
+  ],
+  "violence-safety": [
+    { title: "안전보호선 이해하기", url: "https://youtu.be/A3dGysylfB4" },
+  ],
+  "drug-cyber-safety": [
+    { title: "화학물질 사고 대처", url: "https://youtu.be/9dvmMvbIzsA" },
+  ],
+  "disaster-safety": [
+    { title: "대설 및 한파 행동 요령", url: "https://youtu.be/Q2r2ojKeXKo" },
+  ],
+  "work-safety": [
+    { title: "과학 실험실 및 화재 안전", url: "https://youtu.be/Y6BvFIYYRo4" },
+  ],
+  "firstaid-safety": [
+    { title: "심폐소생술 및 하임리히법", url: "https://youtu.be/3R8wTAI5S9c" },
+  ],
+};
+
+const AREA_BOARD_URL =
+  "https://www.goe.go.kr/goe/na/ntt/selectNttList.do?mi=10924&bbsId=2477";
+
 export default function FeedbackOverlay() {
-  const { lastChoice, proceedAfterFeedback, isGameOver } = useGameStore();
+  const { lastChoice, proceedAfterFeedback, isGameOver, tipRevealed, revealTip } = useGameStore();
+  const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
   const { playCorrect, playIncorrect } = useSound();
 
   const isCorrect = lastChoice?.isCorrect ?? false;
 
   useEffect(() => {
     if (!lastChoice) return;
-    if (isCorrect) {
-      playCorrect();
-    } else {
-      playIncorrect();
-    }
+    if (isCorrect) playCorrect();
+    else playIncorrect();
   }, [lastChoice?.id]);
 
   if (!lastChoice) return null;
+
+  const currentArea = allAreas[currentAreaIndex];
+  const videos = currentArea ? (AREA_VIDEOS[currentArea.id] ?? []) : [];
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#eef6ff" }}>
@@ -44,8 +75,8 @@ export default function FeedbackOverlay() {
             className="px-6 py-6 text-center"
             style={{
               background: isCorrect
-                ? "linear-gradient(135deg, rgba(22,163,74,0.08) 0%, rgba(16,185,129,0.04) 100%)"
-                : "linear-gradient(135deg, rgba(220,38,38,0.07) 0%, rgba(249,115,22,0.04) 100%)",
+                ? "linear-gradient(135deg, rgba(22,163,74,0.08), rgba(16,185,129,0.04))"
+                : "linear-gradient(135deg, rgba(220,38,38,0.07), rgba(249,115,22,0.04))",
               borderBottom: isCorrect
                 ? "1px solid rgba(22,163,74,0.15)"
                 : "1px solid rgba(220,38,38,0.15)",
@@ -85,7 +116,7 @@ export default function FeedbackOverlay() {
                     color: lastChoice.mentalDelta > 0 ? "#0284c7" : "#dc2626",
                   }}
                 >
-                  <span>🧠</span>
+                  <span>🧪</span>
                   <span>{lastChoice.mentalDelta > 0 ? "+" : ""}{lastChoice.mentalDelta}</span>
                 </div>
               )}
@@ -94,31 +125,105 @@ export default function FeedbackOverlay() {
               )}
             </div>
 
-            {/* 안전 팁 */}
-            <div
-              className="rounded-xl p-5 border mb-6"
-              style={{
-                background: "rgba(2,132,199,0.04)",
-                borderColor: "rgba(2,132,199,0.18)",
-              }}
-            >
-              <p className="text-xs font-bold uppercase tracking-widest mb-2.5" style={{ color: "#0284c7" }}>
-                💡 안전 Tip
-              </p>
-              <p className="text-sm md:text-base leading-relaxed" style={{ color: "#0d2a4a" }}>
-                {lastChoice.feedback}
-              </p>
-            </div>
+            {/* ★ 안전 팁 - 숨겨져 있고 읽으면 판단력 +5 ★ */}
+            {!tipRevealed ? (
+              <button
+                onClick={revealTip}
+                className="w-full rounded-xl p-4 mb-6 text-center transition-all duration-200 hover:scale-[1.01] active:scale-[0.99]"
+                style={{
+                  background: "linear-gradient(135deg, rgba(245,158,11,0.08), rgba(2,132,199,0.06))",
+                  border: "2px dashed rgba(245,158,11,0.5)",
+                  cursor: "pointer",
+                }}
+              >
+                <p className="text-base font-black mb-1" style={{ color: "#b45309" }}>
+                  🔒 안전 팁이 숨겨져 있어요!
+                </p>
+                <p className="text-sm font-semibold mb-2" style={{ color: "#4a7090" }}>
+                  팁을 확인하면
+                </p>
+                <span
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-sm font-black"
+                  style={{
+                    background: "rgba(2,132,199,0.12)",
+                    border: "1.5px solid rgba(2,132,199,0.35)",
+                    color: "#0284c7",
+                  }}
+                >
+                  🧪 판단력 +5 보너스!
+                </span>
+                <p className="text-xs mt-2 font-semibold" style={{ color: "#f59e0b" }}>
+                  👆 탭하여 안전 팁 보기
+                </p>
+              </button>
+            ) : (
+              <div
+                className="rounded-xl p-5 border mb-6"
+                style={{
+                  background: "rgba(2,132,199,0.04)",
+                  borderColor: "rgba(2,132,199,0.18)",
+                }}
+              >
+                <div className="flex items-center gap-2 mb-2.5">
+                  <p className="text-xs font-black uppercase tracking-widest" style={{ color: "#0284c7" }}>
+                    💡 안전 Tip
+                  </p>
+                  <span
+                    className="text-xs font-black px-2 py-0.5 rounded-full"
+                    style={{ background: "rgba(2,132,199,0.12)", color: "#0284c7", border: "1px solid rgba(2,132,199,0.25)" }}
+                  >
+                    🧪 +5 판단력 획득!
+                  </span>
+                </div>
+                <p className="text-sm md:text-base leading-relaxed" style={{ color: "#0d2a4a" }}>
+                  {lastChoice.feedback}
+                </p>
+              </div>
+            )}
 
-            {/* 게임오버 메시지 */}
+            {/* 게임오버 - 영역별 영상 링크 */}
             {isGameOver && (
               <div
-                className="text-center mb-4 p-4 rounded-xl"
-                style={{ background: "rgba(220,38,38,0.07)", border: "1px solid rgba(220,38,38,0.22)" }}
+                className="mb-5 p-4 rounded-xl"
+                style={{ background: "rgba(220,38,38,0.06)", border: "1.5px solid rgba(220,38,38,0.22)" }}
               >
-                <p className="font-bold" style={{ color: "#dc2626" }}>
+                <p className="font-black text-base mb-3" style={{ color: "#dc2626" }}>
                   💔 자원이 바닥났습니다... 게임 오버!
                 </p>
+                {videos.length > 0 && (
+                  <>
+                    <p className="text-sm font-bold mb-2" style={{ color: "#1e4a72" }}>
+                      📺 영상으로 안전 지식을 익히고 다시 도전해보세요!
+                    </p>
+                    <div className="flex flex-col gap-2 mb-2">
+                      {videos.map((v) => (
+                        <a
+                          key={v.url}
+                          href={v.url}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-[1.01]"
+                          style={{
+                            background: "rgba(220,38,38,0.08)",
+                            border: "1px solid rgba(220,38,38,0.25)",
+                            color: "#b91c1c",
+                          }}
+                        >
+                          ▶ {v.title}
+                        </a>
+                      ))}
+                    </div>
+                    <a
+                      href={AREA_BOARD_URL}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-xs font-semibold underline"
+                      style={{ color: "#4a7090" }}
+                    >
+                      🔗 경기도교육청 나침반 5분 안전교육 전체 보기 →
+                    </a>
+                  </>
+                )}
               </div>
             )}
 

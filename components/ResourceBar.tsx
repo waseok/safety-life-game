@@ -105,7 +105,7 @@ export default function ResourceBar() {
 
           <div>
             <div className="flex items-center justify-between mb-1">
-              <span className="text-sm font-bold" style={{ color: mentalColor }}>🧠 정신 에너지</span>
+              <span className="text-sm font-bold" style={{ color: mentalColor }}>🧪 판단력</span>
               <span className="text-sm font-black" style={{ color: mentalColor }}>
                 {mental}<span className="text-xs font-normal" style={{ color: "#9ab4c8" }}>/{maxMental}</span>
               </span>
