@@ -3,37 +3,9 @@
 import { useEffect } from "react";
 import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
+import { AREA_VIDEOS, AREA_BOARD_URL } from "@/data/safetyVideos";
 import ResourceBar from "./ResourceBar";
 import { useSound } from "@/hooks/useSound";
-
-// 🧭 나침반 5분 안전교육 영역별 영상
-const AREA_VIDEOS: Record<string, { title: string; url: string }[]> = {
-  "daily-safety": [
-    { title: "화재 대피 요령", url: "https://youtu.be/Y6BvFIYYRo4" },
-    { title: "감염병 예방 수칙", url: "https://youtu.be/0gJlY7Ekh-M" },
-  ],
-  "traffic-safety": [
-    { title: "통학버스 승하차 안전", url: "https://youtu.be/vzP1nlpiaWs" },
-  ],
-  "violence-safety": [
-    { title: "안전보호선 이해하기", url: "https://youtu.be/A3dGysylfB4" },
-  ],
-  "drug-cyber-safety": [
-    { title: "화학물질 사고 대처", url: "https://youtu.be/9dvmMvbIzsA" },
-  ],
-  "disaster-safety": [
-    { title: "대설 및 한파 행동 요령", url: "https://youtu.be/Q2r2ojKeXKo" },
-  ],
-  "work-safety": [
-    { title: "과학 실험실 및 화재 안전", url: "https://youtu.be/Y6BvFIYYRo4" },
-  ],
-  "firstaid-safety": [
-    { title: "심폐소생술 및 하임리히법", url: "https://youtu.be/3R8wTAI5S9c" },
-  ],
-};
-
-const AREA_BOARD_URL =
-  "https://www.goe.go.kr/goe/na/ntt/selectNttList.do?mi=10924&bbsId=2477";
 
 export default function FeedbackOverlay() {
   const { lastChoice, proceedAfterFeedback, isGameOver, tipRevealed, revealTip, gameOverAreaId } = useGameStore();
@@ -50,11 +22,13 @@ export default function FeedbackOverlay() {
 
   if (!lastChoice) return null;
 
-  // 게임오버 시엔 gameOverAreaId(확실한 영역), 아니면 currentAreaIndex 기반
-  const areaId = isGameOver
-    ? (gameOverAreaId ?? allAreas[currentAreaIndex]?.id)
-    : allAreas[currentAreaIndex]?.id;
-  const videos = areaId ? (AREA_VIDEOS[areaId] ?? []) : [];
+  // 게임오버 시: gameOverAreaId 우선, 없으면 currentAreaIndex 기반
+  const resolvedAreaId = isGameOver
+    ? (gameOverAreaId ?? allAreas[currentAreaIndex]?.id ?? null)
+    : (allAreas[currentAreaIndex]?.id ?? null);
+
+  const resolvedArea = allAreas.find((a) => a.id === resolvedAreaId);
+  const videos = resolvedAreaId ? (AREA_VIDEOS[resolvedAreaId] ?? []) : [];
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#eef6ff" }}>
@@ -190,13 +164,30 @@ export default function FeedbackOverlay() {
                 className="mb-5 p-4 rounded-xl"
                 style={{ background: "rgba(220,38,38,0.06)", border: "1.5px solid rgba(220,38,38,0.22)" }}
               >
-                <p className="font-black text-base mb-3" style={{ color: "#dc2626" }}>
+                <p className="font-black text-base mb-2" style={{ color: "#dc2626" }}>
                   💔 자원이 바닥났습니다... 게임 오버!
                 </p>
-                {videos.length > 0 && (
+
+                {/* 영역명 뱃지 - 어느 영역 영상인지 명시 */}
+                {resolvedArea && (
+                  <div className="mb-3">
+                    <span
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-black"
+                      style={{
+                        background: `${resolvedArea.color}15`,
+                        border: `1.5px solid ${resolvedArea.color}40`,
+                        color: resolvedArea.color,
+                      }}
+                    >
+                      {resolvedArea.icon} {resolvedArea.title} 안전교육 영상
+                    </span>
+                  </div>
+                )}
+
+                {videos.length > 0 ? (
                   <>
                     <p className="text-sm font-bold mb-2" style={{ color: "#1e4a72" }}>
-                      📺 영상으로 안전 지식을 익히고 다시 도전해보세요!
+                      📺 영상으로 학습하고 다시 도전해보세요!
                     </p>
                     <div className="flex flex-col gap-2 mb-2">
                       {videos.map((v) => (
@@ -216,17 +207,21 @@ export default function FeedbackOverlay() {
                         </a>
                       ))}
                     </div>
-                    <a
-                      href={AREA_BOARD_URL}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-xs font-semibold underline"
-                      style={{ color: "#4a7090" }}
-                    >
-                      🔗 경기도교육청 나침반 5분 안전교육 전체 보기 →
-                    </a>
                   </>
+                ) : (
+                  <p className="text-sm font-bold mb-2" style={{ color: "#1e4a72" }}>
+                    📺 전체 안전교육 영상을 통해 학습하고 다시 도전해보세요!
+                  </p>
                 )}
+                <a
+                  href={AREA_BOARD_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-semibold underline"
+                  style={{ color: "#4a7090" }}
+                >
+                  🔗 경기도교육청 나침반 5분 안전교육 전체 보기 →
+                </a>
               </div>
             )}
 
