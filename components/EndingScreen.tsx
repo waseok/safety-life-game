@@ -30,7 +30,7 @@ export default function EndingScreen() {
   const maxLife = useGameStore((s) => s.maxLife);
   const maxMental = useGameStore((s) => s.maxMental);
   const isGameOver = useGameStore((s) => s.isGameOver);
-  const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
+  const gameOverAreaId = useGameStore((s) => s.gameOverAreaId);
 
   const ending = useMemo(() => {
     if (isGameOver) return endings.find((e) => e.type === "gameover")!;
@@ -61,8 +61,8 @@ export default function EndingScreen() {
   }[ending.type];
 
   const accuracyColor = accuracy >= 80 ? "#16a34a" : accuracy >= 60 ? "#d97706" : "#dc2626";
-  const currentArea = allAreas[currentAreaIndex];
-  const videos = isGameOver && currentArea ? (AREA_VIDEOS[currentArea.id] ?? []) : [];
+  // gameOverAreaId로 정확한 영역 영상을 표시
+  const videos = isGameOver && gameOverAreaId ? (AREA_VIDEOS[gameOverAreaId] ?? []) : [];
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 phase-transition">
