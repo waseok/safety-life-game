@@ -11,6 +11,18 @@ export interface AreaResult {
   totalChoices: number;
 }
 
+// 캐릭터별 정답 보너스 (생명력 보너스)
+const CHARACTER_LIFE_BONUS: Record<string, number> = {
+  minjun: 5,   // 활발/용감 → 체력 회복
+  seoyeon: 0,  // 꼼꼼/책임감 → 판단력 위주
+  hyunwoo: 5,  // 운동신경 → 체력 보너스로 균형
+};
+const CHARACTER_MENTAL_BONUS: Record<string, number> = {
+  minjun: 0,
+  seoyeon: 5,  // 꼼꼼함 → 판단력 회복
+  hyunwoo: 0,
+};
+
 interface GameStore {
   phase: GamePhase;
   selectedCharacter: Character | null;
@@ -30,6 +42,7 @@ interface GameStore {
   areaSessionCorrect: number;
   areaSessionTotal: number;
   areaResults: AreaResult[];
+  tipRevealed: boolean;
 
   setPhase: (phase: GamePhase) => void;
   selectCharacter: (character: Character) => void;
@@ -37,6 +50,7 @@ interface GameStore {
   selectArea: (areaIndex: number) => void;
   quitToAreaSelect: () => void;
   makeChoice: (situationId: string, choice: Choice) => void;
+  revealTip: () => void;
   proceedAfterFeedback: () => void;
   proceedFromAreaComplete: () => void;
   resetGame: () => void;
@@ -67,6 +81,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   areaSessionCorrect: 0,
   areaSessionTotal: 0,
   areaResults: [],
+  tipRevealed: false,
 
   setPhase: (phase) => set({ phase }),
 
@@ -105,13 +120,18 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
   makeChoice: (situationId, choice) => {
     const state = get();
-    const newLife = Math.max(0, Math.min(state.maxLife, state.life + choice.lifeDelta));
-    const newMental = Math.max(0, Math.min(state.maxMental, state.mental + choice.mentalDelta));
+    const charId = state.selectedCharacter?.id ?? "";
+    // 정답 시 캐릭터 보너스 적용
+    const lifeBonus = choice.isCorrect ? (CHARACTER_LIFE_BONUS[charId] ?? 0) : 0;
+    const mentalBonus = choice.isCorrect ? (CHARACTER_MENTAL_BONUS[charId] ?? 0) : 0;
+
+    const newLife = Math.max(0, Math.min(state.maxLife, state.life + choice.lifeDelta + lifeBonus));
+    const newMental = Math.max(0, Math.min(state.maxMental, state.mental + choice.mentalDelta + mentalBonus));
     const record: ChoiceRecord = {
       situationId,
       choiceId: choice.id,
-      lifeDelta: choice.lifeDelta,
-      mentalDelta: choice.mentalDelta,
+      lifeDelta: choice.lifeDelta + lifeBonus,
+      mentalDelta: choice.mentalDelta + mentalBonus,
       isCorrect: choice.isCorrect,
     };
 
@@ -127,7 +147,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
       areaSessionTotal: state.areaSessionTotal + 1,
       phase: "feedback",
       isGameOver: newLife <= 0 || newMental <= 0,
+      tipRevealed: false,
     });
+  },
+
+  // 안전 팁 공개 시 판단력 +5 보너스
+  revealTip: () => {
+    const state = get();
+    if (state.tipRevealed) return;
+    const bonusMental = 5;
+    const newMental = Math.min(state.maxMental, state.mental + bonusMental);
+    set({ tipRevealed: true, mental: newMental });
   },
 
   proceedAfterFeedback: () => {
@@ -201,6 +231,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       areaSessionCorrect: 0,
       areaSessionTotal: 0,
       areaResults: [],
+      tipRevealed: false,
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],

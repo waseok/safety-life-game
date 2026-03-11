@@ -2,8 +2,24 @@
 
 import { useEffect, useMemo } from "react";
 import { useGameStore } from "@/store/useGameStore";
+import { allAreas } from "@/data/areas";
 import { endings } from "@/data/endings";
 import IllustrationCard from "./IllustrationCard";
+
+// 영역별 안전교육 영상
+const AREA_VIDEOS: Record<string, { title: string; url: string }[]> = {
+  "daily-safety": [
+    { title: "화재 대피 요령", url: "https://youtu.be/Y6BvFIYYRo4" },
+    { title: "감염병 예방 수칙", url: "https://youtu.be/0gJlY7Ekh-M" },
+  ],
+  "traffic-safety": [{ title: "통학버스 승하차 안전", url: "https://youtu.be/vzP1nlpiaWs" }],
+  "violence-safety": [{ title: "안전보호선 이해하기", url: "https://youtu.be/A3dGysylfB4" }],
+  "drug-cyber-safety": [{ title: "화학물질 사고 대처", url: "https://youtu.be/9dvmMvbIzsA" }],
+  "disaster-safety": [{ title: "대설 및 한파 행동 요령", url: "https://youtu.be/Q2r2ojKeXKo" }],
+  "work-safety": [{ title: "과학 실험실 및 화재 안전", url: "https://youtu.be/Y6BvFIYYRo4" }],
+  "firstaid-safety": [{ title: "심폐소생술 및 하임리히법", url: "https://youtu.be/3R8wTAI5S9c" }],
+};
+const AREA_BOARD_URL = "https://www.goe.go.kr/goe/na/ntt/selectNttList.do?mi=10924&bbsId=2477";
 
 export default function EndingScreen() {
   const resetGame = useGameStore((s) => s.resetGame);
@@ -14,6 +30,7 @@ export default function EndingScreen() {
   const maxLife = useGameStore((s) => s.maxLife);
   const maxMental = useGameStore((s) => s.maxMental);
   const isGameOver = useGameStore((s) => s.isGameOver);
+  const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
 
   const ending = useMemo(() => {
     if (isGameOver) return endings.find((e) => e.type === "gameover")!;
@@ -44,6 +61,8 @@ export default function EndingScreen() {
   }[ending.type];
 
   const accuracyColor = accuracy >= 80 ? "#16a34a" : accuracy >= 60 ? "#d97706" : "#dc2626";
+  const currentArea = allAreas[currentAreaIndex];
+  const videos = isGameOver && currentArea ? (AREA_VIDEOS[currentArea.id] ?? []) : [];
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 phase-transition">
@@ -99,13 +118,52 @@ export default function EndingScreen() {
               <p className="text-2xl font-black" style={{ color: "#0284c7" }}>
                 {mental}<span className="text-sm font-normal" style={{ color: "#4a7090" }}>/{maxMental}</span>
               </p>
-              <p className="text-sm font-semibold mt-1" style={{ color: "#4a7090" }}>정신 에너지</p>
+              <p className="text-sm font-semibold mt-1" style={{ color: "#4a7090" }}>판단력</p>
             </div>
           </div>
 
-          <div className="text-sm font-semibold mb-6" style={{ color: "#4a7090" }}>
+          <div className="text-sm font-semibold mb-4" style={{ color: "#4a7090" }}>
             {correctCount}/{totalChoices} 문항 정답
           </div>
+
+          {/* 게임오버 시 영상 학습 링크 */}
+          {isGameOver && videos.length > 0 && (
+            <div
+              className="mb-5 p-4 rounded-xl text-left"
+              style={{ background: "rgba(220,38,38,0.06)", border: "1.5px solid rgba(220,38,38,0.22)" }}
+            >
+              <p className="text-sm font-black mb-2" style={{ color: "#dc2626" }}>
+                📺 영상으로 안전 지식을 익히고 다시 도전해보세요!
+              </p>
+              <div className="flex flex-col gap-2 mb-2">
+                {videos.map((v) => (
+                  <a
+                    key={v.url}
+                    href={v.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-[1.01]"
+                    style={{
+                      background: "rgba(220,38,38,0.08)",
+                      border: "1px solid rgba(220,38,38,0.25)",
+                      color: "#b91c1c",
+                    }}
+                  >
+                    ▶ {v.title}
+                  </a>
+                ))}
+              </div>
+              <a
+                href={AREA_BOARD_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-xs font-semibold underline"
+                style={{ color: "#4a7090" }}
+              >
+                🔗 경기도교육청 나침반 5분 안전교육 전체 보기 →
+              </a>
+            </div>
+          )}
 
           <button
             onClick={resetGame}

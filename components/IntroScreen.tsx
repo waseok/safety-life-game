@@ -5,7 +5,7 @@ import { backgrounds } from "@/data/backgrounds";
 import IllustrationCard from "./IllustrationCard";
 
 export default function IntroScreen() {
-  const { selectedCharacter, startGame } = useGameStore();
+  const { selectedCharacter, startGame, setPhase } = useGameStore();
 
   if (!selectedCharacter) return null;
 
@@ -13,6 +13,21 @@ export default function IntroScreen() {
 
   return (
     <div className="min-h-screen flex flex-col items-center justify-center p-4 phase-transition">
+      {/* 뒤로 가기 */}
+      <div className="w-full max-w-2xl mb-4">
+        <button
+          onClick={() => setPhase("character-select")}
+          className="px-4 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105"
+          style={{
+            background: "rgba(2,132,199,0.08)",
+            border: "1px solid rgba(2,132,199,0.22)",
+            color: "#0284c7",
+          }}
+        >
+          ← 캐릭터 선택으로
+        </button>
+      </div>
+
       <div className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg"
         style={{ background: "#ffffff", border: "1.5px solid rgba(2,132,199,0.2)" }}
       >
