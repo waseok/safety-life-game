@@ -4,22 +4,8 @@ import { useEffect, useMemo } from "react";
 import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
 import { endings } from "@/data/endings";
+import { AREA_VIDEOS, AREA_BOARD_URL } from "@/data/safetyVideos";
 import IllustrationCard from "./IllustrationCard";
-
-// 영역별 안전교육 영상
-const AREA_VIDEOS: Record<string, { title: string; url: string }[]> = {
-  "daily-safety": [
-    { title: "화재 대피 요령", url: "https://youtu.be/Y6BvFIYYRo4" },
-    { title: "감염병 예방 수칙", url: "https://youtu.be/0gJlY7Ekh-M" },
-  ],
-  "traffic-safety": [{ title: "통학버스 승하차 안전", url: "https://youtu.be/vzP1nlpiaWs" }],
-  "violence-safety": [{ title: "안전보호선 이해하기", url: "https://youtu.be/A3dGysylfB4" }],
-  "drug-cyber-safety": [{ title: "화학물질 사고 대처", url: "https://youtu.be/9dvmMvbIzsA" }],
-  "disaster-safety": [{ title: "대설 및 한파 행동 요령", url: "https://youtu.be/Q2r2ojKeXKo" }],
-  "work-safety": [{ title: "과학 실험실 및 화재 안전", url: "https://youtu.be/Y6BvFIYYRo4" }],
-  "firstaid-safety": [{ title: "심폐소생술 및 하임리히법", url: "https://youtu.be/3R8wTAI5S9c" }],
-};
-const AREA_BOARD_URL = "https://www.goe.go.kr/goe/na/ntt/selectNttList.do?mi=10924&bbsId=2477";
 
 export default function EndingScreen() {
   const resetGame = useGameStore((s) => s.resetGame);
@@ -61,8 +47,9 @@ export default function EndingScreen() {
   }[ending.type];
 
   const accuracyColor = accuracy >= 80 ? "#16a34a" : accuracy >= 60 ? "#d97706" : "#dc2626";
-  // gameOverAreaId로 정확한 영역 영상을 표시
-  const videos = isGameOver && gameOverAreaId ? (AREA_VIDEOS[gameOverAreaId] ?? []) : [];
+  // gameOverAreaId로 정확한 영역 영상 표시
+  const gameOverArea = isGameOver && gameOverAreaId ? allAreas.find((a) => a.id === gameOverAreaId) : null;
+  const videos = gameOverAreaId ? (AREA_VIDEOS[gameOverAreaId] ?? []) : [];
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4 phase-transition">
@@ -127,32 +114,56 @@ export default function EndingScreen() {
           </div>
 
           {/* 게임오버 시 영상 학습 링크 */}
-          {isGameOver && videos.length > 0 && (
+          {isGameOver && (
             <div
               className="mb-5 p-4 rounded-xl text-left"
               style={{ background: "rgba(220,38,38,0.06)", border: "1.5px solid rgba(220,38,38,0.22)" }}
             >
-              <p className="text-sm font-black mb-2" style={{ color: "#dc2626" }}>
-                📺 영상으로 안전 지식을 익히고 다시 도전해보세요!
-              </p>
-              <div className="flex flex-col gap-2 mb-2">
-                {videos.map((v) => (
-                  <a
-                    key={v.url}
-                    href={v.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-[1.01]"
+              {/* 어느 영역 영상인지 명시 */}
+              {gameOverArea && (
+                <div className="mb-2">
+                  <span
+                    className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-sm font-black"
                     style={{
-                      background: "rgba(220,38,38,0.08)",
-                      border: "1px solid rgba(220,38,38,0.25)",
-                      color: "#b91c1c",
+                      background: `${gameOverArea.color}15`,
+                      border: `1.5px solid ${gameOverArea.color}40`,
+                      color: gameOverArea.color,
                     }}
                   >
-                    ▶ {v.title}
-                  </a>
-                ))}
-              </div>
+                    {gameOverArea.icon} {gameOverArea.title} 안전교육 영상
+                  </span>
+                </div>
+              )}
+
+              <p className="text-sm font-black mb-2" style={{ color: "#dc2626" }}>
+                📺 영상으로 학습하고 다시 도전해보세요!
+              </p>
+
+              {videos.length > 0 ? (
+                <div className="flex flex-col gap-2 mb-2">
+                  {videos.map((v) => (
+                    <a
+                      key={v.url}
+                      href={v.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-semibold transition-all hover:scale-[1.01]"
+                      style={{
+                        background: "rgba(220,38,38,0.08)",
+                        border: "1px solid rgba(220,38,38,0.25)",
+                        color: "#b91c1c",
+                      }}
+                    >
+                      ▶ {v.title}
+                    </a>
+                  ))}
+                </div>
+              ) : (
+                <p className="text-sm mb-2" style={{ color: "#1e4a72" }}>
+                  아래 링크에서 영역별 영상을 확인하세요.
+                </p>
+              )}
+
               <a
                 href={AREA_BOARD_URL}
                 target="_blank"
