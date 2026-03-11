@@ -11,16 +11,16 @@ export interface AreaResult {
   totalChoices: number;
 }
 
-// 캐릭터별 정답 보너스 (생명력 보너스)
+// 캐릭터별 정답 보너스 - 균형적 스탯 회복
 const CHARACTER_LIFE_BONUS: Record<string, number> = {
-  minjun: 5,   // 활발/용감 → 체력 회복
-  seoyeon: 0,  // 꼼꼼/책임감 → 판단력 위주
-  hyunwoo: 5,  // 운동신경 → 체력 보너스로 균형
+  minjun: 8,    // 활발/용감 → 체력 우선 회복
+  seoyeon: 3,   // 꼼꼼함 → 약간의 체력도 회복
+  hyunwoo: 8,   // 운동신경 → 체력 강한 회복
 };
 const CHARACTER_MENTAL_BONUS: Record<string, number> = {
-  minjun: 0,
-  seoyeon: 5,  // 꼼꼼함 → 판단력 회복
-  hyunwoo: 0,
+  minjun: 3,    // 호기심 → 약간의 판단력도 회복
+  seoyeon: 8,   // 책임감 → 판단력 우선 회복
+  hyunwoo: 5,   // 사교성 → 균형 있게 판단력도 회복
 };
 
 interface GameStore {
@@ -43,6 +43,7 @@ interface GameStore {
   areaSessionTotal: number;
   areaResults: AreaResult[];
   tipRevealed: boolean;
+  gameOverAreaId: string | null;  // 게임오버 발생 영역 ID (영상 링크용)
 
   setPhase: (phase: GamePhase) => void;
   selectCharacter: (character: Character) => void;
@@ -82,6 +83,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   areaSessionTotal: 0,
   areaResults: [],
   tipRevealed: false,
+  gameOverAreaId: null,
 
   setPhase: (phase) => set({ phase }),
 
@@ -127,18 +129,27 @@ export const useGameStore = create<GameStore>((set, get) => ({
 
     const newLife = Math.max(0, Math.min(state.maxLife, state.life + choice.lifeDelta + lifeBonus));
     const newMental = Math.max(0, Math.min(state.maxMental, state.mental + choice.mentalDelta + mentalBonus));
+    const gameOver = newLife <= 0 || newMental <= 0;
+    const currentArea = allAreas[state.currentAreaIndex];
+
+    // 보너스가 반영된 델타를 lastChoice에 저장 → FeedbackOverlay 표시에 보너스가 나타남
+    const effectiveChoice: Choice = {
+      ...choice,
+      lifeDelta: choice.lifeDelta + lifeBonus,
+      mentalDelta: choice.mentalDelta + mentalBonus,
+    };
     const record: ChoiceRecord = {
       situationId,
       choiceId: choice.id,
-      lifeDelta: choice.lifeDelta + lifeBonus,
-      mentalDelta: choice.mentalDelta + mentalBonus,
+      lifeDelta: effectiveChoice.lifeDelta,
+      mentalDelta: effectiveChoice.mentalDelta,
       isCorrect: choice.isCorrect,
     };
 
     set({
       life: newLife,
       mental: newMental,
-      lastChoice: choice,
+      lastChoice: effectiveChoice,
       completedSituations: [...state.completedSituations, situationId],
       choiceHistory: [...state.choiceHistory, record],
       correctCount: state.correctCount + (choice.isCorrect ? 1 : 0),
@@ -146,8 +157,9 @@ export const useGameStore = create<GameStore>((set, get) => ({
       areaSessionCorrect: state.areaSessionCorrect + (choice.isCorrect ? 1 : 0),
       areaSessionTotal: state.areaSessionTotal + 1,
       phase: "feedback",
-      isGameOver: newLife <= 0 || newMental <= 0,
+      isGameOver: gameOver,
       tipRevealed: false,
+      gameOverAreaId: gameOver ? (currentArea?.id ?? null) : state.gameOverAreaId,
     });
   },
 
@@ -232,6 +244,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       areaSessionTotal: 0,
       areaResults: [],
       tipRevealed: false,
+      gameOverAreaId: null,
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],

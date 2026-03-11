@@ -36,7 +36,7 @@ const AREA_BOARD_URL =
   "https://www.goe.go.kr/goe/na/ntt/selectNttList.do?mi=10924&bbsId=2477";
 
 export default function FeedbackOverlay() {
-  const { lastChoice, proceedAfterFeedback, isGameOver, tipRevealed, revealTip } = useGameStore();
+  const { lastChoice, proceedAfterFeedback, isGameOver, tipRevealed, revealTip, gameOverAreaId } = useGameStore();
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
   const { playCorrect, playIncorrect } = useSound();
 
@@ -50,8 +50,11 @@ export default function FeedbackOverlay() {
 
   if (!lastChoice) return null;
 
-  const currentArea = allAreas[currentAreaIndex];
-  const videos = currentArea ? (AREA_VIDEOS[currentArea.id] ?? []) : [];
+  // 게임오버 시엔 gameOverAreaId(확실한 영역), 아니면 currentAreaIndex 기반
+  const areaId = isGameOver
+    ? (gameOverAreaId ?? allAreas[currentAreaIndex]?.id)
+    : allAreas[currentAreaIndex]?.id;
+  const videos = areaId ? (AREA_VIDEOS[areaId] ?? []) : [];
 
   return (
     <div className="min-h-screen flex flex-col" style={{ background: "#eef6ff" }}>
