@@ -40,7 +40,7 @@ export default function IllustrationCard({
   className = "",
   overlay = true,
 }: Props) {
-  const [imgError, setImgError] = useState(true);
+  const [imgError, setImgError] = useState(false);  // false = 이미지 먼저 시도
 
   const hash = src.split("").reduce((acc, c) => acc + c.charCodeAt(0), 0);
   const palette = GRADIENT_PALETTES[hash % GRADIENT_PALETTES.length];
