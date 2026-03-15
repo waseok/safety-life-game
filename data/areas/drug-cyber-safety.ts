@@ -74,7 +74,7 @@ export const drugCyberSafety: Area = {
       id: "dc-06", areaId: "drug-cyber-safety", subAreaId: "drug-misuse", order: 6,
       title: "본드·가스 흡입",
       body: "친구 집에서 놀다가 한 친구가 본드를 내밀며 \"이거 킁킁하면 기분 좋아진다\"고 합니다.",
-      image: "/images/situations/area4/s03.png",
+      image: "/images/situations/area4/s02.png",
       choices: [
         { id: "dc-06-a", text: "\"그건 마약이나 마찬가지야. 절대 안 해\"라고 거절하고 나온다", lifeDelta: 0, mentalDelta: 10, feedback: "정확합니다! 본드, 부탄가스 등 흡입제는 뇌 세포를 파괴하고, 심장 마비로 돌연사할 수 있는 매우 위험한 약물입니다. 한 번이라도 치명적일 수 있어요.", isCorrect: true },
         { id: "dc-06-b", text: "호기심에 한 번만 맡아본다", lifeDelta: -25, mentalDelta: -10, feedback: "한 번의 흡입으로도 사망할 수 있습니다! '급성 흡입 사망 증후군'은 첫 사용에서도 발생합니다.", isCorrect: false },
@@ -85,7 +85,7 @@ export const drugCyberSafety: Area = {
       id: "dc-07", areaId: "drug-cyber-safety", subAreaId: "drug-misuse", order: 7,
       title: "처방약 공유",
       body: "친구가 수면제를 갖고 있는데 \"잠이 안 올 때 이거 하나 먹으면 바로 잠든다\"며 하나 줍니다.",
-      image: "/images/situations/area4/s04.png",
+      image: "/images/situations/area4/s02.png",
       choices: [
         { id: "dc-07-a", text: "\"처방약은 나눠 먹으면 안 돼\"라고 거절한다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 처방약은 개인의 체질, 체중, 건강 상태에 맞춰 처방된 것입니다. 다른 사람의 처방약을 먹으면 부작용이나 중독이 생길 수 있어요.", isCorrect: true },
         { id: "dc-07-b", text: "한 알 정도는 괜찮겠지 하고 받는다", lifeDelta: -10, mentalDelta: -5, feedback: "수면제는 중독성이 강하고, 다른 약과의 상호작용도 위험합니다. 처방약 공유는 법적으로도 금지되어 있어요.", isCorrect: false },
@@ -96,7 +96,7 @@ export const drugCyberSafety: Area = {
       id: "dc-08", areaId: "drug-cyber-safety", subAreaId: "drug-misuse", order: 8,
       title: "음주 권유",
       body: "선배 집에서 열리는 파티에 갔더니 맥주를 권합니다. \"한 잔만 마셔. 이 정도는 모두 마시잖아\"라고 합니다.",
-      image: "/images/situations/area4/s04.png",
+      image: "/images/situations/area4/s01.png",
       choices: [
         { id: "dc-08-a", text: "\"미성년자라 안 마셔요\"라고 거절한다", lifeDelta: 0, mentalDelta: 10, feedback: "올바릅니다! 청소년 음주는 뇌 발달을 저해하고, 성인보다 알코올 의존 위험이 4배 높습니다. 법적으로도 19세 미만 음주는 금지예요.", isCorrect: true },
         { id: "dc-08-b", text: "분위기에 맞추어 한 잔만 마신다", lifeDelta: -10, mentalDelta: -5, feedback: "한 잔이 한 병이 됩니다. 청소년의 뇌는 아직 발달 중이어서 소량의 알코올에도 영향을 받습니다.", isCorrect: false },
@@ -107,7 +107,7 @@ export const drugCyberSafety: Area = {
       id: "dc-09", areaId: "drug-cyber-safety", subAreaId: "drug-misuse", order: 9,
       title: "약물 사용 친구 발견",
       body: "친구가 화장실에서 이상한 약을 먹는 것을 목격했습니다. 눈이 풀려 있고 행동이 평소와 다릅니다. 비밀로 해달라고 합니다.",
-      image: "/images/situations/area4/s05.png",
+      image: "/images/situations/area4/s02.png",
       choices: [
         { id: "dc-09-a", text: "친구의 안전을 위해 선생님이나 부모님께 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "가장 중요한 선택입니다! 약물 사용을 숨겨주는 것은 친구를 돕는 것이 아닙니다. 전문 도움이 필요하며, 알리는 것이 생명을 구하는 일이에요.", isCorrect: true },
         { id: "dc-09-b", text: "약속대로 비밀을 지켜준다", lifeDelta: 0, mentalDelta: -10, feedback: "비밀을 지키면 친구의 약물 사용이 심해지고 생명이 위험해질 수 있습니다. 진정한 우정은 위험을 알리는 것입니다.", isCorrect: false },
@@ -118,7 +118,7 @@ export const drugCyberSafety: Area = {
       id: "dc-10", areaId: "drug-cyber-safety", subAreaId: "drug-misuse", order: 10,
       title: "카페인 중독 증상",
       body: "최근 커피와 에너지 음료를 많이 마셨더니, 손이 떨리고 심장이 두근거리며 잠을 잘 못 잡니다.",
-      image: "/images/situations/area4/s05.png",
+      image: "/images/situations/area4/s02.png",
       choices: [
         { id: "dc-10-a", text: "카페인 음료를 줄이고, 증상이 지속되면 병원에 간다", lifeDelta: 0, mentalDelta: 5, feedback: "올바릅니다! 손 떨림, 심장 두근거림, 불면은 카페인 과다 섭취의 전형적 증상입니다. 즉시 줄이고, 물을 많이 마시세요.", isCorrect: true },
         { id: "dc-10-b", text: "피곤해서 그런 거라 더 마신다", lifeDelta: -15, mentalDelta: -10, feedback: "이미 과다 섭취 증상이 나타난 상태입니다. 더 마시면 심장 부정맥, 경련 등 심각한 상태가 될 수 있어요.", isCorrect: false },
@@ -130,7 +130,7 @@ export const drugCyberSafety: Area = {
       id: "dc-11", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 11,
       title: "게임 과몰입",
       body: "새 게임이 너무 재밌어서 어제 밤새 했습니다. 오늘도 학교에서 게임 생각뿐이고, 또 밤새 하고 싶습니다.",
-      image: "/images/situations/area4/s01.png",
+      image: "/images/situations/area4/s05.png",
       choices: [
         { id: "dc-11-a", text: "정해진 시간만 하고, 밤에는 스마트폰을 방 밖에 둔다", lifeDelta: 0, mentalDelta: 5, feedback: "좋은 자기 관리입니다! 게임 시간을 정해두고 알람을 맞추세요. 수면 부족은 집중력·기억력·성장에 직접적인 영향을 줍니다.", isCorrect: true },
         { id: "dc-11-b", text: "재밌을 때 실컷 하는 게 낫다", lifeDelta: -10, mentalDelta: -10, feedback: "게임 과몰입은 수면 부족, 학업 저하, 사회성 감소로 이어집니다. 재미와 절제 사이의 균형이 중요해요.", isCorrect: false },
@@ -141,7 +141,7 @@ export const drugCyberSafety: Area = {
       id: "dc-12", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 12,
       title: "SNS 중독",
       body: "SNS를 5분마다 확인합니다. 좋아요 수가 신경 쓰이고, 다른 사람의 화려한 일상과 비교하며 기분이 우울해집니다.",
-      image: "/images/situations/area4/s02.png",
+      image: "/images/situations/area4/s05.png",
       choices: [
         { id: "dc-12-a", text: "SNS 알림을 끄고 하루 사용 시간을 제한한다", lifeDelta: 0, mentalDelta: 10, feedback: "훌륭합니다! SNS의 화려한 게시물은 편집된 모습입니다. 비교는 자존감을 떨어뜨려요. 알림 끄기와 시간 제한이 효과적인 첫걸음입니다.", isCorrect: true },
         { id: "dc-12-b", text: "더 열심히 꾸며서 올린다", lifeDelta: -5, mentalDelta: -10, feedback: "SNS를 위해 더 꾸미는 것은 악순환의 시작입니다. 실제 삶의 만족도와 SNS 활동은 별개라는 것을 기억하세요.", isCorrect: false },
@@ -152,7 +152,7 @@ export const drugCyberSafety: Area = {
       id: "dc-13", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 13,
       title: "온라인 도박",
       body: "친구가 스포츠 베팅 앱을 보여주며 \"용돈을 2배로 불렸다\"고 자랑합니다. 쉬운 돈벌이인 것 같습니다.",
-      image: "/images/situations/area4/s02.png",
+      image: "/images/situations/area4/s05.png",
       choices: [
         { id: "dc-13-a", text: "\"미성년자 도박은 불법이야. 하면 안 돼\"라고 거절한다", lifeDelta: 0, mentalDelta: 10, feedback: "정답입니다! 청소년 도박은 불법이며, 도박 중독은 마약 중독과 같은 뇌 변화를 일으킵니다. 초기에 딴 돈은 미끼이고, 결국 다 잃게 됩니다.", isCorrect: true },
         { id: "dc-13-b", text: "소액만 해보면 재밌겠다", lifeDelta: -10, mentalDelta: -10, feedback: "소액으로 시작해 큰돈을 잃는 것이 도박의 함정입니다. 도박 중독은 빠르게 진행되며, 청소년이 특히 취약합니다.", isCorrect: false },
@@ -174,7 +174,7 @@ export const drugCyberSafety: Area = {
       id: "dc-15", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 15,
       title: "피싱 메시지",
       body: "\"택배가 반송되었습니다. 확인하세요\"라는 문자에 인터넷 주소(URL)가 있습니다. 최근 주문한 것이 있어서 클릭할 뻔했습니다.",
-      image: "/images/situations/area4/s03.png",
+      image: "/images/situations/area4/s04.png",
       choices: [
         { id: "dc-15-a", text: "URL을 클릭하지 않고, 택배 앱에서 직접 확인한다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 문자의 URL은 피싱(사기) 사이트일 수 있습니다. 항상 공식 앱이나 사이트에서 직접 확인하세요. 의심되면 118(사이버 신고)에 문의하세요.", isCorrect: true },
         { id: "dc-15-b", text: "궁금해서 일단 클릭해본다", lifeDelta: -15, mentalDelta: -5, feedback: "피싱 URL을 클릭하면 악성 앱이 설치되어 개인정보와 금융정보가 유출됩니다. 절대 클릭하지 마세요!", isCorrect: false },
@@ -196,7 +196,7 @@ export const drugCyberSafety: Area = {
       id: "dc-17", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 17,
       title: "디지털 디톡스",
       body: "하루에 스마트폰을 8시간 이상 사용합니다. 스마트폰 없이는 불안하고, 손에 항상 들고 있습니다.",
-      image: "/images/situations/area4/s04.png",
+      image: "/images/situations/area4/s05.png",
       choices: [
         { id: "dc-17-a", text: "사용 시간 제한 앱을 설치하고, 오프라인 취미를 만든다", lifeDelta: 0, mentalDelta: 10, feedback: "좋은 시작입니다! 스마트폰 과의존은 서서히 줄여야 합니다. 화면 사용 시간 설정, 식사 중 폰 내려놓기, 잠자기 30분 전 폰 끄기부터 시작하세요.", isCorrect: true },
         { id: "dc-17-b", text: "쓸 때 쓰고 안 쓸 때 안 쓰면 된다", lifeDelta: -5, mentalDelta: -5, feedback: "이미 하루 8시간 이상 사용하고 있다면 자기 조절이 어려운 상태입니다. 구체적인 방법이 필요해요.", isCorrect: false },
@@ -207,7 +207,7 @@ export const drugCyberSafety: Area = {
       id: "dc-18", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 18,
       title: "악성 댓글",
       body: "한 유튜버의 영상에서 실수를 발견했습니다. 댓글에서 많은 사람이 조롱하며 악성 댓글을 달고 있습니다.",
-      image: "/images/situations/area4/s05.png",
+      image: "/images/situations/area4/s04.png",
       choices: [
         { id: "dc-18-a", text: "악성 댓글에 동조하지 않고, 필요하면 건설적 의견을 남긴다", lifeDelta: 0, mentalDelta: 5, feedback: "성숙한 태도입니다! 악성 댓글은 사이버 명예훼손이며 처벌받을 수 있습니다. 온라인에서도 상대를 존중하는 것이 중요해요.", isCorrect: true },
         { id: "dc-18-b", text: "재밌어서 함께 조롱하는 댓글을 단다", lifeDelta: -5, mentalDelta: -10, feedback: "악성 댓글은 사이버 폭력이며 법적 처벌 대상입니다. 가벼운 농담이라도 당사자에게는 큰 상처가 됩니다.", isCorrect: false },
@@ -218,7 +218,7 @@ export const drugCyberSafety: Area = {
       id: "dc-19", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 19,
       title: "의심스러운 파일",
       body: "게임 무료 핵(치트) 프로그램이라는 파일을 다운로드 사이트에서 발견했습니다. 댓글에는 \"잘 된다\"라는 후기가 많습니다.",
-      image: "/images/situations/area4/s05.png",
+      image: "/images/situations/area4/s04.png",
       choices: [
         { id: "dc-19-a", text: "불법 프로그램이므로 다운로드하지 않는다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 게임 핵 프로그램에는 랜섬웨어, 키로거 등 악성코드가 숨어 있는 경우가 매우 많습니다. 개인정보 유출, PC 감염의 주요 원인이에요.", isCorrect: true },
         { id: "dc-19-b", text: "백신이 있으니 다운받아 본다", lifeDelta: -15, mentalDelta: -5, feedback: "최신 악성코드는 백신 프로그램을 우회할 수 있습니다. 불법 프로그램 자체를 받지 않는 것이 최선이에요.", isCorrect: false },
@@ -229,7 +229,7 @@ export const drugCyberSafety: Area = {
       id: "dc-20", areaId: "drug-cyber-safety", subAreaId: "cyber-addiction", order: 20,
       title: "게임 과금 유혹",
       body: "모바일 게임에서 한정판 아이템이 나왔습니다. 부모님 카드 정보가 저장되어 있어서 바로 결제할 수 있습니다.",
-      image: "/images/situations/area4/s01.png",
+      image: "/images/situations/area4/s05.png",
       choices: [
         { id: "dc-20-a", text: "부모님께 먼저 상의한다", lifeDelta: 0, mentalDelta: 5, feedback: "올바릅니다! 게임 과금은 부모님과 상의해야 합니다. 한정판 이벤트는 충동 구매를 유도하는 마케팅 전략이에요. 꼭 필요한지 냉정하게 생각하세요.", isCorrect: true },
         { id: "dc-20-b", text: "한정판이니까 몰래 결제한다", lifeDelta: -10, mentalDelta: -10, feedback: "허락 없이 결제하면 금전 피해와 신뢰 훼손이 발생합니다. 게임 과금은 한 번 시작하면 점점 금액이 커지는 특성이 있어요.", isCorrect: false },

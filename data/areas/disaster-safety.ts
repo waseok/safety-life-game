@@ -68,7 +68,7 @@ export const disasterSafety: Area = {
       order: 2,
       title: "지진 발생 (실외)",
       body: "길을 걷다가 갑자기 땅이 흔들리기 시작했습니다. 주변 건물들이 흔들리고 사람들이 비명을 지릅니다. 지진이 발생했습니다.",
-      image: "/images/situations/area5/s02.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-02-a",
@@ -106,7 +106,7 @@ export const disasterSafety: Area = {
       order: 3,
       title: "태풍 대비",
       body: "태풍이 24시간 후 우리 지역을 강타할 예정입니다. 뉴스에서 비상용품을 준비하라고 합니다. 집에 비상용품이 거의 없습니다.",
-      image: "/images/situations/area5/s03.png",
+      image: "/images/situations/area5/s02.png",
       choices: [
         {
           id: "dis-03-a",
@@ -144,7 +144,7 @@ export const disasterSafety: Area = {
       order: 4,
       title: "폭우/침수",
       body: "갑자기 폭우가 쏟아지고, 지하철역 계단으로 물이 쏟아져 들어오기 시작합니다. 수위가 빠르게 올라가고 있습니다.",
-      image: "/images/situations/area5/s04.png",
+      image: "/images/situations/area5/s02.png",
       choices: [
         {
           id: "dis-04-a",
@@ -182,7 +182,7 @@ export const disasterSafety: Area = {
       order: 5,
       title: "폭설/빙판길",
       body: "폭설이 내린 다음 날, 등하교길이 눈과 얼음으로 미끄럽습니다. 앞으로 가는 사람이 넘어지는 것을 봤습니다.",
-      image: "/images/situations/area5/s05.png",
+      image: "/images/situations/area5/s03.png",
       choices: [
         {
           id: "dis-05-a",
@@ -220,7 +220,7 @@ export const disasterSafety: Area = {
       order: 6,
       title: "낙뢰",
       body: "공원에서 운동하다가 갑자기 하늘이 어두워지고 천둥소리가 들립니다. 비가 오기 시작했고, 주변에 나무와 넓은 운동장이 있습니다.",
-      image: "/images/situations/area5/s01.png",
+      image: "/images/situations/area5/s03.png",
       choices: [
         {
           id: "dis-06-a",
@@ -258,7 +258,7 @@ export const disasterSafety: Area = {
       order: 7,
       title: "폭염/열사병",
       body: "한낮에 야외 행사에 참가했습니다. 날씨가 매우 더워서 땀을 뻘뻘 흘리고 있습니다. 갑자기 어지럽고 구역질이 납니다.",
-      image: "/images/situations/area5/s02.png",
+      image: "/images/situations/area5/s04.png",
       choices: [
         {
           id: "dis-07-a",
@@ -296,7 +296,7 @@ export const disasterSafety: Area = {
       order: 8,
       title: "한파/저체온증",
       body: "겨울에 등산을 하다가 길을 잃었습니다. 날씨가 매우 추워지고, 손발이 저리고 생각이 띵해지기 시작합니다.",
-      image: "/images/situations/area5/s03.png",
+      image: "/images/situations/area5/s04.png",
       choices: [
         {
           id: "dis-08-a",
@@ -334,7 +334,7 @@ export const disasterSafety: Area = {
       order: 9,
       title: "해일경보",
       body: "해변에서 놀다가 스마트폰에 해일경보가 울렸습니다. '지진 해일 경보 3m 예상'이라고 합니다. 바다가 평소와 다르게 조금씩 물러나고 있습니다.",
-      image: "/images/situations/area5/s04.png",
+      image: "/images/situations/area5/s02.png",
       choices: [
         {
           id: "dis-09-a",
@@ -372,7 +372,7 @@ export const disasterSafety: Area = {
       order: 10,
       title: "산사태",
       body: "폭우가 계속된 뒤 산에 있는 할머니 댁으로 가는 중입니다. 산길에서 흙과 돌이 흔들리는 소리가 들리고, 바위가 굴러내리기 시작합니다.",
-      image: "/images/situations/area5/s05.png",
+      image: "/images/situations/area5/s02.png",
       choices: [
         {
           id: "dis-10-a",
@@ -412,7 +412,7 @@ export const disasterSafety: Area = {
       order: 11,
       title: "화학물질 유출",
       body: "공장 근처를 지나가는데, 갑자기 매캐한 냄새가 나고 눈과 목이 따가워집니다. '화학물질 유출' 경보가 울리고 사람들이 기침하며 뛰어갑니다.",
-      image: "/images/situations/area5/s01.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-11-a",
@@ -450,7 +450,7 @@ export const disasterSafety: Area = {
       order: 12,
       title: "고농도 미세먼지",
       body: "미세먼지 '매우 나쁨' 경보가 발령되었습니다. 오늘은 체육 대회가 있는 날인데, 선생님은 그대로 진행하자고 합니다.",
-      image: "/images/situations/area5/s02.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-12-a",
@@ -488,7 +488,7 @@ export const disasterSafety: Area = {
       order: 13,
       title: "테러 의심물체",
       body: "지하철역에서 이상한 가방이 한동안 방치되어 있는 것을 발견했습니다. 주변에 주인 같은 사람이 보이지 않고, 뭔가 삐 소리가 난다고 합니다.",
-      image: "/images/situations/area5/s03.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-13-a",
@@ -526,7 +526,7 @@ export const disasterSafety: Area = {
       order: 14,
       title: "장기 정전",
       body: "갑자기 전기가 끊겼습니다. 밤인데 한동안 복구될 기미가 없습니다. 냉장고에 음식이 있고, 휴대폰 배터리도 얼마 안 남았습니다.",
-      image: "/images/situations/area5/s04.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-14-a",
@@ -602,7 +602,7 @@ export const disasterSafety: Area = {
       order: 16,
       title: "엘리베이터 정전",
       body: "아파트 엘리베이터를 타고 올라가는 중, 갑자기 정전으로 엘리베이터가 멈췄습니다. 안에 혼자 있고, 조명도 꺼져 어둡습니다.",
-      image: "/images/situations/area5/s01.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-16-a",
@@ -640,7 +640,7 @@ export const disasterSafety: Area = {
       order: 17,
       title: "군중 밀집/압사",
       body: "축제에 왔는데 사람이 너무 많습니다. 앞으로 갈수록 더 밀리고, 숨이 막히기 시작합니다. 주변 사람들이 비명을 지릅니다.",
-      image: "/images/situations/area5/s02.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-17-a",
@@ -678,7 +678,7 @@ export const disasterSafety: Area = {
       order: 18,
       title: "방사능 사고",
       body: "뉴스에서 '원자력 시설 비상사고' 경보가 나왔습니다. 실내에 들어가고 창문을 닫으라고 합니다. 밖에 있는데 집까지 10분 거리입니다.",
-      image: "/images/situations/area5/s03.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-18-a",
@@ -716,7 +716,7 @@ export const disasterSafety: Area = {
       order: 19,
       title: "건물 붕괴",
       body: "건물 안에 있는데 갑자기 큰 '쿵' 소리와 함께 천장에서 먼지가 떨어집니다. 건물이 흔들리기 시작합니다. 붕괴가 시작된 것 같습니다.",
-      image: "/images/situations/area5/s04.png",
+      image: "/images/situations/area5/s05.png",
       choices: [
         {
           id: "dis-19-a",

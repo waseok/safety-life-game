@@ -187,7 +187,7 @@ export const firstaidSafety: Area = {
       order: 5,
       title: "AED와 CPR 연계",
       body: "AED(자동심장충격기)를 가져왔습니다. AED를 사용할 때 CPR과 어떻게 연계해야 할까요?",
-      image: "/images/situations/area7/s05.png",
+      image: "/images/situations/area7/s03.png",
       choices: [
         {
           id: "fa-05-a",
@@ -225,7 +225,7 @@ export const firstaidSafety: Area = {
       order: 6,
       title: "영아 질식 대처",
       body: "갑자기 아기가 음식을 먹다가 목이 막혀 숨을 쉬지 못합니다. 얼굴이 파래지고 있습니다. 어떻게 해야 할까요?",
-      image: "/images/situations/area7/s01.png",
+      image: "/images/situations/area7/s04.png",
       choices: [
         {
           id: "fa-06-a",
@@ -263,7 +263,7 @@ export const firstaidSafety: Area = {
       order: 7,
       title: "회복 자세",
       body: "쓰러진 사람이 의식이 돌아왔고 호흡도 정상입니다. 구급차가 오기 전까지 어떤 자세로 두어야 할까요?",
-      image: "/images/situations/area7/s02.png",
+      image: "/images/situations/area7/s04.png",
       choices: [
         {
           id: "fa-07-a",
@@ -302,7 +302,7 @@ export const firstaidSafety: Area = {
       order: 8,
       title: "출혈과 지혈법",
       body: "친구가 넘어지면서 팔을 베었습니다. 피가 많이 나고 있습니다. 어떻게 지혈해야 할까요?",
-      image: "/images/situations/area7/s03.png",
+      image: "/images/situations/area7/s05.png",
       choices: [
         {
           id: "fa-08-a",
@@ -340,7 +340,7 @@ export const firstaidSafety: Area = {
       order: 9,
       title: "골절과 부목",
       body: "친구가 계단에서 굴러 다리가 부러진 것 같습니다. 다리가 부자연스럽게 휘어져 있고 움직이지 못합니다. 구급차를 부른 상태입니다.",
-      image: "/images/situations/area7/s04.png",
+      image: "/images/situations/area7/s05.png",
       choices: [
         {
           id: "fa-09-a",
@@ -416,7 +416,7 @@ export const firstaidSafety: Area = {
       order: 11,
       title: "열사병 대처",
       body: "더운 날 운동을 하다가 친구가 갑자기 쓰러졌습니다. 피부가 뜨겁고 건조하며, 의식이 혼미합니다. 열사병으로 보입니다.",
-      image: "/images/situations/area7/s01.png",
+      image: "/images/situations/area7/s05.png",
       choices: [
         {
           id: "fa-11-a",
@@ -454,7 +454,7 @@ export const firstaidSafety: Area = {
       order: 12,
       title: "저체온증 대처",
       body: "겨울에 친구가 물에 빠졌다가 구조되었습니다.전신이 떨리고 말이 어눌합니다. 저체온증으로 보입니다.",
-      image: "/images/situations/area7/s02.png",
+      image: "/images/situations/area7/s05.png",
       choices: [
         {
           id: "fa-12-a",
@@ -492,7 +492,7 @@ export const firstaidSafety: Area = {
       order: 13,
       title: "독극물 섭취",
       body: "어린 동생이 세제를 마신 것 같습니다. 입 주변에 거품이 있고 울고 있습니다. 어떻게 해야 할까요?",
-      image: "/images/situations/area7/s03.png",
+      image: "/images/situations/area7/s05.png",
       choices: [
         {
           id: "fa-13-a",
@@ -530,7 +530,7 @@ export const firstaidSafety: Area = {
       order: 14,
       title: "동물 물림과 뱀 물림",
       body: "등산 중에 친구가 뱀에 물렸습니다. 다리에 뱀 이빨 자국이 두 개 보입니다. 어떻게 해야 할까요?",
-      image: "/images/situations/area7/s04.png",
+      image: "/images/situations/area7/s05.png",
       choices: [
         {
           id: "fa-14-a",
@@ -569,7 +569,7 @@ export const firstaidSafety: Area = {
       order: 15,
       title: "AED 위치 확인 습관",
       body: "학교, 공공장소, 지하철역 등에서 AED가 어디에 있는지 평소에 알고 있나요? AED 위치를 아는 것이 왜 중요한가요?",
-      image: "/images/situations/area7/s05.png",
+      image: "/images/situations/area7/s03.png",
       choices: [
         {
           id: "fa-15-a",
@@ -607,7 +607,7 @@ export const firstaidSafety: Area = {
       order: 16,
       title: "AED 패드 부착 위치",
       body: "AED 패드를 부착할 때 올바른 위치는 어디인가요?",
-      image: "/images/situations/area7/s01.png",
+      image: "/images/situations/area7/s03.png",
       choices: [
         {
           id: "fa-16-a",
@@ -645,7 +645,7 @@ export const firstaidSafety: Area = {
       order: 17,
       title: "AED 음성 지시 따르기",
       body: "AED 전원을 켰고 패드를 부착했습니다. AED가 \"심장 분석 중\"이라고 말합니다. 이때 무엇을 해야 할까요?",
-      image: "/images/situations/area7/s02.png",
+      image: "/images/situations/area7/s03.png",
       choices: [
         {
           id: "fa-17-a",
@@ -721,7 +721,7 @@ export const firstaidSafety: Area = {
       order: 19,
       title: "AED 특수 상황: 물과 금속",
       body: "비가 오는 날, 물웅덩이 옆에 쓰러진 사람이 있습니다. 가슴이 젖어 있습니다. AED를 사용할 수 있을까요?",
-      image: "/images/situations/area7/s04.png",
+      image: "/images/situations/area7/s03.png",
       choices: [
         {
           id: "fa-19-a",
@@ -759,7 +759,7 @@ export const firstaidSafety: Area = {
       order: 20,
       title: "구급대 도착까지 CPR 지속",
       body: "CPR과 AED를 사용하고 있습니다. 119 구급대가 아직 도착하지 않았습니다. 어떻게 해야 할까요?",
-      image: "/images/situations/area7/s05.png",
+      image: "/images/situations/area7/s02.png",
       choices: [
         {
           id: "fa-20-a",
