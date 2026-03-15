@@ -64,7 +64,7 @@ export const trafficSafety: Area = {
       id: "ts-05", areaId: "traffic-safety", subAreaId: "pedestrian", order: 5,
       title: "비 오는 날 횡단보도",
       body: "비가 억수같이 내립니다. 우산을 써서 앞이 잘 보이지 않습니다. 횡단보도 신호가 초록불로 바뀌었습니다.",
-      image: "/images/situations/area2/s03.png",
+      image: "/images/situations/area2/s01.png",
       choices: [
         { id: "ts-05-a", text: "우산을 높이 들어 시야를 확보하고, 좌우를 살핀 뒤 건넌다", lifeDelta: 0, mentalDelta: 5, feedback: "정확합니다! 비 올 때는 우산으로 시야가 가려지고, 차량도 제동거리가 길어집니다. 반드시 좌우 확인 후 건너세요.", isCorrect: true },
         { id: "ts-05-b", text: "초록불이니까 바로 건넌다", lifeDelta: -10, mentalDelta: -3, feedback: "초록불이라도 우회전 차량이 올 수 있습니다. 특히 빗길에서는 차량 제동거리가 1.5배 이상 늘어납니다.", isCorrect: false },
@@ -75,7 +75,7 @@ export const trafficSafety: Area = {
       id: "ts-06", areaId: "traffic-safety", subAreaId: "pedestrian", order: 6,
       title: "인도 없는 골목길",
       body: "차도와 인도 구분이 없는 좁은 골목길을 걷고 있습니다. 뒤에서 자동차 소리가 들립니다.",
-      image: "/images/situations/area2/s03.png",
+      image: "/images/situations/area2/s01.png",
       choices: [
         { id: "ts-06-a", text: "길 가장자리로 붙어 걷고 차가 지나갈 때 멈춰 선다", lifeDelta: 0, mentalDelta: 5, feedback: "올바릅니다! 인도가 없는 도로에서는 길 가장자리(좌측)로 걸어야 하며, 차량이 오면 멈추어 양보하세요.", isCorrect: true },
         { id: "ts-06-b", text: "길 한가운데로 걸어 차가 비켜가게 한다", lifeDelta: -15, mentalDelta: -5, feedback: "도로 가운데를 걷는 것은 매우 위험합니다. 보행자는 항상 도로 가장자리로 걸어야 합니다.", isCorrect: false },
@@ -109,7 +109,7 @@ export const trafficSafety: Area = {
       id: "ts-09", areaId: "traffic-safety", subAreaId: "bicycle", order: 9,
       title: "자전거 방향 전환",
       body: "자전거로 달리다가 왼쪽으로 꺾어야 합니다. 뒤에서 자동차가 오는 소리가 들립니다.",
-      image: "/images/situations/area2/s05.png",
+      image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-09-a", text: "왼손을 뻗어 수신호를 보내고 뒤를 확인한 뒤 천천히 방향을 바꾼다", lifeDelta: 0, mentalDelta: 5, feedback: "완벽합니다! 자전거도 차량입니다. 방향 전환 시 반드시 수신호를 보내고 후방을 확인해야 합니다.", isCorrect: true },
         { id: "ts-09-b", text: "갑자기 왼쪽으로 꺾는다", lifeDelta: -25, mentalDelta: -10, feedback: "매우 위험합니다! 뒤에서 오는 차량이 자전거의 갑작스런 방향 전환을 예측하지 못해 충돌할 수 있습니다.", isCorrect: false },
@@ -120,7 +120,7 @@ export const trafficSafety: Area = {
       id: "ts-10", areaId: "traffic-safety", subAreaId: "bicycle", order: 10,
       title: "자전거 도로 선택",
       body: "자전거를 타고 이동 중입니다. 자전거 전용 도로가 끊기고, 넓은 인도와 차도만 남았습니다.",
-      image: "/images/situations/area2/s05.png",
+      image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-10-a", text: "자전거에서 내려 인도로 끌고 간다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 자전거 도로가 없을 때 인도에서는 반드시 내려서 끌어야 합니다. 인도 위 자전거 주행은 불법이에요.", isCorrect: true },
         { id: "ts-10-b", text: "인도 위에서 천천히 탄다", lifeDelta: -10, mentalDelta: -3, feedback: "인도에서 자전거를 타는 것은 보행자에게 위험하며 법적으로도 금지되어 있습니다.", isCorrect: false },
@@ -142,7 +142,7 @@ export const trafficSafety: Area = {
       id: "ts-12", areaId: "traffic-safety", subAreaId: "bicycle", order: 12,
       title: "이어폰 자전거",
       body: "자전거를 타면서 좋아하는 음악을 듣고 싶습니다. 이어폰을 양쪽 귀에 꽂으면 기분 좋게 달릴 수 있을 것 같습니다.",
-      image: "/images/situations/area2/s05.png",
+      image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-12-a", text: "이어폰을 사용하지 않고 주변 소리를 들으며 탄다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 자전거 주행 중 이어폰 착용은 경적, 사이렌 등 위험 신호를 듣지 못하게 합니다. 법적으로도 금지인 지역이 많아요.", isCorrect: true },
         { id: "ts-12-b", text: "양쪽 다 끼고 탄다", lifeDelta: -15, mentalDelta: -5, feedback: "양쪽 이어폰은 외부 소리를 완전히 차단합니다. 차량 경적이나 자전거 벨 소리를 듣지 못해 큰 사고로 이어질 수 있어요.", isCorrect: false },
@@ -164,7 +164,7 @@ export const trafficSafety: Area = {
       id: "ts-14", areaId: "traffic-safety", subAreaId: "bicycle", order: 14,
       title: "자전거 2인 탑승",
       body: "친구가 자전거 뒤에 태워달라고 합니다. 짐받이가 있어서 앉을 수는 있을 것 같습니다. 거리도 멀지 않습니다.",
-      image: "/images/situations/area2/s05.png",
+      image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-14-a", text: "위험하다며 거절하고 걸어가자고 한다", lifeDelta: 0, mentalDelta: 5, feedback: "올바른 판단입니다! 자전거 2인 탑승은 균형이 무너지기 쉽고 제동 거리도 늘어납니다. 법적으로도 금지되어 있어요.", isCorrect: true },
         { id: "ts-14-b", text: "짧은 거리니까 태워준다", lifeDelta: -15, mentalDelta: -5, feedback: "거리에 상관없이 2인 탑승은 위험합니다. 무게 불균형으로 핸들 조작이 어렵고 급정거 시 둘 다 넘어집니다.", isCorrect: false },
@@ -198,7 +198,7 @@ export const trafficSafety: Area = {
       id: "ts-17", areaId: "traffic-safety", subAreaId: "public-transport", order: 17,
       title: "지하철 비상 상황",
       body: "지하철 안에서 갑자기 연기 냄새가 납니다. 승객들이 웅성거리기 시작합니다. 다음 역까지 2분 정도 남았습니다.",
-      image: "/images/situations/area2/s04.png",
+      image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-17-a", text: "비상 인터폰으로 기관사에게 알리고, 젖은 천으로 입을 막는다", lifeDelta: 5, mentalDelta: 10, feedback: "완벽한 대처입니다! 지하철 비상시 기관사에게 알리는 것이 최우선입니다. 비상 인터폰은 각 칸에 설치되어 있어요.", isCorrect: true },
         { id: "ts-17-b", text: "비상 코크를 돌려 문을 열고 뛰어내린다", lifeDelta: -25, mentalDelta: -10, feedback: "절대 안 됩니다! 운행 중 문을 열면 전동열차에 감전되거나 추락할 수 있습니다. 반드시 정차 후 대피하세요.", isCorrect: false },
@@ -209,7 +209,7 @@ export const trafficSafety: Area = {
       id: "ts-18", areaId: "traffic-safety", subAreaId: "public-transport", order: 18,
       title: "버스 안 급정거",
       body: "만원 버스를 타고 있습니다. 손잡이가 멀어서 잡지 못하고 서 있습니다. 버스가 갑자기 급정거합니다!",
-      image: "/images/situations/area2/s04.png",
+      image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-18-a", text: "항상 손잡이나 봉을 잡고 서 있는다", lifeDelta: 0, mentalDelta: 5, feedback: "이것이 사고 예방의 핵심입니다! 버스에서는 항상 손잡이, 기둥, 좌석 손잡이 등을 잡고 있어야 급정거에 대비할 수 있어요.", isCorrect: true },
         { id: "ts-18-b", text: "두 발을 넓게 벌려 균형을 잡는다", lifeDelta: -5, mentalDelta: -2, feedback: "발을 넓게 벌리는 것만으로는 급정거에 대비할 수 없습니다. 반드시 고정된 것을 잡으세요.", isCorrect: false },
@@ -220,7 +220,7 @@ export const trafficSafety: Area = {
       id: "ts-19", areaId: "traffic-safety", subAreaId: "public-transport", order: 19,
       title: "혼자 택시 탈 때",
       body: "늦은 밤, 혼자 택시를 타야 합니다. 택시를 잡았는데 기사님이 \"지름길로 가겠다\"며 낯선 길로 들어섭니다.",
-      image: "/images/situations/area2/s05.png",
+      image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-19-a", text: "실시간 위치를 가족에게 공유하고, 내비게이션 경로를 요청한다", lifeDelta: 0, mentalDelta: 5, feedback: "훌륭합니다! 혼자 택시 탈 때는 위치 공유 앱을 켜고, 차량 번호를 가족에게 알리세요. 불안하면 경로 변경을 요청하세요.", isCorrect: true },
         { id: "ts-19-b", text: "기사님 말을 믿고 가만히 있는다", lifeDelta: -5, mentalDelta: -10, feedback: "대부분 문제없지만, 혼자 탈 때는 항상 경로를 확인하고 위치를 공유하는 습관이 중요합니다.", isCorrect: false },
