@@ -64,7 +64,7 @@ export const violenceSafety: Area = {
       id: "vs-05", areaId: "violence-safety", subAreaId: "school-violence", order: 5,
       title: "집단 따돌림",
       body: "반 친구들이 특정 학생과 말을 안 하고, 모둠 활동에서도 같이 안 하려 합니다. 당신은 이 학생과 평소 사이가 나쁘지 않았습니다.",
-      image: "/images/situations/area3/s03.png",
+      image: "/images/situations/area3/s01.png",
       choices: [
         { id: "vs-05-a", text: "따돌림당하는 친구에게 먼저 말 걸고, 선생님께도 상황을 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "가장 용기 있고 올바른 행동입니다! 따돌림 피해자에게 한 명의 친구라도 있으면 심리적 피해가 크게 줄어듭니다.", isCorrect: true },
         { id: "vs-05-b", text: "나도 따돌림당할까 봐 거리를 둔다", lifeDelta: 0, mentalDelta: -10, feedback: "불안한 마음은 이해하지만, 방관은 따돌림을 강화시킵니다. 익명 상담(1388)이나 선생님께 말씀드리는 것도 방법이에요.", isCorrect: false },
@@ -75,7 +75,7 @@ export const violenceSafety: Area = {
       id: "vs-06", areaId: "violence-safety", subAreaId: "school-violence", order: 6,
       title: "신체 폭력 피해",
       body: "아무 이유 없이 다른 학생에게 맞았습니다. 아프고 억울하지만, \"맞은 것 얘기하면 더 맞는다\"라고 위협합니다.",
-      image: "/images/situations/area3/s03.png",
+      image: "/images/situations/area3/s02.png",
       choices: [
         { id: "vs-06-a", text: "부모님, 선생님, 또는 117에 즉시 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "반드시 알려야 합니다! \"더 맞는다\"는 위협은 가해자의 전형적인 수법입니다. 혼자 감당하면 폭력이 반복됩니다. 117(학교폭력 신고), 112 모두 가능해요.", isCorrect: true },
         { id: "vs-06-b", text: "보복이 두려워 참는다", lifeDelta: -10, mentalDelta: -15, feedback: "참으면 폭력은 더 심해집니다. 신고하면 학교에서 보호 조치를 받을 수 있어요. 용기를 내세요.", isCorrect: false },
@@ -86,7 +86,7 @@ export const violenceSafety: Area = {
       id: "vs-07", areaId: "violence-safety", subAreaId: "school-violence", order: 7,
       title: "SNS 비밀 유포 협박",
       body: "한 친구가 \"네 비밀을 SNS에 올리겠다\"며 원하는 대로 하지 않으면 유포하겠다고 협박합니다.",
-      image: "/images/situations/area3/s04.png",
+      image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-07-a", text: "협박 메시지를 캡처해 증거를 남기고, 부모님/선생님께 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "정확한 대처입니다! 협박 내용은 반드시 캡처해서 증거로 보관하세요. 비밀 유포 협박은 범죄이며, 신고하면 법적 보호를 받을 수 있습니다.", isCorrect: true },
         { id: "vs-07-b", text: "시키는 대로 한다", lifeDelta: -10, mentalDelta: -15, feedback: "협박에 굴복하면 요구가 점점 커집니다. 절대 따르지 말고 즉시 어른에게 도움을 요청하세요.", isCorrect: false },
@@ -198,7 +198,7 @@ export const violenceSafety: Area = {
       id: "vs-17", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 17,
       title: "SNS 위치 정보",
       body: "맛집에서 찍은 사진을 인스타그램에 올리려 합니다. 위치 태그를 달면 좋아요가 더 많이 오는데, 위치 정보가 노출됩니다.",
-      image: "/images/situations/area3/s04.png",
+      image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-17-a", text: "위치 태그 없이 올리거나, 나중에 그 장소를 떠난 후 올린다", lifeDelta: 0, mentalDelta: 5, feedback: "훌륭합니다! 실시간 위치 노출은 범죄자에게 정보를 제공하는 것입니다. 집, 학교 근처 사진은 특히 위치를 제거하세요.", isCorrect: true },
         { id: "vs-17-b", text: "위치 태그를 달고 바로 올린다", lifeDelta: -5, mentalDelta: -5, feedback: "실시간 위치 공유는 스토킹, 유괴 등의 범죄에 악용될 수 있습니다. 특히 일상 패턴이 드러나는 장소는 주의하세요.", isCorrect: false },
@@ -209,7 +209,7 @@ export const violenceSafety: Area = {
       id: "vs-18", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 18,
       title: "길을 잃었을 때",
       body: "낯선 도시에서 가족과 떨어져 길을 잃었습니다. 스마트폰 배터리가 거의 없습니다.",
-      image: "/images/situations/area3/s05.png",
+      image: "/images/situations/area3/s03.png",
       choices: [
         { id: "vs-18-a", text: "가까운 가게나 경찰 초소에 들어가 도움을 요청한다", lifeDelta: 0, mentalDelta: 10, feedback: "정답입니다! 제자리에서 기다리거나, 가까운 경찰서/편의점/공공기관에 도움을 요청하세요. 어린이의 경우 182(경찰 실종신고)로 연락합니다.", isCorrect: true },
         { id: "vs-18-b", text: "길에서 아무 어른에게나 도움을 요청한다", lifeDelta: -5, mentalDelta: -3, feedback: "도움을 요청하는 것은 좋지만, 제복을 입은 사람(경찰, 경비원)이나 가게 직원에게 요청하는 것이 더 안전합니다.", isCorrect: false },

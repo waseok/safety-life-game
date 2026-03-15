@@ -68,7 +68,7 @@ export const workSafety: Area = {
       order: 2,
       title: "고소작업 안전벨트",
       body: "2층 높이의 비계 위에서 철근 작업을 하고 있습니다. 안전벨트를 착용했지만, 이동할 때마다 연결고리가 걸리면서 불편합니다. \"이 정도 높이면 괜찮지 않을까?\"라는 생각이 듭니다.",
-      image: "/images/situations/area6/s02.png",
+      image: "/images/situations/area6/s01.png",
       choices: [
         {
           id: "ws-02-a",
@@ -106,7 +106,7 @@ export const workSafety: Area = {
       order: 3,
       title: "회전기계 주의",
       body: "공장에서 드릴 작업을 하고 있습니다. 드릴 비트를 교체해야 하는데, 기계가 방금 꺼졌습니다. 비트가 아직 천천히 돌고 있는 것 같습니다. 조금 기다리면 될 것 같은데 일정이 촉박합니다.",
-      image: "/images/situations/area6/s03.png",
+      image: "/images/situations/area6/s02.png",
       choices: [
         {
           id: "ws-03-a",
@@ -144,7 +144,7 @@ export const workSafety: Area = {
       order: 4,
       title: "화학물질 취급",
       body: "공장에서 세척용 산성 시약을 옮기고 있습니다. 용기 라벨에 '부식성', '피부 접촉 금지'라고 적혀 있습니다. 장갑이 없는데, \"한 번만 옮기면 되지\"라는 생각이 듭니다.",
-      image: "/images/situations/area6/s04.png",
+      image: "/images/situations/area6/s05.png",
       choices: [
         {
           id: "ws-04-a",
@@ -182,7 +182,7 @@ export const workSafety: Area = {
       order: 5,
       title: "밀폐공간",
       body: "저장탱크 내부 청소 작업을 해야 합니다. 탱크 입구가 좁고 안이 어둡습니다. 선임이 \"빨리 들어가서 닦고 나와.\"라고 합니다. 환기 팬이 돌아가고 있지만 냄새가 좀 납니다.",
-      image: "/images/situations/area6/s05.png",
+      image: "/images/situations/area6/s03.png",
       choices: [
         {
           id: "ws-05-a",
@@ -220,7 +220,7 @@ export const workSafety: Area = {
       order: 6,
       title: "소음 환경/청력",
       body: "공장에서 프레스 기계 옆에서 8시간 근무합니다. 기계 소리가 매우 시끄럽습니다. 귀마개가 지급됐는데, 대화하기 불편해서 자주 빼고 있습니다. \"몇 년은 괜찮겠지\"라고 생각합니다.",
-      image: "/images/situations/area6/s01.png",
+      image: "/images/situations/area6/s03.png",
       choices: [
         {
           id: "ws-06-a",
@@ -258,7 +258,7 @@ export const workSafety: Area = {
       order: 7,
       title: "중량물 운반",
       body: "창고에서 25kg짜리 박스를 여러 개 옮겨야 합니다. 무릎을 구부리지 않고 허리만 숙여 들려고 하니 등이 뻐근합니다. \"한 번에 두 개씩 들면 빨리 끝나겠지\"라고 생각합니다.",
-      image: "/images/situations/area6/s02.png",
+      image: "/images/situations/area6/s04.png",
       choices: [
         {
           id: "ws-07-a",
@@ -296,7 +296,7 @@ export const workSafety: Area = {
       order: 8,
       title: "전기작업 차단기",
       body: "전기 패널의 회로를 점검해야 합니다. 차단기를 내리면 해당 구역이 정전되어 다른 작업이 멈춥니다. \"잠깐만 확인하는 거니까\"라고 생각하며 차단기 없이 작업하려 합니다.",
-      image: "/images/situations/area6/s03.png",
+      image: "/images/situations/area6/s04.png",
       choices: [
         {
           id: "ws-08-a",
@@ -334,7 +334,7 @@ export const workSafety: Area = {
       order: 9,
       title: "용접 보호장비",
       body: "금속 용접 작업을 하고 있습니다. 용접면(헬멧)이 무겁고 불편합니다. \"잠깐만 용접하는 거니까\" 보안경만 쓰고 작업하려 합니다. 주변에 다른 작업자도 있습니다.",
-      image: "/images/situations/area6/s04.png",
+      image: "/images/situations/area6/s05.png",
       choices: [
         {
           id: "ws-09-a",
@@ -412,7 +412,7 @@ export const workSafety: Area = {
       order: 11,
       title: "실험복/보안경 착용",
       body: "과학 실험실에서 산과 염기의 중화 반응 실험을 합니다. 실험복과 보안경이 비치되어 있는데, 날씨가 더워서 반팔에 보안경 없이 실험하려 합니다.",
-      image: "/images/situations/area6/s01.png",
+      image: "/images/situations/area6/s02.png",
       choices: [
         {
           id: "ws-11-a",
@@ -450,7 +450,7 @@ export const workSafety: Area = {
       order: 12,
       title: "산/염기 시약 취급",
       body: "염산을 비커에 옮기는 실험입니다. 염산 병이 무겁고, \"조금만 옮기면 되니까\" 직접 붓고 싶습니다. 옆에 있는 친구가 실험 노트를 적고 있습니다.",
-      image: "/images/situations/area6/s02.png",
+      image: "/images/situations/area6/s03.png",
       choices: [
         {
           id: "ws-12-a",
@@ -488,7 +488,7 @@ export const workSafety: Area = {
       order: 13,
       title: "유리기구 파손",
       body: "실험 중 비커를 떨어뜨려 바닥에 유리 조각이 사방에 흩어져 있습니다. 수업이 끝나고 정리 시간입니다. \"빨리 치우고 가야지\" 맨손으로 유리 조각을 주우려 합니다.",
-      image: "/images/situations/area6/s03.png",
+      image: "/images/situations/area6/s02.png",
       choices: [
         {
           id: "ws-13-a",
@@ -526,7 +526,7 @@ export const workSafety: Area = {
       order: 14,
       title: "알코올램프 가열",
       body: "알코올램프로 시험관을 가열하는 실험입니다. 시험관을 직접 불꽃 위에 올려놓고 가열하려 합니다. \"빨리 하면 되지\"라는 생각이 듭니다.",
-      image: "/images/situations/area6/s04.png",
+      image: "/images/situations/area6/s05.png",
       choices: [
         {
           id: "ws-14-a",
@@ -564,7 +564,7 @@ export const workSafety: Area = {
       order: 15,
       title: "전기실험 감전",
       body: "전기 회로 실험을 하고 있습니다. 전원이 켜진 상태에서 전선을 연결하려다가 실수로 두 전선이 닿을 뻔했습니다. \"다행히 안 닿았지\"라고 생각하며 계속 작업하려 합니다.",
-      image: "/images/situations/area6/s05.png",
+      image: "/images/situations/area6/s04.png",
       choices: [
         {
           id: "ws-15-a",
@@ -602,7 +602,7 @@ export const workSafety: Area = {
       order: 16,
       title: "환기/유해가스",
       body: "염소 가스를 발생시키는 실험을 합니다. 실험실 창문이 닫혀 있고, 환기팬이 꺼져 있습니다. \"창문 열기 귀찮은데\"라는 생각이 듭니다.",
-      image: "/images/situations/area6/s01.png",
+      image: "/images/situations/area6/s05.png",
       choices: [
         {
           id: "ws-16-a",
@@ -640,7 +640,7 @@ export const workSafety: Area = {
       order: 17,
       title: "폐액 처리",
       body: "실험이 끝나고 사용한 산성 폐액이 비커에 남아 있습니다. \"그냥 세면대에 버려도 되지\"라는 생각이 듭니다. 물로 씻어내면 될 것 같습니다.",
-      image: "/images/situations/area6/s02.png",
+      image: "/images/situations/area6/s03.png",
       choices: [
         {
           id: "ws-17-a",
@@ -678,7 +678,7 @@ export const workSafety: Area = {
       order: 18,
       title: "실험실 화재",
       body: "실험 중 알코올이 쏟아져 버너 불꽃에 불이 붙었습니다! 불이 실험대 위로 번지고 있습니다. 옆에 소화기가 있습니다.",
-      image: "/images/situations/area6/s03.png",
+      image: "/images/situations/area6/s05.png",
       choices: [
         {
           id: "ws-18-a",
@@ -716,7 +716,7 @@ export const workSafety: Area = {
       order: 19,
       title: "눈에 약품 들어감",
       body: "시약을 옮기다가 염산이 튀어 눈에 들어갔습니다! 따가움과 통증이 느껴집니다. 당황스럽습니다.",
-      image: "/images/situations/area6/s04.png",
+      image: "/images/situations/area6/s03.png",
       choices: [
         {
           id: "ws-19-a",
@@ -754,7 +754,7 @@ export const workSafety: Area = {
       order: 20,
       title: "실험 후 안전 정리",
       body: "실험이 끝났습니다. 다음 수업이 곧 시작되어 실험실을 빨리 비워야 합니다. 버너 불이 아직 켜져 있고, 시약 병 뚜껑이 열려 있습니다.",
-      image: "/images/situations/area6/s05.png",
+      image: "/images/situations/area6/s02.png",
       choices: [
         {
           id: "ws-20-a",
