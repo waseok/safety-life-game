@@ -72,8 +72,19 @@ export type GamePhase =
   | "area-intro"
   | "playing"
   | "feedback"
+  | "area-quiz"
   | "area-complete"
   | "ending";
+
+export interface QuizQuestion {
+  areaId: string;
+  level: number;        // 1–7, IB 사고 수준
+  levelLabel: string;   // e.g. "Lv.3 분석"
+  commandTerm: string;  // e.g. "분석해보세요"
+  question: string;
+  subPrompts: string[]; // 생각을 돕는 보조 질문
+  reflection: string;   // 제출 후 보여주는 핵심 관점
+}
 
 export interface ChoiceRecord {
   situationId: string;
