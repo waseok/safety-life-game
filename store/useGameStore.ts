@@ -44,6 +44,7 @@ interface GameStore {
   areaResults: AreaResult[];
   tipRevealed: boolean;
   gameOverAreaId: string | null;  // 게임오버 발생 영역 ID (영상 링크용)
+  quizAnswers: Record<string, string>;  // areaId → 서술형 답변
 
   setPhase: (phase: GamePhase) => void;
   selectCharacter: (character: Character) => void;
@@ -53,6 +54,7 @@ interface GameStore {
   makeChoice: (situationId: string, choice: Choice) => void;
   revealTip: () => void;
   proceedAfterFeedback: () => void;
+  submitQuizAnswer: (answer: string) => void;
   proceedFromAreaComplete: () => void;
   resetGame: () => void;
   getCurrentArea: () => (typeof allAreas)[number] | undefined;
@@ -84,6 +86,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   areaResults: [],
   tipRevealed: false,
   gameOverAreaId: null,
+  quizAnswers: {},
 
   setPhase: (phase) => set({ phase }),
 
@@ -204,7 +207,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       set({
         completedAreas: newCompleted,
         areaResults: newAreaResults,
-        phase: "area-complete",
+        phase: "area-quiz",   // ← 에어리어 완료 후 IB 탐구 질문으로
       });
     } else {
       set({
@@ -212,6 +215,19 @@ export const useGameStore = create<GameStore>((set, get) => ({
         phase: "playing",
       });
     }
+  },
+
+  // IB 탐구 질문 제출 — 답변 저장 + 판단력 보너스 + area-complete로 전환
+  submitQuizAnswer: (answer: string) => {
+    const state = get();
+    const area = allAreas[state.currentAreaIndex];
+    const bonusMental = 15;
+    const newMental = Math.min(state.maxMental, state.mental + bonusMental);
+    set({
+      quizAnswers: { ...state.quizAnswers, [area?.id ?? ""]: answer },
+      mental: newMental,
+      phase: "area-complete",
+    });
   },
 
   proceedFromAreaComplete: () => {
@@ -245,6 +261,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       areaResults: [],
       tipRevealed: false,
       gameOverAreaId: null,
+      quizAnswers: {},
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],
