@@ -5,7 +5,7 @@ import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
 import { getQuizQuestion } from "@/data/quizQuestions";
 
-// IB 레벨별 색상 (1→파랑 → 7→보라, 점점 깊어지는 사고)
+// 레벨별 색상 (1→파랑 → 7→보라, 점점 깊어지는 사고)
 const LEVEL_COLORS: Record<number, { color: string; bg: string; border: string; glow: string }> = {
   1: { color: "#0284c7", bg: "rgba(2,132,199,0.08)",   border: "rgba(2,132,199,0.35)",   glow: "rgba(2,132,199,0.18)" },
   2: { color: "#0d9488", bg: "rgba(13,148,136,0.08)",  border: "rgba(13,148,136,0.35)",  glow: "rgba(13,148,136,0.18)" },
@@ -78,7 +78,7 @@ export default function AreaQuiz() {
               {area.icon} {area.title}
             </span>
 
-            {/* IB 레벨 뱃지 */}
+            {/* 사고 수준 뱃지 */}
             <span
               className="text-xs font-black px-3 py-1 rounded-full"
               style={{
@@ -93,9 +93,8 @@ export default function AreaQuiz() {
 
           {/* 타이틀 */}
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xl">💭</span>
             <p className="text-sm font-black" style={{ color: lc.color }}>
-              IB 탐구 질문 · {quiz.commandTerm}
+              💭 탐구 질문 · {quiz.commandTerm}
             </p>
           </div>
           <p className="text-xs font-semibold" style={{ color: "#6b8aaa" }}>
