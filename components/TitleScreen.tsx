@@ -36,9 +36,9 @@ export default function TitleScreen() {
 
       {/* 상단 내비게이션 */}
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-blue-100">
-        <div className="flex justify-between items-center px-6 py-3 max-w-5xl mx-auto">
+        <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Image src="/images/shield-logo.png" alt="SAFE 프로젝트" width={32} height={32} />
+            <Image src="/images/shield-logo.png" alt="SAFE 프로젝트" width={36} height={36} className="rounded-lg" />
             <span className="text-lg font-black text-primary tracking-tighter">
               Safety Life Game
             </span>
@@ -61,8 +61,8 @@ export default function TitleScreen() {
       </nav>
 
       {showRanking ? (
-        <main className="flex-1 flex flex-col items-center pt-24 pb-12 px-4">
-          <div className="max-w-2xl w-full">
+        <main className="flex-1 flex flex-col items-center pt-24 pb-12 px-6">
+          <div className="max-w-3xl w-full">
             <h2 className="text-3xl font-black text-primary mb-6 text-center">
               🏆 랭킹 보드
             </h2>
@@ -77,13 +77,13 @@ export default function TitleScreen() {
                 {rankings.map((r, i) => (
                   <div
                     key={`${r.name}-${r.date}-${i}`}
-                    className="flex items-center gap-4 p-4 rounded-xl bg-white border transition-all hover:shadow-md"
+                    className="flex items-center gap-4 p-5 rounded-2xl bg-white border transition-all hover:shadow-md"
                     style={{
                       borderColor: i === 0 ? "#ffd700" : i === 1 ? "#c0c0c0" : i === 2 ? "#cd7f32" : "rgba(26,111,181,0.12)",
                       borderWidth: i < 3 ? "2px" : "1px",
                     }}
                   >
-                    <div className="w-10 h-10 rounded-full flex items-center justify-center font-black text-lg"
+                    <div className="w-12 h-12 rounded-full flex items-center justify-center font-black text-xl"
                       style={{
                         background: i === 0 ? "#fff8e1" : i === 1 ? "#f5f5f5" : i === 2 ? "#fbe9e7" : "#e3f2fd",
                         color: i === 0 ? "#f57f17" : i === 1 ? "#616161" : i === 2 ? "#bf360c" : "#1565c0",
@@ -91,11 +91,11 @@ export default function TitleScreen() {
                       {i + 1}
                     </div>
                     <div className="flex-1">
-                      <p className="font-black text-on-surface">{r.name}</p>
+                      <p className="font-black text-on-surface text-lg">{r.name}</p>
                       <p className="text-xs text-on-surface/50">{r.date}</p>
                     </div>
                     <div className="text-right">
-                      <p className="font-black text-primary text-lg">{r.score}점</p>
+                      <p className="font-black text-primary text-xl">{r.score}점</p>
                       <p className="text-xs text-on-surface/50">정답률 {r.accuracy}%</p>
                     </div>
                   </div>
@@ -105,45 +105,52 @@ export default function TitleScreen() {
           </div>
         </main>
       ) : (
-        <main className="flex-1 flex flex-col items-center justify-center pt-20 pb-12 px-4">
+        <main className="flex-1 flex flex-col items-center pt-20 pb-12 px-6">
           {/* 배경 장식 */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
-            <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full blur-3xl opacity-20"
+            <div className="absolute top-1/4 left-1/6 w-96 h-96 rounded-full blur-3xl opacity-15"
               style={{ background: "radial-gradient(circle, #64b5f6 0%, transparent 70%)" }} />
-            <div className="absolute bottom-1/3 right-1/4 w-80 h-80 rounded-full blur-3xl opacity-15"
+            <div className="absolute bottom-1/4 right-1/6 w-[30rem] h-[30rem] rounded-full blur-3xl opacity-10"
               style={{ background: "radial-gradient(circle, #42a5f5 0%, transparent 70%)" }} />
           </div>
 
-          <div className="relative z-10 flex flex-col items-center text-center max-w-3xl w-full">
+          <div className="relative z-10 flex flex-col items-center text-center w-full max-w-6xl">
 
-            {/* 방패 로고 */}
-            <div className="mb-6 animate-float">
-              <Image
-                src="/images/shield-logo.png"
-                alt="SAFE 프로젝트 - 안전문해력 향상"
-                width={180}
-                height={180}
-                className="drop-shadow-xl"
-                priority
-              />
+            {/* 상단 히어로: 방패 + 타이틀 가로 배치 (PC) */}
+            <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-8 mt-4">
+              {/* 방패 로고 */}
+              <div className="animate-float flex-shrink-0">
+                <Image
+                  src="/images/shield-logo.png"
+                  alt="SAFE 프로젝트 - 안전문해력 향상"
+                  width={200}
+                  height={200}
+                  className="drop-shadow-2xl"
+                  priority
+                />
+              </div>
+
+              {/* 타이틀 영역 */}
+              <div className="flex flex-col items-center md:items-start">
+                <div className="pill-badge mb-3">
+                  🛡️ 안전 탐험을 시작하세요!
+                </div>
+                <Image
+                  src="/images/title-text.png"
+                  alt="안전 인생게임"
+                  width={360}
+                  height={120}
+                  className="drop-shadow-lg mb-3"
+                  priority
+                />
+                <p className="text-on-surface/60 font-semibold text-base md:text-lg max-w-md">
+                  7대 안전영역에서 올바른 판단을 내리고 안전문해력을 키워보세요!
+                </p>
+              </div>
             </div>
-
-            {/* 소제목 */}
-            <div className="pill-badge mb-4">
-              🛡️ 안전 탐험을 시작하세요!
-            </div>
-
-            {/* 메인 타이틀 */}
-            <h1 className="font-headline text-5xl md:text-7xl font-black text-primary bubbly-text mb-4 tracking-tighter leading-none">
-              안전<br />인생게임
-            </h1>
-
-            <p className="text-on-surface/60 font-semibold text-base mb-8 max-w-sm">
-              7대 안전영역에서 올바른 판단을 내리고<br />안전문해력을 키워보세요!
-            </p>
 
             {/* 이름 입력 + 시작 버튼 */}
-            <div className="w-full max-w-sm mb-10">
+            <div className="w-full max-w-md mb-10">
               <div className="relative mb-4">
                 <input
                   type="text"
@@ -152,9 +159,9 @@ export default function TitleScreen() {
                   onKeyDown={handleKeyDown}
                   placeholder="이름을 입력하세요"
                   maxLength={12}
-                  className="w-full px-5 py-4 rounded-2xl text-center text-lg font-bold
-                    bg-white border-2 border-blue-200 focus:border-primary focus:ring-2 focus:ring-primary/20
-                    outline-none transition-all placeholder:text-on-surface/30"
+                  className="w-full px-6 py-5 rounded-2xl text-center text-lg font-bold
+                    bg-white border-2 border-blue-200 focus:border-primary focus:ring-4 focus:ring-primary/15
+                    outline-none transition-all placeholder:text-on-surface/30 shadow-sm"
                   style={{ color: "#1a2c3d" }}
                 />
               </div>
@@ -174,27 +181,25 @@ export default function TitleScreen() {
             </div>
 
             {/* 7대 안전영역 카드 */}
-            <div className="w-full max-w-3xl">
-              <h3 className="text-sm font-black text-primary uppercase tracking-widest mb-4">
+            <div className="w-full">
+              <h3 className="text-sm font-black text-primary uppercase tracking-widest mb-5">
                 7대 안전 영역
               </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-7 gap-3">
                 {AREAS.map((area) => (
                   <div
                     key={area.name}
-                    className="flex items-center gap-3 p-4 rounded-xl bg-white border border-blue-100
-                      hover:shadow-md hover:-translate-y-0.5 transition-all cursor-default"
+                    className="flex flex-col items-center gap-2 p-4 rounded-2xl bg-white border border-blue-100
+                      hover:shadow-lg hover:-translate-y-1 transition-all cursor-default"
                   >
                     <div
-                      className="w-11 h-11 rounded-xl flex items-center justify-center text-xl flex-shrink-0"
+                      className="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl"
                       style={{ background: `${area.color}15` }}
                     >
                       {area.icon}
                     </div>
-                    <div className="text-left min-w-0">
-                      <p className="font-black text-sm text-on-surface truncate">{area.name}</p>
-                      <p className="text-[11px] text-on-surface/50 font-medium truncate">{area.desc}</p>
-                    </div>
+                    <p className="font-black text-sm text-on-surface">{area.name}</p>
+                    <p className="text-[11px] text-on-surface/50 font-medium leading-tight text-center">{area.desc}</p>
                   </div>
                 ))}
               </div>

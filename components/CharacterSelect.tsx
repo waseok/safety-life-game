@@ -28,9 +28,9 @@ export default function CharacterSelect() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 phase-transition">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 phase-transition">
       {/* 뒤로 가기 */}
-      <div className="w-full max-w-4xl mb-4">
+      <div className="w-full max-w-6xl mb-4">
         <button
           onClick={() => setPhase("title")}
           className="px-4 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105"
@@ -53,7 +53,7 @@ export default function CharacterSelect() {
         </p>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl w-full">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl w-full">
         {characters.map((char) => {
           const isExpanded = expandedId === char.id;
           return (

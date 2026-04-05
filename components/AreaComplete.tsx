@@ -43,9 +43,9 @@ export default function AreaComplete() {
   const accuracyColor = accuracy >= 80 ? "#16a34a" : accuracy >= 60 ? "#d97706" : "#dc2626";
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 phase-transition">
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 phase-transition">
       <div
-        className="max-w-md w-full rounded-3xl overflow-hidden"
+        className="max-w-lg w-full rounded-3xl overflow-hidden"
         style={{
           background: "#ffffff",
           border: `2.5px solid ${badge.border}`,

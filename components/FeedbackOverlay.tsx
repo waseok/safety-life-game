@@ -34,9 +34,9 @@ export default function FeedbackOverlay() {
     <div className="min-h-screen flex flex-col bg-surface">
       <ResourceBar />
 
-      <div className="flex-1 flex items-center justify-center p-4 phase-transition">
+      <div className="flex-1 flex items-center justify-center p-4 md:p-8 phase-transition">
         <div
-          className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-xl"
+          className="max-w-3xl w-full rounded-2xl overflow-hidden shadow-xl"
           style={{
             background: "#ffffff",
             border: isCorrect

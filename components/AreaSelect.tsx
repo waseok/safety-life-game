@@ -49,7 +49,7 @@ export default function AreaSelect() {
 
       {/* ── 상단 헤더 ── */}
       <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
-        <div className="flex items-center justify-between px-6 py-3 max-w-5xl mx-auto">
+        <div className="flex items-center justify-between px-6 py-3 max-w-7xl mx-auto">
 
           {/* 로고 + 포인트 */}
           <div className="flex items-center gap-3">
@@ -102,7 +102,7 @@ export default function AreaSelect() {
         </div>
       </header>
 
-      <div className="max-w-5xl mx-auto w-full px-6 pt-6">
+      <div className="max-w-7xl mx-auto w-full px-6 pt-6">
 
         {/* ── 타이틀 섹션 ── */}
         <div className="mb-6 flex items-end justify-between">

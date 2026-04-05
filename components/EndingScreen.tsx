@@ -66,9 +66,9 @@ export default function EndingScreen() {
   const myRank = rankings.findIndex((r) => r.name === playerName && r.score === finalScore) + 1;
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4 phase-transition">
+    <div className="min-h-screen flex items-center justify-center p-4 md:p-8 phase-transition">
       <div
-        className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg"
+        className="max-w-3xl w-full rounded-2xl overflow-hidden shadow-lg"
         style={{
           background: "#ffffff",
           border: `2px solid ${theme.border}`,

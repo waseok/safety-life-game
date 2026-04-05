@@ -24,7 +24,7 @@ export default function ResourceBar() {
 
   return (
     <div className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-outline-variant/30 shadow-sm">
-      <div className="max-w-2xl mx-auto px-4 py-3">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
 
         {/* ── 영역명 + 진행률 ── */}
         <div className="flex items-center justify-between mb-2">
