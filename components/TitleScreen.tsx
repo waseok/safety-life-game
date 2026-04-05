@@ -105,7 +105,7 @@ export default function TitleScreen() {
           </div>
         </main>
       ) : (
-        <main className="flex-1 flex flex-col items-center pt-20 pb-12 px-6">
+        <main className="flex-1 flex flex-col items-center pt-20 pb-8 px-6">
           {/* 배경 장식 */}
           <div className="absolute inset-0 pointer-events-none overflow-hidden">
             <div className="absolute top-1/4 left-1/6 w-96 h-96 rounded-full blur-3xl opacity-15"
@@ -114,67 +114,68 @@ export default function TitleScreen() {
               style={{ background: "radial-gradient(circle, #42a5f5 0%, transparent 70%)" }} />
           </div>
 
-          <div className="relative z-10 flex flex-col items-center text-center w-full max-w-6xl">
-
-            {/* 방패 로고 */}
-            <div className="animate-float mb-5 mt-4">
-              <Image
-                src="/images/shield-logo.png"
-                alt="SAFE 프로젝트 - 안전문해력 향상"
-                width={220}
-                height={220}
-                className="drop-shadow-2xl"
-                priority
-              />
-            </div>
-
-            {/* 소제목 뱃지 */}
-            <div className="pill-badge mb-4">
-              🛡️ 안전 탐험을 시작하세요!
-            </div>
-
-            {/* 메인 타이틀 - 한 줄, 그림자 없음 */}
-            <h1 className="font-headline text-5xl md:text-7xl font-black text-primary mb-3 tracking-tighter leading-none">
-              안전 인생게임
-            </h1>
-
-            <p className="text-on-surface/60 font-semibold text-base md:text-lg mb-8 max-w-lg">
-              7대 안전영역에서 올바른 판단을 내리고 안전문해력을 키워보세요!
-            </p>
-
-            {/* 이름 입력 + 시작 버튼 */}
-            <div className="w-full max-w-md mb-10">
-              <div className="relative mb-4">
-                <input
-                  type="text"
-                  value={name}
-                  onChange={(e) => setName(e.target.value)}
-                  onKeyDown={handleKeyDown}
-                  placeholder="이름을 입력하세요"
-                  maxLength={12}
-                  className="w-full px-6 py-5 rounded-2xl text-center text-lg font-bold
-                    bg-white border-2 border-blue-200 focus:border-primary focus:ring-4 focus:ring-primary/15
-                    outline-none transition-all placeholder:text-on-surface/30 shadow-sm"
-                  style={{ color: "#1a2c3d" }}
+          <div className="relative z-10 flex min-h-[calc(100dvh-6rem)] flex-col items-center justify-between text-center w-full max-w-6xl">
+            <div className="flex flex-col items-center">
+              {/* 방패 로고 */}
+              <div className="animate-float mb-6 mt-6 md:mb-8">
+                <Image
+                  src="/images/shield-logo.png"
+                  alt="SAFE 프로젝트 - 안전문해력 향상"
+                  width={340}
+                  height={340}
+                  className="drop-shadow-2xl w-[220px] md:w-[300px] xl:w-[340px] h-auto"
+                  priority
                 />
               </div>
 
-              <button
-                onClick={handleStart}
-                disabled={!name.trim()}
-                className="soft-3d-primary w-full bg-gradient-to-b from-primary-fixed to-primary
-                  text-white font-black text-xl md:text-2xl px-14 py-5 rounded-full
-                  flex items-center justify-center gap-3 group
-                  disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none
-                  transition-all"
-              >
-                <span className="tracking-tight">게임 시작</span>
-                <span className="text-2xl group-hover:translate-x-1 transition-transform">▶</span>
-              </button>
+              {/* 소제목 뱃지 */}
+              <div className="pill-badge mb-4">
+                🛡️ 안전 탐험을 시작하세요!
+              </div>
+
+              {/* 메인 타이틀 - 한 줄, 그림자 없음 */}
+              <h1 className="font-headline text-5xl md:text-7xl font-black text-primary mb-3 tracking-tighter leading-none">
+                안전 인생게임
+              </h1>
+
+              <p className="text-on-surface/60 font-semibold text-base md:text-lg mb-8 max-w-lg">
+                7대 안전영역에서 올바른 판단을 내리고 안전문해력을 키워보세요!
+              </p>
+
+              {/* 이름 입력 + 시작 버튼 */}
+              <div className="w-full max-w-md mb-12 md:mb-16">
+                <div className="relative mb-4">
+                  <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    onKeyDown={handleKeyDown}
+                    placeholder="이름을 입력하세요"
+                    maxLength={12}
+                    className="w-full px-6 py-5 rounded-2xl text-center text-lg font-bold
+                      bg-white border-2 border-blue-200 focus:border-primary focus:ring-4 focus:ring-primary/15
+                      outline-none transition-all placeholder:text-on-surface/30 shadow-sm"
+                    style={{ color: "#1a2c3d" }}
+                  />
+                </div>
+
+                <button
+                  onClick={handleStart}
+                  disabled={!name.trim()}
+                  className="soft-3d-primary w-full bg-gradient-to-b from-primary-fixed to-primary
+                    text-white font-black text-xl md:text-2xl px-14 py-5 rounded-full
+                    flex items-center justify-center gap-3 group
+                    disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none disabled:transform-none
+                    transition-all"
+                >
+                  <span className="tracking-tight">게임 시작</span>
+                  <span className="text-2xl group-hover:translate-x-1 transition-transform">▶</span>
+                </button>
+              </div>
             </div>
 
             {/* 7대 안전영역 카드 */}
-            <div className="w-full">
+            <div className="w-full pb-2">
               <h3 className="text-sm font-black text-primary uppercase tracking-widest mb-5">
                 7대 안전 영역
               </h3>
