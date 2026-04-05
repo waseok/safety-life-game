@@ -7,8 +7,8 @@ import IllustrationCard from "./IllustrationCard";
 
 const BADGE_LEVELS = [
   { min: 90, label: "완벽 이수", icon: "🥇", color: "#b45309",  bg: "rgba(245,158,11,0.13)",  border: "rgba(245,158,11,0.5)" },
-  { min: 70, label: "우수 이수", icon: "🥈", color: "#006384",  bg: "rgba(0,99,132,0.12)",    border: "rgba(0,99,132,0.45)" },
-  { min: 0,  label: "이수 완료", icon: "🎖️", color: "#3c6600",  bg: "rgba(60,102,0,0.12)",    border: "rgba(60,102,0,0.45)" },
+  { min: 70, label: "우수 이수", icon: "🥈", color: "#1a6fb5",  bg: "rgba(26,111,181,0.12)",    border: "rgba(26,111,181,0.45)" },
+  { min: 0,  label: "이수 완료", icon: "🎖️", color: "#0d8a6a",  bg: "rgba(13,138,106,0.12)",    border: "rgba(13,138,106,0.45)" },
 ];
 
 function getBadge(result?: AreaResult) {
@@ -45,7 +45,7 @@ export default function AreaSelect() {
   const mentalPercent = (mental / maxMental) * 100;
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface pb-28">
+    <div className="min-h-screen flex flex-col bg-surface pb-8">
 
       {/* ── 상단 헤더 ── */}
       <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
@@ -76,7 +76,7 @@ export default function AreaSelect() {
               <div className="w-24 h-2.5 rounded-full overflow-hidden bg-surface-container-highest">
                 <div className="h-full rounded-full transition-all duration-700"
                   style={{ width: `${lifePercent}%`,
-                    background: lifePercent > 60 ? "#3c6600" : lifePercent > 30 ? "#f59e0b" : "#b31b25" }} />
+                    background: lifePercent > 60 ? "#0d8a6a" : lifePercent > 30 ? "#ffa726" : "#d32f2f" }} />
               </div>
               <span className="text-xs font-black text-on-surface">{life}</span>
             </div>
@@ -85,7 +85,7 @@ export default function AreaSelect() {
               <div className="w-24 h-2.5 rounded-full overflow-hidden bg-surface-container-highest">
                 <div className="h-full rounded-full transition-all duration-700"
                   style={{ width: `${mentalPercent}%`,
-                    background: mentalPercent > 60 ? "#006384" : mentalPercent > 30 ? "#f59e0b" : "#b31b25" }} />
+                    background: mentalPercent > 60 ? "#1a6fb5" : mentalPercent > 30 ? "#ffa726" : "#d32f2f" }} />
               </div>
               <span className="text-xs font-black text-on-surface">{mental}</span>
             </div>
@@ -95,7 +95,7 @@ export default function AreaSelect() {
           <button
             onClick={resetGame}
             className="px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:scale-105"
-            style={{ background: "rgba(179,27,37,0.07)", border: "1px solid rgba(179,27,37,0.2)", color: "#b31b25" }}
+            style={{ background: "rgba(211,47,47,0.07)", border: "1px solid rgba(211,47,47,0.2)", color: "#d32f2f" }}
           >
             🏠 처음으로
           </button>
@@ -122,7 +122,7 @@ export default function AreaSelect() {
               <div className="h-full rounded-full transition-all duration-700"
                 style={{
                   width: `${(completedAreas.length / allAreas.length) * 100}%`,
-                  background: "linear-gradient(90deg, #9b3e20, #fd8863)",
+                  background: "linear-gradient(90deg, #1a6fb5, #64b5f6)",
                 }} />
             </div>
             <span className="text-xs font-bold text-on-surface/50">
@@ -240,25 +240,6 @@ export default function AreaSelect() {
         )}
       </div>
 
-      {/* ── 바텀 내비게이션 ── */}
-      <nav className="bottom-nav">
-        <button className="bottom-nav-item active" aria-label="플레이">
-          <span className="text-xl">🎮</span>
-          <span className="text-[9px] font-black tracking-widest uppercase">Play</span>
-        </button>
-        <button className="bottom-nav-item" aria-label="프로필">
-          <span className="text-xl">👤</span>
-          <span className="text-[9px] font-black tracking-widest uppercase">Profile</span>
-        </button>
-        <button className="bottom-nav-item" aria-label="업적">
-          <span className="text-xl">🏅</span>
-          <span className="text-[9px] font-black tracking-widest uppercase">Awards</span>
-        </button>
-        <button className="bottom-nav-item" aria-label="설정">
-          <span className="text-xl">⚙️</span>
-          <span className="text-[9px] font-black tracking-widest uppercase">Settings</span>
-        </button>
-      </nav>
     </div>
   );
 }

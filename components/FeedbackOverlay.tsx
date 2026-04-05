@@ -40,11 +40,11 @@ export default function FeedbackOverlay() {
           style={{
             background: "#ffffff",
             border: isCorrect
-              ? "2px solid rgba(60,102,0,0.35)"
-              : "2px solid rgba(179,27,37,0.3)",
+              ? "2px solid rgba(13,138,106,0.35)"
+              : "2px solid rgba(211,47,47,0.3)",
             boxShadow: isCorrect
-              ? "0 12px 40px rgba(60,102,0,0.12)"
-              : "0 12px 40px rgba(179,27,37,0.1)",
+              ? "0 12px 40px rgba(13,138,106,0.12)"
+              : "0 12px 40px rgba(211,47,47,0.1)",
           }}
         >
           {/* 결과 헤더 */}
@@ -52,17 +52,17 @@ export default function FeedbackOverlay() {
             className="px-6 py-6 text-center"
             style={{
               background: isCorrect
-                ? "linear-gradient(135deg, rgba(60,102,0,0.08), rgba(193,253,124,0.06))"
-                : "linear-gradient(135deg, rgba(179,27,37,0.07), rgba(251,81,81,0.04))",
+                ? "linear-gradient(135deg, rgba(13,138,106,0.08), rgba(128,203,196,0.06))"
+                : "linear-gradient(135deg, rgba(211,47,47,0.07), rgba(239,83,80,0.04))",
               borderBottom: isCorrect
-                ? "1px solid rgba(60,102,0,0.15)"
-                : "1px solid rgba(179,27,37,0.15)",
+                ? "1px solid rgba(13,138,106,0.15)"
+                : "1px solid rgba(211,47,47,0.15)",
             }}
           >
             <div className="text-5xl mb-3 animate-pop">{isCorrect ? "✅" : "⚠️"}</div>
             <h3
               className="text-2xl md:text-3xl font-black"
-              style={{ color: isCorrect ? "#3c6600" : "#b31b25" }}
+              style={{ color: isCorrect ? "#0d8a6a" : "#d32f2f" }}
             >
               {isCorrect ? "올바른 선택입니다!" : "아쉬운 선택이에요"}
             </h3>
@@ -233,11 +233,11 @@ export default function FeedbackOverlay() {
                 ${isGameOver ? "soft-3d-error" : isCorrect ? "soft-3d-tertiary" : "soft-3d-secondary"}`}
               style={{
                 background: isGameOver
-                  ? "linear-gradient(to bottom, #fb5151, #b31b25)"
+                  ? "linear-gradient(to bottom, #ef5350, #d32f2f)"
                   : isCorrect
-                  ? "linear-gradient(to bottom, #c1fd7c, #3c6600)"
-                  : "linear-gradient(to bottom, #97daff, #006384)",
-                color: isCorrect ? "#2c4d00" : "#ffffff",
+                  ? "linear-gradient(to bottom, #80cbc4, #0d8a6a)"
+                  : "linear-gradient(to bottom, #64b5f6, #1a6fb5)",
+                color: isCorrect ? "#004d40" : "#ffffff",
               }}
             >
               {isGameOver ? "💀 결과 보기" : "다음으로 →"}

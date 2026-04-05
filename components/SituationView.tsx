@@ -18,16 +18,16 @@ const CHOICE_STYLES = [
     labelBg: "rgba(255,255,255,0.25)",
   },
   {
-    bg:      "linear-gradient(to bottom, #fd8863, #9b3e20)",
-    shadow:  "0 8px 0 #8b3315",
-    hoverShadow: "0 4px 0 #8b3315",
+    bg:      "linear-gradient(to bottom, #42a5f5, #1565c0)",
+    shadow:  "0 8px 0 #0d47a1",
+    hoverShadow: "0 4px 0 #0d47a1",
     label:   "B",
     labelBg: "rgba(255,255,255,0.25)",
   },
   {
-    bg:      "linear-gradient(to bottom, #c1fd7c, #3c6600)",
-    shadow:  "0 8px 0 #1e3300",
-    hoverShadow: "0 4px 0 #1e3300",
+    bg:      "linear-gradient(to bottom, #80cbc4, #0d8a6a)",
+    shadow:  "0 8px 0 #00695c",
+    hoverShadow: "0 4px 0 #00695c",
     label:   "C",
     labelBg: "rgba(255,255,255,0.25)",
   },
@@ -78,14 +78,14 @@ export default function SituationView() {
             <button
               onClick={() => setShowQuitConfirm(true)}
               className="px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:scale-105"
-              style={{ background: "rgba(0,99,132,0.08)", border: "1px solid rgba(0,99,132,0.2)", color: "#006384" }}
+              style={{ background: "rgba(26,111,181,0.08)", border: "1px solid rgba(26,111,181,0.2)", color: "#1a6fb5" }}
             >
               ← 영역 선택
             </button>
             <button
               onClick={() => setShowHomeConfirm(true)}
               className="px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:scale-105"
-              style={{ background: "rgba(179,27,37,0.07)", border: "1px solid rgba(179,27,37,0.2)", color: "#b31b25" }}
+              style={{ background: "rgba(211,47,47,0.07)", border: "1px solid rgba(211,47,47,0.2)", color: "#d32f2f" }}
             >
               🏠 처음으로
             </button>
@@ -128,7 +128,7 @@ export default function SituationView() {
               <div className="flex gap-2">
                 <button onClick={resetGame}
                   className="px-4 py-2 rounded-lg text-sm font-bold"
-                  style={{ background: "rgba(179,27,37,0.1)", color: "#b31b25" }}>
+                  style={{ background: "rgba(211,47,47,0.1)", color: "#d32f2f" }}>
                   초기화
                 </button>
                 <button onClick={() => setShowHomeConfirm(false)}
