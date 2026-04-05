@@ -117,16 +117,13 @@ export default function TitleScreen() {
           <div className="relative z-10 flex flex-col items-center text-center w-full max-w-6xl">
 
             {/* 방패 로고 */}
-            <div
-              className="animate-float mb-5 mt-4 rounded-[2rem] overflow-hidden"
-              style={{ background: "#f0f4f8", isolation: "isolate" }}
-            >
+            <div className="animate-float mb-5 mt-4">
               <Image
                 src="/images/shield-logo.png"
                 alt="SAFE 프로젝트 - 안전문해력 향상"
                 width={220}
                 height={220}
-                style={{ mixBlendMode: "screen" }}
+                className="drop-shadow-2xl"
                 priority
               />
             </div>
