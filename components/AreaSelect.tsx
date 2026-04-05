@@ -3,252 +3,262 @@
 import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
 import { AreaResult } from "@/store/useGameStore";
+import IllustrationCard from "./IllustrationCard";
 
 const BADGE_LEVELS = [
-  { min: 90, label: "완벽 이수", icon: "🥇", color: "#d97706", bg: "rgba(245,158,11,0.13)", border: "rgba(245,158,11,0.5)" },
-  { min: 70, label: "우수 이수", icon: "🥈", color: "#0284c7", bg: "rgba(2,132,199,0.12)", border: "rgba(2,132,199,0.45)" },
-  { min: 0,  label: "이수 완료", icon: "🎖️", color: "#16a34a", bg: "rgba(22,163,74,0.12)", border: "rgba(22,163,74,0.45)" },
+  { min: 90, label: "완벽 이수", icon: "🥇", color: "#b45309",  bg: "rgba(245,158,11,0.13)",  border: "rgba(245,158,11,0.5)" },
+  { min: 70, label: "우수 이수", icon: "🥈", color: "#006384",  bg: "rgba(0,99,132,0.12)",    border: "rgba(0,99,132,0.45)" },
+  { min: 0,  label: "이수 완료", icon: "🎖️", color: "#3c6600",  bg: "rgba(60,102,0,0.12)",    border: "rgba(60,102,0,0.45)" },
 ];
 
 function getBadge(result?: AreaResult) {
   if (!result) return null;
   const accuracy = result.totalChoices > 0
-    ? Math.round((result.correctCount / result.totalChoices) * 100)
-    : 0;
+    ? Math.round((result.correctCount / result.totalChoices) * 100) : 0;
   return BADGE_LEVELS.find((b) => accuracy >= b.min) ?? BADGE_LEVELS[2];
 }
 
-export default function AreaSelect() {
-  const selectArea = useGameStore((s) => s.selectArea);
-  const completedAreas = useGameStore((s) => s.completedAreas);
-  const areaResults = useGameStore((s) => s.areaResults);
-  const life = useGameStore((s) => s.life);
-  const mental = useGameStore((s) => s.mental);
-  const maxLife = useGameStore((s) => s.maxLife);
-  const maxMental = useGameStore((s) => s.maxMental);
-  const setPhase = useGameStore((s) => s.setPhase);
-  const resetGame = useGameStore((s) => s.resetGame);
+// 7개 영역을 벤토 그리드에 배치하는 레이아웃 설정
+const GRID_LAYOUTS = [
+  { span: "md:col-span-7", tall: true  },  // area 0 - 큰 카드
+  { span: "md:col-span-5", tall: true  },  // area 1 - 사이드 큰 카드
+  { span: "md:col-span-4", tall: false },  // area 2
+  { span: "md:col-span-4", tall: false },  // area 3
+  { span: "md:col-span-4", tall: false },  // area 4
+  { span: "md:col-span-6", tall: false },  // area 5
+  { span: "md:col-span-6", tall: false },  // area 6
+];
 
-  const allDone = completedAreas.length >= allAreas.length;
-  const lifePercent = (life / maxLife) * 100;
+export default function AreaSelect() {
+  const selectArea    = useGameStore((s) => s.selectArea);
+  const completedAreas = useGameStore((s) => s.completedAreas);
+  const areaResults   = useGameStore((s) => s.areaResults);
+  const life          = useGameStore((s) => s.life);
+  const mental        = useGameStore((s) => s.mental);
+  const maxLife       = useGameStore((s) => s.maxLife);
+  const maxMental     = useGameStore((s) => s.maxMental);
+  const setPhase      = useGameStore((s) => s.setPhase);
+  const resetGame     = useGameStore((s) => s.resetGame);
+
+  const allDone       = completedAreas.length >= allAreas.length;
+  const lifePercent   = (life / maxLife) * 100;
   const mentalPercent = (mental / maxMental) * 100;
 
   return (
-    <div className="min-h-screen flex flex-col items-center p-4 phase-transition">
-      {/* 헤더 */}
-      <div className="w-full max-w-4xl mb-6 mt-4">
-        <div className="flex items-center justify-between mb-5">
+    <div className="min-h-screen flex flex-col bg-surface pb-28">
+
+      {/* ── 상단 헤더 ── */}
+      <header className="sticky top-0 z-40 bg-surface/90 backdrop-blur-md border-b border-outline-variant/30">
+        <div className="flex items-center justify-between px-6 py-3 max-w-5xl mx-auto">
+
+          {/* 로고 + 포인트 */}
+          <div className="flex items-center gap-3">
+            <div className="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center text-xl shadow-sm">
+              🛡️
+            </div>
+            <div>
+              <h1 className="font-black text-secondary text-lg tracking-tighter leading-none">
+                Safety Life Game
+              </h1>
+              <div className="flex items-center gap-1 mt-0.5">
+                <span className="text-primary-fixed text-xs">⭐</span>
+                <span className="text-xs font-black text-on-surface">
+                  {life + mental} PTS
+                </span>
+              </div>
+            </div>
+          </div>
+
+          {/* 스탯 미니 바 */}
+          <div className="hidden md:flex items-center gap-4">
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-on-surface/50">❤️ 생명력</span>
+              <div className="w-24 h-2.5 rounded-full overflow-hidden bg-surface-container-highest">
+                <div className="h-full rounded-full transition-all duration-700"
+                  style={{ width: `${lifePercent}%`,
+                    background: lifePercent > 60 ? "#3c6600" : lifePercent > 30 ? "#f59e0b" : "#b31b25" }} />
+              </div>
+              <span className="text-xs font-black text-on-surface">{life}</span>
+            </div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-on-surface/50">🧠 판단력</span>
+              <div className="w-24 h-2.5 rounded-full overflow-hidden bg-surface-container-highest">
+                <div className="h-full rounded-full transition-all duration-700"
+                  style={{ width: `${mentalPercent}%`,
+                    background: mentalPercent > 60 ? "#006384" : mentalPercent > 30 ? "#f59e0b" : "#b31b25" }} />
+              </div>
+              <span className="text-xs font-black text-on-surface">{mental}</span>
+            </div>
+          </div>
+
+          {/* 액션 버튼 */}
+          <button
+            onClick={resetGame}
+            className="px-3 py-1.5 rounded-full text-xs font-bold transition-all hover:scale-105"
+            style={{ background: "rgba(179,27,37,0.07)", border: "1px solid rgba(179,27,37,0.2)", color: "#b31b25" }}
+          >
+            🏠 처음으로
+          </button>
+        </div>
+      </header>
+
+      <div className="max-w-5xl mx-auto w-full px-6 pt-6">
+
+        {/* ── 타이틀 섹션 ── */}
+        <div className="mb-6 flex items-end justify-between">
           <div>
-            <h1 className="text-2xl md:text-3xl font-black mb-1" style={{ color: "#0d2a4a" }}>
-              🛡️ 안전영역 선택
-            </h1>
-            <p className="text-sm" style={{ color: "#4a7090" }}>
-              학습할 안전영역을 선택하세요
-            </p>
+            <h2 className="font-headline text-3xl md:text-4xl font-extrabold text-on-surface tracking-tight">
+              안전 맵 탐험
+            </h2>
+            <p className="text-secondary font-bold text-base mt-1">학습할 안전 영역을 선택하세요!</p>
           </div>
 
-          <div className="flex flex-col items-end gap-2">
-            {/* 미니 스탯 */}
-            <div className="flex items-center gap-2">
-              <div className="h-2.5 w-20 rounded-full overflow-hidden" style={{ background: "rgba(22,163,74,0.12)" }}>
-                <div
-                  className="h-full rounded-full transition-all duration-500"
-                  style={{ width: `${lifePercent}%`, background: "#16a34a" }}
-                />
-              </div>
-              <span className="text-sm font-bold" style={{ color: "#16a34a" }}>❤️ {life}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <div className="h-2.5 w-20 rounded-full overflow-hidden" style={{ background: "rgba(2,132,199,0.12)" }}>
-                <div
-                  className="h-full rounded-full transition-all duration-500"
-                  style={{ width: `${mentalPercent}%`, background: "#0284c7" }}
-                />
-              </div>
-              <span className="text-sm font-bold" style={{ color: "#0284c7" }}>🧠 {mental}</span>
-            </div>
-            {/* 홈 버튼 */}
-            <button
-              onClick={resetGame}
-              className="mt-1 px-3 py-1.5 rounded-full text-xs font-semibold transition-all duration-200 hover:scale-105"
-              style={{
-                background: "rgba(220,38,38,0.07)",
-                border: "1px solid rgba(220,38,38,0.2)",
-                color: "#dc2626",
-              }}
-            >
-              🏠 처음으로
-            </button>
-          </div>
-        </div>
-
-        {/* 전체 진행률 */}
-        <div
-          className="p-4 rounded-2xl"
-          style={{
-            background: "rgba(2,132,199,0.05)",
-            border: "1.5px solid rgba(2,132,199,0.18)",
-          }}
-        >
-          <div className="flex items-center justify-between mb-2">
-            <span className="text-base font-black" style={{ color: "#0d2a4a" }}>
-              전체 진행률
+          {/* 전체 진행률 */}
+          <div className="hidden md:flex flex-col items-end gap-1.5">
+            <span className="text-sm font-black text-on-surface">
+              {completedAreas.length} / {allAreas.length} 완료
             </span>
-            <span className="text-base font-black" style={{ color: "#0284c7" }}>
-              {completedAreas.length} / {allAreas.length} 영역
-            </span>
-          </div>
-          <div className="h-4 rounded-full overflow-hidden" style={{ background: "rgba(2,132,199,0.12)" }}>
-            <div
-              className="h-full rounded-full transition-all duration-700"
-              style={{
-                width: `${(completedAreas.length / allAreas.length) * 100}%`,
-                background: "linear-gradient(90deg, #0284c7, #38bdf8)",
-                boxShadow: "0 0 8px rgba(2,132,199,0.4)",
-              }}
-            />
-          </div>
-          <p className="text-xs mt-1 text-right font-semibold" style={{ color: "#4a7090" }}>
-            {Math.round((completedAreas.length / allAreas.length) * 100)}% 완료
-          </p>
-        </div>
-      </div>
-
-      {/* 영역 그리드 - 3열 */}
-      <div className="w-full max-w-4xl grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
-        {allAreas.map((area, idx) => {
-          const isCompleted = completedAreas.includes(area.id);
-          const result = areaResults.find((r) => r.areaId === area.id);
-          const badge = getBadge(result);
-
-          return (
-            <button
-              key={area.id}
-              onClick={() => !isCompleted && selectArea(idx)}
-              disabled={isCompleted}
-              className={`relative group text-left rounded-2xl overflow-hidden transition-all duration-300 ${
-                isCompleted
-                  ? "cursor-default"
-                  : "hover:scale-[1.03] active:scale-[0.98] cursor-pointer"
-              }`}
-              style={{
-                background: isCompleted
-                  ? `linear-gradient(135deg, ${badge?.bg ?? "rgba(22,163,74,0.08)"}, rgba(255,255,255,0.9))`
-                  : "#ffffff",
-                border: isCompleted
-                  ? `2px solid ${badge?.border ?? "rgba(22,163,74,0.4)"}`
-                  : `1.5px solid ${area.color}30`,
-                boxShadow: isCompleted
-                  ? `0 4px 16px ${badge?.bg ?? "rgba(22,163,74,0.1)"}, 0 0 0 3px ${badge?.bg ?? "rgba(22,163,74,0.06)"}`
-                  : "0 4px 16px rgba(0,0,0,0.06)",
-              }}
-            >
-              {/* 상단 컬러 바 */}
-              <div
-                className="h-1.5 w-full"
+            <div className="w-40 h-3 rounded-full overflow-hidden bg-surface-container-highest">
+              <div className="h-full rounded-full transition-all duration-700"
                 style={{
-                  background: isCompleted
-                    ? `linear-gradient(90deg, ${badge?.color ?? "#16a34a"}, ${badge?.color ?? "#16a34a"}88)`
-                    : `linear-gradient(90deg, ${area.color}, ${area.color}88)`,
-                }}
-              />
+                  width: `${(completedAreas.length / allAreas.length) * 100}%`,
+                  background: "linear-gradient(90deg, #9b3e20, #fd8863)",
+                }} />
+            </div>
+            <span className="text-xs font-bold text-on-surface/50">
+              {Math.round((completedAreas.length / allAreas.length) * 100)}% 달성
+            </span>
+          </div>
+        </div>
 
-              <div className="p-5">
-                <div className="flex items-start justify-between mb-3">
-                  <span className="text-3xl">{area.icon}</span>
-                  {isCompleted && badge ? (
-                    /* 이수 뱃지 - 크고 강조 */
-                    <div className="flex flex-col items-center gap-1">
-                      <div
-                        className="flex flex-col items-center justify-center w-16 h-16 rounded-full"
-                        style={{
-                          background: `radial-gradient(circle, ${badge.bg} 0%, rgba(255,255,255,0.6) 100%)`,
-                          border: `3px solid ${badge.border}`,
-                          boxShadow: `0 0 0 4px ${badge.bg}, 0 4px 12px ${badge.bg}`,
-                        }}
-                      >
-                        <span className="text-2xl">{badge.icon}</span>
-                      </div>
-                      <span className="text-xs font-black" style={{ color: badge.color }}>
-                        {badge.label}
-                      </span>
-                      {result && (
-                        <span className="text-xs font-bold" style={{ color: badge.color }}>
-                          {Math.round((result.correctCount / result.totalChoices) * 100)}%
-                        </span>
-                      )}
-                    </div>
-                  ) : (
-                    <span
-                      className="px-2.5 py-1 rounded-full text-xs font-semibold opacity-0 group-hover:opacity-100 transition-opacity"
-                      style={{
-                        background: `${area.color}15`,
-                        color: area.color,
-                        border: `1px solid ${area.color}35`,
-                      }}
-                    >
-                      시작 →
-                    </span>
+        {/* ── 벤토 그리드 ── */}
+        <div className="grid grid-cols-1 md:grid-cols-12 gap-4">
+          {allAreas.map((area, idx) => {
+            const layout     = GRID_LAYOUTS[idx] ?? { span: "md:col-span-4", tall: false };
+            const isCompleted = completedAreas.includes(area.id);
+            const result      = areaResults.find((r) => r.areaId === area.id);
+            const badge       = getBadge(result);
+            const accuracy    = result && result.totalChoices > 0
+              ? Math.round((result.correctCount / result.totalChoices) * 100) : 0;
+
+            return (
+              <div
+                key={area.id}
+                onClick={() => !isCompleted && selectArea(idx)}
+                className={`area-card ${layout.span} ${layout.tall ? "md:h-80" : "h-52 md:h-60"}
+                  ${isCompleted ? "opacity-90 cursor-default" : "cursor-pointer"}`}
+                style={{
+                  borderBottom: `6px solid ${isCompleted ? (badge?.border ?? area.color) : area.color}`,
+                }}
+              >
+                {/* 배경 이미지 */}
+                <div className="absolute inset-0">
+                  <IllustrationCard
+                    src={area.coverImage}
+                    alt={area.title}
+                    className="w-full h-full"
+                  />
+                  {/* 그라디언트 오버레이 */}
+                  <div className="card-overlay" />
+                  {isCompleted && (
+                    <div className="absolute inset-0 bg-black/20" />
                   )}
                 </div>
 
-                <h3 className="text-base font-black mb-1" style={{ color: "#0d2a4a" }}>
-                  {area.title}
-                </h3>
+                {/* 컨텐츠 */}
+                <div className="relative z-10 h-full p-5 flex flex-col justify-between">
 
-                <p
-                  className="text-xs leading-relaxed mb-3 line-clamp-2"
-                  style={{ color: "#4a7090" }}
-                >
-                  {area.description}
-                </p>
+                  {/* 상단 배지 행 */}
+                  <div className="flex justify-between items-start">
+                    {!isCompleted ? (
+                      <span className="px-3 py-1 rounded-full text-[10px] font-black tracking-widest uppercase text-white shadow-md"
+                        style={{ background: area.color }}>
+                        {idx === 0 ? "추천" : idx <= 2 ? "도전중" : "미탐험"}
+                      </span>
+                    ) : (
+                      <div className="flex flex-col items-center">
+                        <div className="w-12 h-12 rounded-full flex items-center justify-center shadow-lg border-2 border-white text-2xl"
+                          style={{ background: badge?.bg ?? "rgba(255,255,255,0.2)" }}>
+                          {badge?.icon ?? "🎖️"}
+                        </div>
+                        <span className="text-[10px] font-black text-white mt-1 drop-shadow">{accuracy}%</span>
+                      </div>
+                    )}
 
-                <div className="flex flex-wrap gap-1.5 mb-3">
-                  {area.subAreas.map((sub) => (
-                    <span
-                      key={sub.id}
-                      className="px-2 py-0.5 rounded-full text-[10px]"
-                      style={{
-                        background: `${area.color}12`,
-                        color: `${area.color}cc`,
-                        border: `1px solid ${area.color}25`,
-                      }}
-                    >
-                      {sub.title}
-                    </span>
-                  ))}
-                </div>
+                    <div className="flex items-center gap-1.5 bg-white/90 backdrop-blur-sm px-2.5 py-1.5 rounded-2xl shadow-md">
+                      <span className="text-sm">{area.icon}</span>
+                      <span className="text-xs font-black" style={{ color: area.color }}>
+                        Lv.{idx + 1}
+                      </span>
+                    </div>
+                  </div>
 
-                <div className="text-xs font-semibold" style={{ color: `${area.color}99` }}>
-                  📋 {area.situations.length}개 상황
+                  {/* 하단 내용 */}
+                  <div>
+                    <h3 className="font-headline text-xl md:text-2xl font-black text-white mb-2 drop-shadow-md tracking-tight">
+                      {area.title}
+                    </h3>
+
+                    {layout.tall && (
+                      <p className="text-white/80 text-xs font-medium mb-3 line-clamp-2 leading-relaxed drop-shadow">
+                        {area.description}
+                      </p>
+                    )}
+
+                    {!isCompleted ? (
+                      <button
+                        className="soft-3d-secondary text-white font-black text-sm
+                          px-5 py-2.5 rounded-full flex items-center gap-2"
+                        style={{ background: `linear-gradient(to bottom, ${area.color}cc, ${area.color})` }}
+                        onClick={(e) => { e.stopPropagation(); selectArea(idx); }}
+                      >
+                        시작하기 →
+                      </button>
+                    ) : (
+                      <span className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-black text-white bg-white/20 backdrop-blur-sm border border-white/30">
+                        ✅ {badge?.label ?? "이수 완료"}
+                      </span>
+                    )}
+                  </div>
                 </div>
               </div>
+            );
+          })}
+        </div>
 
-              {/* 호버 오버레이 */}
-              {!isCompleted && (
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none rounded-2xl"
-                  style={{ background: `radial-gradient(ellipse at center, ${area.color}08 0%, transparent 70%)` }}
-                />
-              )}
+        {/* ── 전체 완료 버튼 ── */}
+        {allDone && (
+          <div className="mt-8 flex justify-center">
+            <button
+              onClick={() => setPhase("ending")}
+              className="soft-3d-tertiary bg-gradient-to-b from-tertiary-fixed to-tertiary
+                text-white font-black text-xl px-14 py-5 rounded-full flex items-center gap-3"
+            >
+              🎉 최종 결과 보기
             </button>
-          );
-        })}
+          </div>
+        )}
       </div>
 
-      {/* 전체 완료 버튼 */}
-      {allDone && (
-        <button
-          onClick={() => setPhase("ending")}
-          className="px-12 py-4 rounded-2xl font-black text-xl text-white mb-8 transition-all duration-300 hover:scale-105 active:scale-95"
-          style={{
-            background: "linear-gradient(135deg, #16a34a, #0d9488)",
-            boxShadow: "0 8px 32px rgba(22,163,74,0.4)",
-          }}
-        >
-          🎉 최종 결과 보기
+      {/* ── 바텀 내비게이션 ── */}
+      <nav className="bottom-nav">
+        <button className="bottom-nav-item active" aria-label="플레이">
+          <span className="text-xl">🎮</span>
+          <span className="text-[9px] font-black tracking-widest uppercase">Play</span>
         </button>
-      )}
+        <button className="bottom-nav-item" aria-label="프로필">
+          <span className="text-xl">👤</span>
+          <span className="text-[9px] font-black tracking-widest uppercase">Profile</span>
+        </button>
+        <button className="bottom-nav-item" aria-label="업적">
+          <span className="text-xl">🏅</span>
+          <span className="text-[9px] font-black tracking-widest uppercase">Awards</span>
+        </button>
+        <button className="bottom-nav-item" aria-label="설정">
+          <span className="text-xl">⚙️</span>
+          <span className="text-[9px] font-black tracking-widest uppercase">Settings</span>
+        </button>
+      </nav>
     </div>
   );
 }

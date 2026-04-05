@@ -31,20 +31,20 @@ export default function FeedbackOverlay() {
   const videos = resolvedAreaId ? (AREA_VIDEOS[resolvedAreaId] ?? []) : [];
 
   return (
-    <div className="min-h-screen flex flex-col" style={{ background: "#eef6ff" }}>
+    <div className="min-h-screen flex flex-col bg-surface">
       <ResourceBar />
 
       <div className="flex-1 flex items-center justify-center p-4 phase-transition">
         <div
-          className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg"
+          className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-xl"
           style={{
             background: "#ffffff",
             border: isCorrect
-              ? "2px solid rgba(22,163,74,0.4)"
-              : "2px solid rgba(220,38,38,0.35)",
+              ? "2px solid rgba(60,102,0,0.35)"
+              : "2px solid rgba(179,27,37,0.3)",
             boxShadow: isCorrect
-              ? "0 12px 40px rgba(22,163,74,0.12)"
-              : "0 12px 40px rgba(220,38,38,0.1)",
+              ? "0 12px 40px rgba(60,102,0,0.12)"
+              : "0 12px 40px rgba(179,27,37,0.1)",
           }}
         >
           {/* 결과 헤더 */}
@@ -52,17 +52,17 @@ export default function FeedbackOverlay() {
             className="px-6 py-6 text-center"
             style={{
               background: isCorrect
-                ? "linear-gradient(135deg, rgba(22,163,74,0.08), rgba(16,185,129,0.04))"
-                : "linear-gradient(135deg, rgba(220,38,38,0.07), rgba(249,115,22,0.04))",
+                ? "linear-gradient(135deg, rgba(60,102,0,0.08), rgba(193,253,124,0.06))"
+                : "linear-gradient(135deg, rgba(179,27,37,0.07), rgba(251,81,81,0.04))",
               borderBottom: isCorrect
-                ? "1px solid rgba(22,163,74,0.15)"
-                : "1px solid rgba(220,38,38,0.15)",
+                ? "1px solid rgba(60,102,0,0.15)"
+                : "1px solid rgba(179,27,37,0.15)",
             }}
           >
-            <div className="text-5xl mb-3">{isCorrect ? "✅" : "⚠️"}</div>
+            <div className="text-5xl mb-3 animate-pop">{isCorrect ? "✅" : "⚠️"}</div>
             <h3
               className="text-2xl md:text-3xl font-black"
-              style={{ color: isCorrect ? "#16a34a" : "#dc2626" }}
+              style={{ color: isCorrect ? "#3c6600" : "#b31b25" }}
             >
               {isCorrect ? "올바른 선택입니다!" : "아쉬운 선택이에요"}
             </h3>
@@ -228,16 +228,16 @@ export default function FeedbackOverlay() {
             {/* 다음 버튼 */}
             <button
               onClick={proceedAfterFeedback}
-              className="w-full py-4 rounded-xl font-black text-lg text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+              className={`w-full py-4 rounded-full font-black text-lg text-white
+                transition-all duration-200 active:translate-y-1
+                ${isGameOver ? "soft-3d-error" : isCorrect ? "soft-3d-tertiary" : "soft-3d-secondary"}`}
               style={{
                 background: isGameOver
-                  ? "linear-gradient(135deg, #dc2626, #f97316)"
+                  ? "linear-gradient(to bottom, #fb5151, #b31b25)"
                   : isCorrect
-                  ? "linear-gradient(135deg, #16a34a, #0d9488)"
-                  : "linear-gradient(135deg, #0284c7, #0ea5e9)",
-                boxShadow: isGameOver
-                  ? "0 6px 20px rgba(220,38,38,0.3)"
-                  : "0 6px 20px rgba(2,132,199,0.3)",
+                  ? "linear-gradient(to bottom, #c1fd7c, #3c6600)"
+                  : "linear-gradient(to bottom, #97daff, #006384)",
+                color: isCorrect ? "#2c4d00" : "#ffffff",
               }}
             >
               {isGameOver ? "💀 결과 보기" : "다음으로 →"}
