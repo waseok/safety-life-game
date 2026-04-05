@@ -38,7 +38,7 @@ export default function TitleScreen() {
       <nav className="fixed top-0 left-0 right-0 z-50 bg-white/80 backdrop-blur-md border-b border-blue-100">
         <div className="flex justify-between items-center px-6 py-3 max-w-7xl mx-auto">
           <div className="flex items-center gap-2">
-            <Image src="/images/shield-logo.png" alt="SAFE 프로젝트" width={36} height={36} className="rounded-lg" />
+            <span className="text-2xl">🛡️</span>
             <span className="text-lg font-black text-primary tracking-tighter">
               Safety Life Game
             </span>
@@ -116,38 +116,32 @@ export default function TitleScreen() {
 
           <div className="relative z-10 flex flex-col items-center text-center w-full max-w-6xl">
 
-            {/* 상단 히어로: 방패 + 타이틀 가로 배치 (PC) */}
-            <div className="w-full flex flex-col md:flex-row items-center justify-center gap-6 md:gap-10 mb-8 mt-4">
-              {/* 방패 로고 */}
-              <div className="animate-float flex-shrink-0">
-                <Image
-                  src="/images/shield-logo.png"
-                  alt="SAFE 프로젝트 - 안전문해력 향상"
-                  width={200}
-                  height={200}
-                  className="drop-shadow-2xl"
-                  priority
-                />
-              </div>
-
-              {/* 타이틀 영역 */}
-              <div className="flex flex-col items-center md:items-start">
-                <div className="pill-badge mb-3">
-                  🛡️ 안전 탐험을 시작하세요!
-                </div>
-                <Image
-                  src="/images/title-text.png"
-                  alt="안전 인생게임"
-                  width={360}
-                  height={120}
-                  className="drop-shadow-lg mb-3"
-                  priority
-                />
-                <p className="text-on-surface/60 font-semibold text-base md:text-lg max-w-md">
-                  7대 안전영역에서 올바른 판단을 내리고 안전문해력을 키워보세요!
-                </p>
-              </div>
+            {/* 방패 로고 */}
+            <div className="animate-float mb-5 mt-4">
+              <Image
+                src="/images/shield-logo.png"
+                alt="SAFE 프로젝트 - 안전문해력 향상"
+                width={220}
+                height={220}
+                className="drop-shadow-2xl"
+                style={{ mixBlendMode: "screen" }}
+                priority
+              />
             </div>
+
+            {/* 소제목 뱃지 */}
+            <div className="pill-badge mb-4">
+              🛡️ 안전 탐험을 시작하세요!
+            </div>
+
+            {/* 메인 타이틀 - 한 줄, 그림자 없음 */}
+            <h1 className="font-headline text-5xl md:text-7xl font-black text-primary mb-3 tracking-tighter leading-none">
+              안전 인생게임
+            </h1>
+
+            <p className="text-on-surface/60 font-semibold text-base md:text-lg mb-8 max-w-lg">
+              7대 안전영역에서 올바른 판단을 내리고 안전문해력을 키워보세요!
+            </p>
 
             {/* 이름 입력 + 시작 버튼 */}
             <div className="w-full max-w-md mb-10">
