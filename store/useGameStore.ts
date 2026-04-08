@@ -69,6 +69,7 @@ interface GameStore {
   gameOverAreaId: string | null;
   quizAnswers: Record<string, string>;
   rankings: RankingEntry[];
+  serverRankings: RankingEntry[];
 
   setPhase: (phase: GamePhase) => void;
   setPlayerName: (name: string) => void;
@@ -82,6 +83,8 @@ interface GameStore {
   submitQuizAnswer: (answer: string) => void;
   proceedFromAreaComplete: () => void;
   saveScore: () => void;
+  saveAreaScore: (areaId: string) => Promise<void>;
+  fetchServerRankings: () => Promise<void>;
   resetGame: () => void;
   getCurrentArea: () => (typeof allAreas)[number] | undefined;
   getCurrentSituation: () => ReturnType<GameStore["getCurrentArea"]> extends undefined
@@ -115,6 +118,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
   gameOverAreaId: null,
   quizAnswers: {},
   rankings: loadRankings(),
+  serverRankings: [],
 
   setPhase: (phase) => set({ phase }),
   setPlayerName: (name) => set({ playerName: name }),
@@ -286,6 +290,45 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({ rankings: updated });
   },
 
+  saveAreaScore: async (areaId: string) => {
+    const state = get();
+    const result = state.areaResults.find((r) => r.areaId === areaId);
+    const accuracy = result && result.totalChoices > 0
+      ? Math.round((result.correctCount / result.totalChoices) * 100) : 0;
+    const areaScore = state.life + state.mental + ((result?.correctCount ?? 0) * 10);
+    const entry: RankingEntry = {
+      name: state.playerName || "익명",
+      score: areaScore,
+      accuracy,
+      date: new Date().toLocaleDateString("ko-KR"),
+    };
+    try {
+      const res = await fetch("/api/rankings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(entry),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        set({ serverRankings: data.rankings ?? [] });
+      }
+    } catch {
+      // Silently fail if server unavailable
+    }
+  },
+
+  fetchServerRankings: async () => {
+    try {
+      const res = await fetch("/api/rankings");
+      if (res.ok) {
+        const data: RankingEntry[] = await res.json();
+        set({ serverRankings: data });
+      }
+    } catch {
+      // Silently fail
+    }
+  },
+
   resetGame: () =>
     set({
       phase: "title",
@@ -311,6 +354,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       gameOverAreaId: null,
       quizAnswers: {},
       rankings: loadRankings(),
+      // serverRankings persists across resets
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],

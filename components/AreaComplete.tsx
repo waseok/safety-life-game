@@ -14,6 +14,7 @@ const BADGE_LEVELS = [
 export default function AreaComplete() {
   const proceedFromAreaComplete = useGameStore((s) => s.proceedFromAreaComplete);
   const resetGame = useGameStore((s) => s.resetGame);
+  const saveAreaScore = useGameStore((s) => s.saveAreaScore);
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
   const areaResults = useGameStore((s) => s.areaResults);
   const completedAreas = useGameStore((s) => s.completedAreas);
@@ -30,6 +31,9 @@ export default function AreaComplete() {
 
   useEffect(() => {
     playAreaComplete();
+    if (area?.id) {
+      saveAreaScore(area.id);
+    }
     if (allDone) {
       import("canvas-confetti").then((mod) => {
         const confetti = mod.default;
