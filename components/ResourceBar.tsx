@@ -19,19 +19,19 @@ export default function ResourceBar() {
   const lifePercent   = Math.max(0, (life / maxLife) * 100);
   const mentalPercent = Math.max(0, (mental / maxMental) * 100);
 
-  const lifeColor   = lifePercent > 60 ? "#3c6600" : lifePercent > 30 ? "#f59e0b" : "#b31b25";
-  const mentalColor = mentalPercent > 60 ? "#006384" : mentalPercent > 30 ? "#f59e0b" : "#b31b25";
+  const lifeColor   = lifePercent > 60 ? "#0d8a6a" : lifePercent > 30 ? "#ffa726" : "#d32f2f";
+  const mentalColor = mentalPercent > 60 ? "#1a6fb5" : mentalPercent > 30 ? "#ffa726" : "#d32f2f";
 
   return (
     <div className="w-full sticky top-0 z-50 bg-white/95 backdrop-blur-lg border-b border-outline-variant/30 shadow-sm">
-      <div className="max-w-2xl mx-auto px-4 py-3">
+      <div className="max-w-6xl mx-auto px-4 md:px-6 py-3">
 
         {/* ── 영역명 + 진행률 ── */}
         <div className="flex items-center justify-between mb-2">
           <span className="flex items-center gap-2 px-3 py-1 rounded-full text-sm font-bold"
-            style={{ background: `${area?.color ?? "#9b3e20"}15`,
-              border: `1px solid ${area?.color ?? "#9b3e20"}30`,
-              color: area?.color ?? "#9b3e20" }}>
+            style={{ background: `${area?.color ?? "#1a6fb5"}15`,
+              border: `1px solid ${area?.color ?? "#1a6fb5"}30`,
+              color: area?.color ?? "#1a6fb5" }}>
             {area?.icon} {area?.title ?? "진행 중"}
           </span>
 
@@ -49,8 +49,8 @@ export default function ResourceBar() {
           <div className="h-full rounded-full transition-all duration-700"
             style={{
               width: `${areaPercent}%`,
-              background: "linear-gradient(90deg, #9b3e20, #fd8863)",
-              boxShadow: "0 0 6px rgba(155,62,32,0.4)",
+              background: "linear-gradient(90deg, #1a6fb5, #64b5f6)",
+              boxShadow: "0 0 6px rgba(26,111,181,0.4)",
             }} />
         </div>
 

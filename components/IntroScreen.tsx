@@ -12,9 +12,9 @@ export default function IntroScreen() {
   const bg = backgrounds[selectedCharacter.id] || backgrounds["minjun"];
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 phase-transition">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 phase-transition">
       {/* 뒤로 가기 */}
-      <div className="w-full max-w-2xl mb-4">
+      <div className="w-full max-w-3xl mb-4">
         <button
           onClick={() => setPhase("character-select")}
           className="px-4 py-2 rounded-full text-sm font-semibold transition-all hover:scale-105"
@@ -28,7 +28,7 @@ export default function IntroScreen() {
         </button>
       </div>
 
-      <div className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg"
+      <div className="max-w-3xl w-full rounded-2xl overflow-hidden shadow-lg"
         style={{ background: "#ffffff", border: "1.5px solid rgba(2,132,199,0.2)" }}
       >
         <IllustrationCard

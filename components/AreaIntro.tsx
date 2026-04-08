@@ -13,8 +13,8 @@ export default function AreaIntro() {
   if (!area) return null;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center p-4 phase-transition">
-      <div className="max-w-2xl w-full mb-4">
+    <div className="min-h-screen flex flex-col items-center justify-center p-4 md:p-8 phase-transition">
+      <div className="max-w-3xl w-full mb-4">
         <button
           onClick={quitToAreaSelect}
           className="px-4 py-2 rounded-full text-sm font-semibold transition-colors hover:scale-105"
@@ -29,7 +29,7 @@ export default function AreaIntro() {
       </div>
 
       <div
-        className="max-w-2xl w-full rounded-2xl overflow-hidden shadow-lg"
+        className="max-w-3xl w-full rounded-2xl overflow-hidden shadow-lg"
         style={{
           background: "#ffffff",
           border: `2px solid ${area.color}35`,

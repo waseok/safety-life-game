@@ -50,7 +50,7 @@ export default function AreaQuiz() {
       style={{ background: "#eef6ff" }}
     >
       <div
-        className="max-w-xl w-full rounded-3xl overflow-hidden"
+        className="max-w-2xl w-full rounded-3xl overflow-hidden"
         style={{
           background: "#ffffff",
           border: `2px solid ${lc.border}`,

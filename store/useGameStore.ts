@@ -11,6 +11,28 @@ export interface AreaResult {
   totalChoices: number;
 }
 
+export interface RankingEntry {
+  name: string;
+  score: number;
+  accuracy: number;
+  date: string;
+}
+
+function loadRankings(): RankingEntry[] {
+  if (typeof window === "undefined") return [];
+  try {
+    const raw = localStorage.getItem("safety-life-rankings");
+    return raw ? JSON.parse(raw) : [];
+  } catch {
+    return [];
+  }
+}
+
+function saveRankings(rankings: RankingEntry[]) {
+  if (typeof window === "undefined") return;
+  localStorage.setItem("safety-life-rankings", JSON.stringify(rankings));
+}
+
 // 캐릭터별 정답 보너스 - 균형적 스탯 회복
 const CHARACTER_LIFE_BONUS: Record<string, number> = {
   minjun: 8,    // 활발/용감 → 체력 우선 회복
@@ -25,6 +47,7 @@ const CHARACTER_MENTAL_BONUS: Record<string, number> = {
 
 interface GameStore {
   phase: GamePhase;
+  playerName: string;
   selectedCharacter: Character | null;
   currentAreaIndex: number;
   currentSituationIndex: number;
@@ -43,10 +66,12 @@ interface GameStore {
   areaSessionTotal: number;
   areaResults: AreaResult[];
   tipRevealed: boolean;
-  gameOverAreaId: string | null;  // 게임오버 발생 영역 ID (영상 링크용)
-  quizAnswers: Record<string, string>;  // areaId → 서술형 답변
+  gameOverAreaId: string | null;
+  quizAnswers: Record<string, string>;
+  rankings: RankingEntry[];
 
   setPhase: (phase: GamePhase) => void;
+  setPlayerName: (name: string) => void;
   selectCharacter: (character: Character) => void;
   startGame: () => void;
   selectArea: (areaIndex: number) => void;
@@ -56,6 +81,7 @@ interface GameStore {
   proceedAfterFeedback: () => void;
   submitQuizAnswer: (answer: string) => void;
   proceedFromAreaComplete: () => void;
+  saveScore: () => void;
   resetGame: () => void;
   getCurrentArea: () => (typeof allAreas)[number] | undefined;
   getCurrentSituation: () => ReturnType<GameStore["getCurrentArea"]> extends undefined
@@ -67,6 +93,7 @@ interface GameStore {
 
 export const useGameStore = create<GameStore>((set, get) => ({
   phase: "title",
+  playerName: "",
   selectedCharacter: null,
   currentAreaIndex: 0,
   currentSituationIndex: 0,
@@ -87,8 +114,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
   tipRevealed: false,
   gameOverAreaId: null,
   quizAnswers: {},
+  rankings: loadRankings(),
 
   setPhase: (phase) => set({ phase }),
+  setPlayerName: (name) => set({ playerName: name }),
 
   selectCharacter: (character) =>
     set({
@@ -239,9 +268,28 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
+  saveScore: () => {
+    const state = get();
+    const accuracy = state.totalChoices > 0
+      ? Math.round((state.correctCount / state.totalChoices) * 100) : 0;
+    const score = state.life + state.mental + (state.correctCount * 10);
+    const entry: RankingEntry = {
+      name: state.playerName || "익명",
+      score,
+      accuracy,
+      date: new Date().toLocaleDateString("ko-KR"),
+    };
+    const updated = [...loadRankings(), entry]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20);
+    saveRankings(updated);
+    set({ rankings: updated });
+  },
+
   resetGame: () =>
     set({
       phase: "title",
+      playerName: "",
       selectedCharacter: null,
       currentAreaIndex: 0,
       currentSituationIndex: 0,
@@ -262,6 +310,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       tipRevealed: false,
       gameOverAreaId: null,
       quizAnswers: {},
+      rankings: loadRankings(),
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],
