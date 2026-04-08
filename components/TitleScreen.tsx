@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { useGameStore } from "@/store/useGameStore";
 
@@ -17,9 +17,18 @@ const AREAS = [
 export default function TitleScreen() {
   const setPhase = useGameStore((s) => s.setPhase);
   const setPlayerName = useGameStore((s) => s.setPlayerName);
+  const serverRankings = useGameStore((s) => s.serverRankings);
+  const fetchServerRankings = useGameStore((s) => s.fetchServerRankings);
   const rankings = useGameStore((s) => s.rankings);
   const [name, setName] = useState("");
   const [showRanking, setShowRanking] = useState(false);
+
+  useEffect(() => {
+    fetchServerRankings();
+  }, []);
+
+  // Show server rankings if available, fall back to local rankings
+  const displayRankings = serverRankings.length > 0 ? serverRankings : rankings;
 
   const handleStart = () => {
     if (!name.trim()) return;
@@ -43,18 +52,26 @@ export default function TitleScreen() {
               Safety Life Game
             </span>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 p-1 rounded-full bg-surface-container-low border border-outline-variant/30">
             <button
               onClick={() => setShowRanking(false)}
-              className={`text-xs font-black tracking-widest uppercase transition-colors ${!showRanking ? "text-primary" : "text-on-surface/50 hover:text-on-surface"}`}
+              className={`px-5 py-2 rounded-full text-sm font-black transition-all duration-200 ${
+                !showRanking
+                  ? "bg-primary text-white shadow-md"
+                  : "text-on-surface/60 hover:text-on-surface hover:bg-surface-container"
+              }`}
             >
               홈
             </button>
             <button
               onClick={() => setShowRanking(true)}
-              className={`text-xs font-black tracking-widest uppercase transition-colors ${showRanking ? "text-primary" : "text-on-surface/50 hover:text-on-surface"}`}
+              className={`px-5 py-2 rounded-full text-sm font-black transition-all duration-200 ${
+                showRanking
+                  ? "bg-primary text-white shadow-md"
+                  : "text-on-surface/60 hover:text-on-surface hover:bg-surface-container"
+              }`}
             >
-              랭킹
+              🏆 랭킹
             </button>
           </div>
         </div>
@@ -63,18 +80,25 @@ export default function TitleScreen() {
       {showRanking ? (
         <main className="flex-1 flex flex-col items-center pt-24 pb-12 px-6">
           <div className="max-w-3xl w-full">
-            <h2 className="text-3xl font-black text-primary mb-6 text-center">
-              🏆 랭킹 보드
-            </h2>
-            {rankings.length === 0 ? (
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-3xl font-black text-primary">
+                🏆 랭킹 보드
+              </h2>
+              {serverRankings.length > 0 && (
+                <span className="text-xs font-bold px-3 py-1 rounded-full bg-primary/10 text-primary border border-primary/20">
+                  🌐 전체 유저
+                </span>
+              )}
+            </div>
+            {displayRankings.length === 0 ? (
               <div className="text-center py-16">
                 <p className="text-6xl mb-4">📊</p>
                 <p className="text-lg font-bold text-on-surface/50">아직 기록이 없습니다</p>
-                <p className="text-sm text-on-surface/40 mt-1">게임을 완료하면 랭킹에 등록됩니다!</p>
+                <p className="text-sm text-on-surface/40 mt-1">영역을 완료하면 랭킹에 등록됩니다!</p>
               </div>
             ) : (
               <div className="space-y-3">
-                {rankings.map((r, i) => (
+                {displayRankings.map((r, i) => (
                   <div
                     key={`${r.name}-${r.date}-${i}`}
                     className="flex items-center gap-4 p-5 rounded-2xl bg-white border transition-all hover:shadow-md"
