@@ -28,8 +28,8 @@ export const workSafety: Area = {
       areaId: "work-safety",
       subAreaId: "industrial",
       order: 1,
-      title: "안전모 착용",
-      body: "건설현장에 첫 출근한 날입니다. 현장 입구에 '안전모 착용 필수' 표지판이 보입니다. 선배가 \"빨리 와, 오늘 일 많아.\"라며 재촉합니다. 안전모가 조금 불편하게 느껴집니다.",
+      title: "직업 체험 첫날, 건설현장 안전모 착용",
+      body: "민준이는 학교 직업 체험 활동으로 건설현장에 첫 출근했습니다. 현장 입구에 '안전모 착용 필수' 표지판이 보입니다. 선배가 \"빨리 와, 오늘 일 많아.\"라며 재촉하는데, 안전모가 조금 불편하게 느껴집니다.",
       image: "/images/situations/area6/s01.png",
       choices: [
         {
@@ -66,8 +66,8 @@ export const workSafety: Area = {
       areaId: "work-safety",
       subAreaId: "industrial",
       order: 2,
-      title: "고소작업 안전벨트",
-      body: "2층 높이의 비계 위에서 철근 작업을 하고 있습니다. 안전벨트를 착용했지만, 이동할 때마다 연결고리가 걸리면서 불편합니다. \"이 정도 높이면 괜찮지 않을까?\"라는 생각이 듭니다.",
+      title: "비계 위 고소작업, 불편한 안전벨트 연결고리",
+      body: "이어서 민준이는 2층 높이의 비계 위에서 철근 작업을 하게 됐습니다. 안전벨트를 착용했지만, 이동할 때마다 연결고리가 걸리면서 불편합니다. \"이 정도 높이면 괜찮지 않을까?\"라는 생각이 듭니다.",
       image: "/images/situations/area6/s01.png",
       choices: [
         {
@@ -104,8 +104,8 @@ export const workSafety: Area = {
       areaId: "work-safety",
       subAreaId: "industrial",
       order: 3,
-      title: "회전기계 주의",
-      body: "공장에서 드릴 작업을 하고 있습니다. 드릴 비트를 교체해야 하는데, 기계가 방금 꺼졌습니다. 비트가 아직 천천히 돌고 있는 것 같습니다. 조금 기다리면 될 것 같은데 일정이 촉박합니다.",
+      title: "공장 드릴 작업 중 멈추지 않은 회전 비트",
+      body: "다음 날 민준이는 공장 체험으로 드릴 작업을 하게 됐습니다. 드릴 비트를 교체해야 하는데, 기계가 방금 꺼졌습니다. 비트가 아직 천천히 돌고 있는 것 같고, 일정이 촉박합니다.",
       image: "/images/situations/area6/s02.png",
       choices: [
         {
@@ -142,8 +142,8 @@ export const workSafety: Area = {
       areaId: "work-safety",
       subAreaId: "industrial",
       order: 4,
-      title: "화학물질 취급",
-      body: "공장에서 세척용 산성 시약을 옮기고 있습니다. 용기 라벨에 '부식성', '피부 접촉 금지'라고 적혀 있습니다. 장갑이 없는데, \"한 번만 옮기면 되지\"라는 생각이 듭니다.",
+      title: "장갑 없이 부식성 화학물질을 옮기려는 민준",
+      body: "계속해서 민준이는 공장에서 세척용 산성 시약을 옮기는 작업을 받았습니다. 용기 라벨에 '부식성', '피부 접촉 금지'라고 적혀 있는데, 장갑이 없습니다. \"한 번만 옮기면 되지\"라는 생각이 듭니다.",
       image: "/images/situations/area6/s05.png",
       choices: [
         {

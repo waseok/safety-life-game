@@ -51,8 +51,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-04", areaId: "traffic-safety", subAreaId: "pedestrian", order: 4,
-      title: "어두운 밤길",
-      body: "학원을 마치고 집으로 돌아가는 밤 9시, 가로등이 없는 골목을 지나야 합니다. 어두운 옷을 입고 있습니다.",
+      title: "밤 9시, 어두운 골목으로 귀갓길",
+      body: "그날 밤 9시, 학원을 마치고 집으로 돌아가던 민준이는 가로등이 없는 골목을 지나야 하는 상황이 됐습니다. 하필 오늘 어두운 옷을 입고 있었습니다.",
       image: "/images/situations/area2/s02.png",
       choices: [
         { id: "ts-04-a", text: "스마트폰 손전등을 켜고 밝은 길로 돌아간다", lifeDelta: 0, mentalDelta: 5, feedback: "좋은 판단입니다! 야간 보행 시 밝은 옷이나 반사 소재, 손전등을 활용하고 가급적 밝은 길을 이용하세요.", isCorrect: true },
@@ -62,8 +62,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-05", areaId: "traffic-safety", subAreaId: "pedestrian", order: 5,
-      title: "비 오는 날 횡단보도",
-      body: "비가 억수같이 내립니다. 우산을 써서 앞이 잘 보이지 않습니다. 횡단보도 신호가 초록불로 바뀌었습니다.",
+      title: "장마철 등굣길, 우산 속 횡단보도",
+      body: "장마철 어느 날 아침, 민준이는 우산을 쓰고 등교하고 있었습니다. 비가 억수같이 내려 앞이 잘 보이지 않는 중에 횡단보도 신호가 초록불로 바뀌었습니다.",
       image: "/images/situations/area2/s01.png",
       choices: [
         { id: "ts-05-a", text: "우산을 높이 들어 시야를 확보하고, 좌우를 살핀 뒤 건넌다", lifeDelta: 0, mentalDelta: 5, feedback: "정확합니다! 비 올 때는 우산으로 시야가 가려지고, 차량도 제동거리가 길어집니다. 반드시 좌우 확인 후 건너세요.", isCorrect: true },
@@ -73,8 +73,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-06", areaId: "traffic-safety", subAreaId: "pedestrian", order: 6,
-      title: "인도 없는 골목길",
-      body: "차도와 인도 구분이 없는 좁은 골목길을 걷고 있습니다. 뒤에서 자동차 소리가 들립니다.",
+      title: "하굣길 인도 없는 좁은 골목",
+      body: "이어서 하교 중이던 민준이는 차도와 인도 구분이 없는 좁은 골목길을 걷게 됐습니다. 그때 뒤에서 자동차 소리가 들려왔습니다.",
       image: "/images/situations/area2/s01.png",
       choices: [
         { id: "ts-06-a", text: "길 가장자리로 붙어 걷고 차가 지나갈 때 멈춰 선다", lifeDelta: 0, mentalDelta: 5, feedback: "올바릅니다! 인도가 없는 도로에서는 길 가장자리(좌측)로 걸어야 하며, 차량이 오면 멈추어 양보하세요.", isCorrect: true },
@@ -84,8 +84,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-07", areaId: "traffic-safety", subAreaId: "pedestrian", order: 7,
-      title: "어린이보호구역",
-      body: "등교길, 학교 앞 어린이보호구역(스쿨존)을 지나고 있습니다. 주차된 차들 사이로 길을 건너면 빠른데, 횡단보도는 조금 돌아가야 합니다.",
+      title: "학교 앞 스쿨존, 주차 차량 사이의 유혹",
+      body: "계속해서 등굣길에 민준이는 학교 앞 어린이보호구역(스쿨존)을 지나고 있었습니다. 주차된 차들 사이로 길을 건너면 빠른데, 횡단보도는 조금 돌아가야 합니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-07-a", text: "횡단보도를 이용해 안전하게 건넌다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 주차된 차 사이에서 튀어나오면 운전자가 볼 수 없습니다. 스쿨존에서도 반드시 횡단보도를 이용하세요.", isCorrect: true },
@@ -96,8 +96,8 @@ export const trafficSafety: Area = {
     // ────────── 자전거안전 (7개) ──────────
     {
       id: "ts-08", areaId: "traffic-safety", subAreaId: "bicycle", order: 8,
-      title: "헬멧 없는 자전거",
-      body: "친구와 자전거를 타러 나왔는데 헬멧을 깜빡했습니다. 집에 다시 가려면 10분이 걸립니다. 친구는 빨리 출발하자고 합니다.",
+      title: "주말 자전거 나들이, 헬멧을 깜빡하다",
+      body: "주말에 민준이는 친구와 함께 자전거를 타러 나왔습니다. 그런데 헬멧을 깜빡했다는 것을 알았습니다. 집에 다시 가려면 10분이 걸리고, 친구는 빨리 출발하자고 합니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-08-a", text: "집에 돌아가서 헬멧을 가져온다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 자전거 사고 시 머리 부상이 가장 치명적입니다. 헬멧 착용으로 사망률을 70% 이상 줄일 수 있어요.", isCorrect: true },
@@ -107,8 +107,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-09", areaId: "traffic-safety", subAreaId: "bicycle", order: 9,
-      title: "자전거 방향 전환",
-      body: "자전거로 달리다가 왼쪽으로 꺾어야 합니다. 뒤에서 자동차가 오는 소리가 들립니다.",
+      title: "자전거 타다 왼쪽으로 꺾어야 하는 상황",
+      body: "이어서 달리던 민준이는 왼쪽으로 꺾어야 하는 교차로에 다가왔습니다. 그때 뒤에서 자동차가 오는 소리가 들렸습니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-09-a", text: "왼손을 뻗어 수신호를 보내고 뒤를 확인한 뒤 천천히 방향을 바꾼다", lifeDelta: 0, mentalDelta: 5, feedback: "완벽합니다! 자전거도 차량입니다. 방향 전환 시 반드시 수신호를 보내고 후방을 확인해야 합니다.", isCorrect: true },
@@ -118,8 +118,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-10", areaId: "traffic-safety", subAreaId: "bicycle", order: 10,
-      title: "자전거 도로 선택",
-      body: "자전거를 타고 이동 중입니다. 자전거 전용 도로가 끊기고, 넓은 인도와 차도만 남았습니다.",
+      title: "자전거 도로가 끊긴 구간에서의 선택",
+      body: "계속해서 자전거를 타고 이동하던 민준이는 자전거 전용 도로가 갑자기 끊기는 구간에 이르렀습니다. 앞에는 넓은 인도와 차도만 남아 있습니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-10-a", text: "자전거에서 내려 인도로 끌고 간다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 자전거 도로가 없을 때 인도에서는 반드시 내려서 끌어야 합니다. 인도 위 자전거 주행은 불법이에요.", isCorrect: true },
@@ -129,8 +129,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-11", areaId: "traffic-safety", subAreaId: "bicycle", order: 11,
-      title: "야간 자전거",
-      body: "저녁에 자전거를 타려고 합니다. 전조등과 후미등이 달려 있지만 배터리가 다 된 것 같습니다.",
+      title: "저녁 자전거 라이딩, 방전된 라이트 발견",
+      body: "저녁에 집에 돌아가던 민준이는 자전거 라이트를 켜려 했습니다. 전조등과 후미등이 달려 있지만, 막상 켜보니 배터리가 다 된 것 같습니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-11-a", text: "라이트 배터리를 교체하거나, 야간 주행을 포기한다", lifeDelta: 0, mentalDelta: 5, feedback: "올바릅니다! 야간에 라이트 없이 자전거를 타면 차량 운전자가 발견하기 매우 어렵습니다. 법적으로도 전조등은 필수예요.", isCorrect: true },
@@ -140,8 +140,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-12", areaId: "traffic-safety", subAreaId: "bicycle", order: 12,
-      title: "이어폰 자전거",
-      body: "자전거를 타면서 좋아하는 음악을 듣고 싶습니다. 이어폰을 양쪽 귀에 꽂으면 기분 좋게 달릴 수 있을 것 같습니다.",
+      title: "자전거 타며 음악 듣고 싶어진 민준",
+      body: "다음 날 자전거를 타던 민준이는 좋아하는 음악을 듣고 싶어졌습니다. 이어폰을 양쪽 귀에 꽂으면 기분 좋게 달릴 수 있을 것 같습니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-12-a", text: "이어폰을 사용하지 않고 주변 소리를 들으며 탄다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 자전거 주행 중 이어폰 착용은 경적, 사이렌 등 위험 신호를 듣지 못하게 합니다. 법적으로도 금지인 지역이 많아요.", isCorrect: true },
@@ -151,8 +151,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-13", areaId: "traffic-safety", subAreaId: "bicycle", order: 13,
-      title: "자전거 브레이크 점검",
-      body: "오랫동안 타지 않았던 자전거를 꺼냈습니다. 타이어에 바람은 넣었는데, 브레이크가 좀 느슨한 것 같습니다.",
+      title: "오래된 자전거 꺼냈더니 브레이크가 느슨",
+      body: "이어서 민준이는 창고에서 오랫동안 타지 않았던 자전거를 꺼냈습니다. 타이어에 바람은 넣었는데, 브레이크 레버가 좀 느슨한 것 같습니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-13-a", text: "브레이크를 조정하거나 자전거 가게에서 점검받는다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 자전거 탑승 전 브레이크, 타이어, 체인을 반드시 점검하세요. 특히 브레이크 고장은 치명적 사고로 이어집니다.", isCorrect: true },
@@ -162,8 +162,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-14", areaId: "traffic-safety", subAreaId: "bicycle", order: 14,
-      title: "자전거 2인 탑승",
-      body: "친구가 자전거 뒤에 태워달라고 합니다. 짐받이가 있어서 앉을 수는 있을 것 같습니다. 거리도 멀지 않습니다.",
+      title: "친구가 자전거 뒤에 태워달라고 조르다",
+      body: "계속해서 자전거를 타고 가던 민준이에게 친구가 뒤에 태워달라고 합니다. 짐받이가 있어서 앉을 수는 있을 것 같고, 거리도 멀지 않습니다.",
       image: "/images/situations/area2/s04.png",
       choices: [
         { id: "ts-14-a", text: "위험하다며 거절하고 걸어가자고 한다", lifeDelta: 0, mentalDelta: 5, feedback: "올바른 판단입니다! 자전거 2인 탑승은 균형이 무너지기 쉽고 제동 거리도 늘어납니다. 법적으로도 금지되어 있어요.", isCorrect: true },
@@ -174,8 +174,8 @@ export const trafficSafety: Area = {
     // ────────── 대중교통안전 (6개) ──────────
     {
       id: "ts-15", areaId: "traffic-safety", subAreaId: "public-transport", order: 15,
-      title: "버스 승하차",
-      body: "버스가 정류장에 도착했습니다. 사람이 많아서 뒷문으로 빠르게 내리고 싶은데, 아직 버스가 완전히 멈추지 않았습니다.",
+      title: "버스 여행 중, 아직 멈추지 않은 버스 문",
+      body: "이번엔 다른 장소에서, 민준이는 수학여행 준비로 버스를 타고 도시 곳곳을 다니게 됐습니다. 버스가 정류장에 도착했는데, 사람이 많아 빠르게 내리고 싶지만 버스가 완전히 멈추지 않았습니다.",
       image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-15-a", text: "버스가 완전히 멈춘 후 차례대로 내린다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 버스가 완전히 정차하기 전에 일어서면 급정거 시 넘어질 수 있습니다. 안전하게 기다려주세요.", isCorrect: true },
@@ -185,8 +185,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-16", areaId: "traffic-safety", subAreaId: "public-transport", order: 16,
-      title: "지하철 스크린도어",
-      body: "지하철이 도착하고 스크린도어가 열렸습니다. 서둘러 타려는데, 가방 끈이 스크린도어에 걸린 것 같습니다. 문이 닫히려고 합니다.",
+      title: "지하철 스크린도어에 가방이 걸리다",
+      body: "이어서 민준이는 지하철을 타고 목적지로 향했습니다. 서둘러 타려는데, 지하철이 도착해 스크린도어가 열리면서 가방 끈이 문에 걸린 것 같습니다. 문이 닫히려고 합니다.",
       image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-16-a", text: "가방을 빼내고, 안 되면 비상 버튼을 누른다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 스크린도어에 물건이 끼면 무리하게 당기지 말고 비상 개폐 버튼을 누르세요. 끼인 채 열차가 출발하면 큰 사고가 됩니다.", isCorrect: true },
@@ -196,8 +196,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-17", areaId: "traffic-safety", subAreaId: "public-transport", order: 17,
-      title: "지하철 비상 상황",
-      body: "지하철 안에서 갑자기 연기 냄새가 납니다. 승객들이 웅성거리기 시작합니다. 다음 역까지 2분 정도 남았습니다.",
+      title: "지하철 안에서 갑자기 나는 연기 냄새",
+      body: "계속해서 지하철을 타고 가던 민준이는 갑자기 연기 냄새를 맡았습니다. 승객들이 웅성거리기 시작하고, 다음 역까지 2분 정도 남아 있습니다.",
       image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-17-a", text: "비상 인터폰으로 기관사에게 알리고, 젖은 천으로 입을 막는다", lifeDelta: 5, mentalDelta: 10, feedback: "완벽한 대처입니다! 지하철 비상시 기관사에게 알리는 것이 최우선입니다. 비상 인터폰은 각 칸에 설치되어 있어요.", isCorrect: true },
@@ -207,8 +207,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-18", areaId: "traffic-safety", subAreaId: "public-transport", order: 18,
-      title: "버스 안 급정거",
-      body: "만원 버스를 타고 있습니다. 손잡이가 멀어서 잡지 못하고 서 있습니다. 버스가 갑자기 급정거합니다!",
+      title: "만원 버스 안, 손잡이 없이 서 있을 때 급정거",
+      body: "그 다음 날 민준이는 만원 버스를 타고 이동 중이었습니다. 손잡이가 멀어서 잡지 못하고 서 있었는데, 갑자기 버스가 급정거합니다!",
       image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-18-a", text: "항상 손잡이나 봉을 잡고 서 있는다", lifeDelta: 0, mentalDelta: 5, feedback: "이것이 사고 예방의 핵심입니다! 버스에서는 항상 손잡이, 기둥, 좌석 손잡이 등을 잡고 있어야 급정거에 대비할 수 있어요.", isCorrect: true },
@@ -218,8 +218,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-19", areaId: "traffic-safety", subAreaId: "public-transport", order: 19,
-      title: "혼자 택시 탈 때",
-      body: "늦은 밤, 혼자 택시를 타야 합니다. 택시를 잡았는데 기사님이 \"지름길로 가겠다\"며 낯선 길로 들어섭니다.",
+      title: "늦은 밤 혼자 탄 택시, 낯선 길로 접어들다",
+      body: "어느 날 늦은 밤, 민준이는 혼자 택시를 타야 하는 상황이 됐습니다. 택시를 잡아타니 기사님이 \"지름길로 가겠다\"며 낯선 길로 들어섭니다.",
       image: "/images/situations/area2/s03.png",
       choices: [
         { id: "ts-19-a", text: "실시간 위치를 가족에게 공유하고, 내비게이션 경로를 요청한다", lifeDelta: 0, mentalDelta: 5, feedback: "훌륭합니다! 혼자 택시 탈 때는 위치 공유 앱을 켜고, 차량 번호를 가족에게 알리세요. 불안하면 경로 변경을 요청하세요.", isCorrect: true },
@@ -229,8 +229,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-20", areaId: "traffic-safety", subAreaId: "public-transport", order: 20,
-      title: "전동킥보드 이용",
-      body: "친구와 공유 전동킥보드를 빌렸습니다. 헬멧이 없지만, 재밌어 보여서 바로 타고 싶습니다. 자전거 도로가 바로 옆에 있습니다.",
+      title: "친구와 공유 전동킥보드, 헬멧 없이 타도 될까?",
+      body: "계속해서 민준이는 친구와 공유 전동킥보드를 빌렸습니다. 헬멧이 없지만 재밌어 보여서 바로 타고 싶고, 자전거 도로가 바로 옆에 있습니다.",
       image: "/images/situations/area2/s05.png",
       choices: [
         { id: "ts-20-a", text: "헬멧 없이는 타지 않고, 교통법규를 확인한다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 전동킥보드도 헬멧 의무이며, 자전거 도로에서 주행해야 합니다. 인도 주행, 2인 탑승, 음주 운전 모두 불법이에요.", isCorrect: true },

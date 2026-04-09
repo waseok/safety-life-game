@@ -18,8 +18,8 @@ export const violenceSafety: Area = {
     // ────────── 학교폭력 (7개) ──────────
     {
       id: "vs-01", areaId: "violence-safety", subAreaId: "school-violence", order: 1,
-      title: "언어폭력",
-      body: "같은 반 친구들이 모여서 한 친구에게 외모를 비하하는 별명을 부르며 놀리고 있습니다. 놀림을 당하는 친구가 울먹이고 있습니다.",
+      title: "교실에서 목격한 언어폭력",
+      body: "민준이는 중학교 2학년입니다. 어느 날 교실에서 같은 반 친구들이 한 친구에게 외모를 비하하는 별명을 부르며 놀리고 있었습니다. 놀림을 당하는 친구가 울먹이고 있습니다.",
       image: "/images/situations/area3/s01.png",
       choices: [
         { id: "vs-01-a", text: "\"그건 언어폭력이야, 그만해.\"라고 말하고 선생님께 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "훌륭합니다! 외모 비하, 욕설, 모욕적 별명은 모두 언어폭력입니다. 목격자가 용기 내어 말리는 것이 매우 중요해요.", isCorrect: true },
@@ -29,8 +29,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-02", areaId: "violence-safety", subAreaId: "school-violence", order: 2,
-      title: "단체 채팅방 따돌림",
-      body: "반 단체 채팅방에서 특정 친구를 빼고 새 채팅방을 만들자는 메시지가 왔습니다. \"걔 싫지 않아? 우리끼리 놀자\"라고 합니다.",
+      title: "반 채팅방에서 특정 친구를 빼자는 메시지",
+      body: "이어서 그날 저녁, 민준이의 스마트폰에 반 단체 채팅방에서 특정 친구를 빼고 새 채팅방을 만들자는 메시지가 왔습니다. \"걔 싫지 않아? 우리끼리 놀자\"라고 합니다.",
       image: "/images/situations/area3/s01.png",
       choices: [
         { id: "vs-02-a", text: "\"그건 따돌림이야. 나는 참여 안 해.\"라고 분명히 거절한다", lifeDelta: 0, mentalDelta: 10, feedback: "용기 있는 선택입니다! 특정인을 배제하는 단체 채팅방은 사이버 따돌림에 해당합니다. 거절 의사를 분명히 하세요.", isCorrect: true },
@@ -40,8 +40,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-03", areaId: "violence-safety", subAreaId: "school-violence", order: 3,
-      title: "금품 갈취",
-      body: "학교 화장실에서 선배들이 \"용돈 좀 빌려줘\"라며 돈을 요구합니다. 주지 않으면 불이익을 주겠다고 은근히 위협합니다.",
+      title: "화장실에서 선배들의 금품 갈취",
+      body: "다음 날 학교 화장실에서 민준이는 선배들에게 \"용돈 좀 빌려줘\"라며 돈을 요구받았습니다. 주지 않으면 불이익을 주겠다고 은근히 위협합니다.",
       image: "/images/situations/area3/s02.png",
       choices: [
         { id: "vs-03-a", text: "그 자리를 벗어나 선생님이나 부모님께 바로 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "정확한 대처입니다! 금품 갈취는 명백한 범죄입니다. 혼자 해결하려 하지 말고 반드시 어른에게 도움을 요청하세요. 117(학교폭력 신고)도 이용할 수 있어요.", isCorrect: true },
@@ -51,8 +51,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-04", areaId: "violence-safety", subAreaId: "school-violence", order: 4,
-      title: "폭력 목격",
-      body: "방과 후 학교 뒷편에서 같은 학년 학생이 다른 학생을 때리고 있는 것을 목격했습니다. 피해 학생이 울며 맞고 있습니다.",
+      title: "방과 후 학교 뒤편에서 폭력을 목격",
+      body: "계속해서 방과 후, 민준이는 학교 뒤편을 지나다가 같은 학년 학생이 다른 학생을 때리고 있는 것을 목격했습니다. 피해 학생이 울며 맞고 있습니다.",
       image: "/images/situations/area3/s02.png",
       choices: [
         { id: "vs-04-a", text: "안전한 거리에서 증거를 확보하고 즉시 선생님/경찰에 신고한다", lifeDelta: 0, mentalDelta: 10, feedback: "최선의 대처입니다! 직접 개입하면 위험할 수 있으니, 안전한 곳에서 증거(사진/영상)를 확보하고 즉시 신고하세요. 117, 112 모두 가능합니다.", isCorrect: true },
@@ -62,8 +62,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-05", areaId: "violence-safety", subAreaId: "school-violence", order: 5,
-      title: "집단 따돌림",
-      body: "반 친구들이 특정 학생과 말을 안 하고, 모둠 활동에서도 같이 안 하려 합니다. 당신은 이 학생과 평소 사이가 나쁘지 않았습니다.",
+      title: "반에서 집단으로 따돌림 당하는 친구",
+      body: "그 다음 날, 민준이는 반 친구들이 특정 학생과 말을 안 하고 모둠 활동에서도 같이 하지 않으려는 것을 눈치챘습니다. 민준이는 그 학생과 평소 사이가 나쁘지 않았습니다.",
       image: "/images/situations/area3/s01.png",
       choices: [
         { id: "vs-05-a", text: "따돌림당하는 친구에게 먼저 말 걸고, 선생님께도 상황을 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "가장 용기 있고 올바른 행동입니다! 따돌림 피해자에게 한 명의 친구라도 있으면 심리적 피해가 크게 줄어듭니다.", isCorrect: true },
@@ -73,8 +73,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-06", areaId: "violence-safety", subAreaId: "school-violence", order: 6,
-      title: "신체 폭력 피해",
-      body: "아무 이유 없이 다른 학생에게 맞았습니다. 아프고 억울하지만, \"맞은 것 얘기하면 더 맞는다\"라고 위협합니다.",
+      title: "이유 없이 맞은 민준, 신체 폭력 피해",
+      body: "계속해서 어느 날, 민준이는 아무 이유 없이 다른 학생에게 맞았습니다. 아프고 억울하지만, 그 학생은 \"맞은 것 얘기하면 더 맞는다\"라고 위협합니다.",
       image: "/images/situations/area3/s02.png",
       choices: [
         { id: "vs-06-a", text: "부모님, 선생님, 또는 117에 즉시 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "반드시 알려야 합니다! \"더 맞는다\"는 위협은 가해자의 전형적인 수법입니다. 혼자 감당하면 폭력이 반복됩니다. 117(학교폭력 신고), 112 모두 가능해요.", isCorrect: true },
@@ -84,8 +84,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-07", areaId: "violence-safety", subAreaId: "school-violence", order: 7,
-      title: "SNS 비밀 유포 협박",
-      body: "한 친구가 \"네 비밀을 SNS에 올리겠다\"며 원하는 대로 하지 않으면 유포하겠다고 협박합니다.",
+      title: "SNS에 비밀을 올리겠다는 협박 메시지",
+      body: "이어서 민준이의 스마트폰에 한 친구로부터 \"네 비밀을 SNS에 올리겠다\"며 원하는 대로 하지 않으면 유포하겠다는 협박 메시지가 왔습니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-07-a", text: "협박 메시지를 캡처해 증거를 남기고, 부모님/선생님께 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "정확한 대처입니다! 협박 내용은 반드시 캡처해서 증거로 보관하세요. 비밀 유포 협박은 범죄이며, 신고하면 법적 보호를 받을 수 있습니다.", isCorrect: true },
@@ -96,8 +96,8 @@ export const violenceSafety: Area = {
     // ────────── 성폭력예방 (7개) ──────────
     {
       id: "vs-08", areaId: "violence-safety", subAreaId: "sexual-violence", order: 8,
-      title: "원치 않는 신체 접촉",
-      body: "학원 버스에서 옆에 앉은 어른이 자꾸 어깨나 허벅지를 건드립니다. 실수인지 고의인지 모르겠지만 불쾌합니다.",
+      title: "학원 버스에서 원치 않는 신체 접촉",
+      body: "한편, 어느 날 민준이는 학원 버스를 타고 가던 중 옆에 앉은 어른이 자꾸 어깨나 허벅지를 건드리는 것을 느꼈습니다. 실수인지 고의인지 모르겠지만 불쾌합니다.",
       image: "/images/situations/area3/s04.png",
       choices: [
         { id: "vs-08-a", text: "\"만지지 마세요\"라고 크게 말하고 자리를 옮긴다", lifeDelta: 0, mentalDelta: 10, feedback: "올바릅니다! 원치 않는 신체 접촉에는 분명하게 거부 의사를 표현하세요. \"싫어요\", \"하지 마세요\"를 크게 말하는 것이 중요합니다.", isCorrect: true },
@@ -107,8 +107,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-09", areaId: "violence-safety", subAreaId: "sexual-violence", order: 9,
-      title: "디지털 성범죄",
-      body: "온라인 친구가 \"나만 보여줄 테니 너도 보여줘\"라며 사적인 사진을 요구합니다. 거절하면 그동안의 대화를 유포하겠다고 합니다.",
+      title: "온라인 채팅에서 사진을 요구하는 디지털 성범죄",
+      body: "이어서 집에서 온라인 게임을 하던 민준이에게 온라인 친구가 \"나만 보여줄 테니 너도 보여줘\"라며 사적인 사진을 요구했습니다. 거절하면 그동안의 대화를 유포하겠다고 합니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-09-a", text: "즉시 대화를 중단하고, 캡처해서 부모님/경찰에 신고한다", lifeDelta: 0, mentalDelta: 10, feedback: "정확합니다! 사적인 사진 요구는 디지털 성범죄입니다. 절대 보내지 말고, 대화 내용을 캡처해서 증거로 보관한 뒤 경찰(112)이나 디지털성범죄피해자지원센터(02-735-8994)에 신고하세요.", isCorrect: true },
@@ -118,8 +118,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-10", areaId: "violence-safety", subAreaId: "sexual-violence", order: 10,
-      title: "온라인 그루밍",
-      body: "SNS에서 만난 사람이 매우 친절하게 대해줍니다. 선물도 보내주고 고민도 들어줍니다. 최근 \"직접 만나자\"며 위치를 알려달라고 합니다.",
+      title: "SNS에서 만난 친절한 사람이 직접 만나자고",
+      body: "계속해서 민준이는 SNS에서 만난 사람과 대화를 이어가고 있었습니다. 선물도 보내주고 고민도 들어주던 그 사람이 최근 \"직접 만나자\"며 위치를 알려달라고 합니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-10-a", text: "온라인에서 만난 사람과 만남을 거절하고 부모님께 알린다", lifeDelta: 0, mentalDelta: 10, feedback: "올바릅니다! 이것은 '온라인 그루밍(길들이기)'의 전형적인 패턴입니다. 친절 → 신뢰 → 만남 유도 → 범죄로 이어집니다. 온라인 친구와 직접 만나는 것은 매우 위험해요.", isCorrect: true },
@@ -129,8 +129,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-11", areaId: "violence-safety", subAreaId: "sexual-violence", order: 11,
-      title: "불쾌한 성적 농담",
-      body: "교실에서 몇몇 친구들이 특정 학생의 신체에 대해 성적인 농담을 합니다. 당사자가 웃으며 넘기지만 표정이 굳어 있습니다.",
+      title: "교실에서 특정 학생을 향한 성적 농담",
+      body: "그 다음 날 학교에서 민준이는 몇몇 친구들이 특정 학생의 신체에 대해 성적인 농담을 하는 것을 들었습니다. 당사자가 웃으며 넘기지만 표정이 굳어 있습니다.",
       image: "/images/situations/area3/s04.png",
       choices: [
         { id: "vs-11-a", text: "\"그런 말은 성희롱이야. 그만해.\"라고 분명히 말한다", lifeDelta: 0, mentalDelta: 10, feedback: "용기 있는 행동입니다! 웃으며 넘기는 것은 동의가 아닙니다. 상대가 불쾌한 성적 발언은 성희롱에 해당하며, 이를 제지하는 것은 중요합니다.", isCorrect: true },
@@ -140,8 +140,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-12", areaId: "violence-safety", subAreaId: "sexual-violence", order: 12,
-      title: "몰래카메라 의심",
-      body: "공중화장실 칸에 들어갔는데, 벽 구멍이나 선반 위에 렌즈처럼 보이는 것이 있습니다.",
+      title: "공중화장실에서 의심스러운 렌즈 발견",
+      body: "계속해서 외출 중이던 민준이는 공중화장실 칸에 들어갔다가 벽 구멍이나 선반 위에 렌즈처럼 보이는 것을 발견했습니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-12-a", text: "즉시 나와서 관리자에게 알리고, 필요 시 경찰에 신고한다", lifeDelta: 0, mentalDelta: 10, feedback: "정확합니다! 의심스러운 구멍이나 장치를 발견하면 만지지 말고 즉시 나와서 신고하세요. 경찰(112) 또는 여성긴급전화(1366)에 신고할 수 있습니다.", isCorrect: true },
@@ -151,8 +151,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-13", areaId: "violence-safety", subAreaId: "sexual-violence", order: 13,
-      title: "데이트 폭력 징후",
-      body: "친구의 연인이 친구의 핸드폰을 수시로 검사하고, 다른 친구를 만나지 못하게 합니다. 친구는 \"사랑이니까 그런 거\"라고 합니다.",
+      title: "친구 연인의 통제적 행동, 데이트 폭력 징후",
+      body: "이어서 민준이는 친구가 요즘 이상하다고 느꼈습니다. 알고 보니 친구의 연인이 핸드폰을 수시로 검사하고, 다른 친구를 만나지 못하게 합니다. 친구는 \"사랑이니까 그런 거\"라고 합니다.",
       image: "/images/situations/area3/s04.png",
       choices: [
         { id: "vs-13-a", text: "친구에게 \"그건 통제야, 건강한 관계가 아니야\"라고 진지하게 말한다", lifeDelta: 0, mentalDelta: 10, feedback: "올바른 조언입니다! 핸드폰 검사, 교우관계 통제, 행동 제한은 데이트 폭력의 대표적인 징후입니다. '사랑'이 아니라 '지배'입니다.", isCorrect: true },
@@ -162,8 +162,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-14", areaId: "violence-safety", subAreaId: "sexual-violence", order: 14,
-      title: "성폭력 피해 후 대처",
-      body: "친한 친구가 성폭력 피해를 당했다고 울면서 고백했습니다. 아무에게도 말하지 말라고 합니다.",
+      title: "친한 친구가 성폭력 피해를 고백하다",
+      body: "그 다음 날, 민준이의 친한 친구가 울면서 성폭력 피해를 당했다고 고백했습니다. 아무에게도 말하지 말라고 합니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-14-a", text: "친구의 말을 경청하고, 전문 상담기관 연결을 도와준다", lifeDelta: 0, mentalDelta: 10, feedback: "가장 올바른 대처입니다. 비난하지 말고 \"네 잘못이 아니야\"라고 말해주세요. 여성긴급전화(1366), 해바라기센터에 함께 연락하는 것을 권유하세요.", isCorrect: true },
@@ -174,8 +174,8 @@ export const violenceSafety: Area = {
     // ────────── 유괴·미아방지 (6개) ──────────
     {
       id: "vs-15", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 15,
-      title: "낯선 어른의 도움 요청",
-      body: "학교 앞에서 낯선 어른이 \"강아지를 잃어버렸는데 같이 찾아줄 수 있니?\"라고 합니다. 친절해 보이지만 처음 보는 사람입니다.",
+      title: "학교 앞에서 강아지를 찾아달라는 낯선 어른",
+      body: "다음날 학교 앞에서 민준이는 낯선 어른이 다가와 \"강아지를 잃어버렸는데 같이 찾아줄 수 있니?\"라고 하는 것을 들었습니다. 친절해 보이지만 처음 보는 사람입니다.",
       image: "/images/situations/area3/s03.png",
       choices: [
         { id: "vs-15-a", text: "\"어른에게 도움을 요청하세요\"라고 말하고 자리를 피한다", lifeDelta: 0, mentalDelta: 10, feedback: "정답입니다! 어른이 아이에게 도움을 요청하는 것은 비정상적입니다. 이것은 유괴범의 대표적인 수법이에요. 거절하고 바로 자리를 피하세요.", isCorrect: true },
@@ -185,8 +185,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-16", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 16,
-      title: "귀가길 안전",
-      body: "학원이 늦게 끝나서 어두운 길을 혼자 걸어야 합니다. 뒤에서 누군가 계속 따라오는 느낌이 듭니다.",
+      title: "어두운 귀갓길, 누군가 계속 따라오는 느낌",
+      body: "이어서 학원이 늦게 끝난 민준이는 혼자 어두운 길을 걸어야 했습니다. 뒤에서 누군가 계속 따라오는 느낌이 들어 불안합니다.",
       image: "/images/situations/area3/s03.png",
       choices: [
         { id: "vs-16-a", text: "가장 가까운 편의점이나 가게에 들어가 도움을 요청한다", lifeDelta: 0, mentalDelta: 10, feedback: "최선의 대처입니다! '아이지킴이집'(노란 스티커 부착 가게)이나 편의점에 들어가세요. 112에 신고하거나 부모님께 전화하세요.", isCorrect: true },
@@ -196,8 +196,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-17", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 17,
-      title: "SNS 위치 정보",
-      body: "맛집에서 찍은 사진을 인스타그램에 올리려 합니다. 위치 태그를 달면 좋아요가 더 많이 오는데, 위치 정보가 노출됩니다.",
+      title: "맛집 사진 올릴 때 위치 태그, 노출해도 될까?",
+      body: "계속해서 민준이는 친구들과 맛집에서 찍은 사진을 인스타그램에 올리려 합니다. 위치 태그를 달면 좋아요가 더 많이 오는데, 위치 정보가 외부에 노출됩니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-17-a", text: "위치 태그 없이 올리거나, 나중에 그 장소를 떠난 후 올린다", lifeDelta: 0, mentalDelta: 5, feedback: "훌륭합니다! 실시간 위치 노출은 범죄자에게 정보를 제공하는 것입니다. 집, 학교 근처 사진은 특히 위치를 제거하세요.", isCorrect: true },
@@ -207,8 +207,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-18", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 18,
-      title: "길을 잃었을 때",
-      body: "낯선 도시에서 가족과 떨어져 길을 잃었습니다. 스마트폰 배터리가 거의 없습니다.",
+      title: "가족 여행 중 낯선 도시에서 길을 잃다",
+      body: "그 다음 날, 민준이는 가족과 여행 중 낯선 도시에서 잠시 가족과 떨어져 길을 잃었습니다. 스마트폰 배터리가 거의 없습니다.",
       image: "/images/situations/area3/s03.png",
       choices: [
         { id: "vs-18-a", text: "가까운 가게나 경찰 초소에 들어가 도움을 요청한다", lifeDelta: 0, mentalDelta: 10, feedback: "정답입니다! 제자리에서 기다리거나, 가까운 경찰서/편의점/공공기관에 도움을 요청하세요. 어린이의 경우 182(경찰 실종신고)로 연락합니다.", isCorrect: true },
@@ -218,8 +218,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-19", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 19,
-      title: "수상한 차량 접근",
-      body: "하교길에 차 한 대가 옆에 멈추더니 \"집까지 태워줄까?\"라고 합니다. 전혀 모르는 사람입니다.",
+      title: "하굣길에 낯선 차량이 다가와 태워주겠다고",
+      body: "계속해서 하굣길에 민준이 옆으로 차 한 대가 멈추더니 \"집까지 태워줄까?\"라고 합니다. 전혀 모르는 사람입니다.",
       image: "/images/situations/area3/s03.png",
       choices: [
         { id: "vs-19-a", text: "\"괜찮아요\"라고 거절하고 차와 반대 방향으로 빠르게 걸어간다", lifeDelta: 0, mentalDelta: 10, feedback: "완벽한 대처입니다! 낯선 사람의 차에 절대 타면 안 됩니다. 차와 반대 방향으로 가면 차가 따라올 수 없어요. 즉시 112에 신고하세요.", isCorrect: true },
@@ -229,8 +229,8 @@ export const violenceSafety: Area = {
     },
     {
       id: "vs-20", areaId: "violence-safety", subAreaId: "kidnap-prevention", order: 20,
-      title: "비상 연락 체계",
-      body: "새 스마트폰으로 바꿨습니다. 부모님 전화번호와 비상 연락처를 저장해야 하는데, 나중에 하려고 합니다.",
+      title: "새 스마트폰으로 바꿨지만 비상 연락처 미저장",
+      body: "이어서 민준이는 새 스마트폰으로 바꿨습니다. 부모님 전화번호와 비상 연락처를 저장해야 하는데, 귀찮아서 나중에 하려고 합니다.",
       image: "/images/situations/area3/s05.png",
       choices: [
         { id: "vs-20-a", text: "즉시 부모님 번호, 112, 119를 저장하고 비상 연락처도 등록한다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 비상 연락처는 즉시 저장하세요. 부모님 연락처는 암기해두는 것이 좋고, 잠금 화면에서도 볼 수 있게 설정하세요.", isCorrect: true },
