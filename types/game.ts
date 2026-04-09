@@ -83,6 +83,7 @@ export interface QuestionScore {
   depth: number;
   originality: number;
   feedback: string;
+  safetyExplanation: string;
   level: string;
   question: string;
 }
