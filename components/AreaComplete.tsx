@@ -15,6 +15,8 @@ export default function AreaComplete() {
   const proceedFromAreaComplete = useGameStore((s) => s.proceedFromAreaComplete);
   const resetGame = useGameStore((s) => s.resetGame);
   const saveAreaScore = useGameStore((s) => s.saveAreaScore);
+  const getTotalQuestionScore = useGameStore((s) => s.getTotalQuestionScore);
+  const questionScores = useGameStore((s) => s.questionScores);
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
   const areaResults = useGameStore((s) => s.areaResults);
   const completedAreas = useGameStore((s) => s.completedAreas);
@@ -25,6 +27,10 @@ export default function AreaComplete() {
   const accuracy = result && result.totalChoices > 0
     ? Math.round((result.correctCount / result.totalChoices) * 100)
     : 0;
+
+  const midScore = area ? questionScores[`${area.id}-mid`] : undefined;
+  const finalScore = area ? questionScores[`${area.id}-final`] : undefined;
+  const totalQScore = area ? getTotalQuestionScore(area.id) : 0;
 
   const badge = BADGE_LEVELS.find((b) => accuracy >= b.min) ?? BADGE_LEVELS[2];
   const allDone = completedAreas.length >= allAreas.length;
@@ -136,6 +142,54 @@ export default function AreaComplete() {
               {result?.correctCount ?? 0} / {result?.totalChoices ?? 0} 정답
             </p>
           </div>
+
+          {/* 질문 만들기 점수 */}
+          {(midScore || finalScore) && (
+            <div
+              className="mb-5 p-4 rounded-xl"
+              style={{ background: "rgba(124,58,237,0.05)", border: "1.5px solid rgba(124,58,237,0.2)" }}
+            >
+              <div className="flex items-center justify-between mb-3">
+                <p className="text-sm font-black" style={{ color: "#7c3aed" }}>✏️ 질문 만들기 점수</p>
+                <p className="text-xl font-black" style={{ color: "#7c3aed" }}>
+                  {totalQScore}
+                  <span className="text-xs font-normal text-on-surface/40"> / 100</span>
+                </p>
+              </div>
+              <div className="space-y-2">
+                {midScore && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <p className="text-xs font-bold" style={{ color: "#b45309" }}>
+                        ✏️ 중간 질문 · {midScore.level}
+                      </p>
+                      <p className="text-xs mt-0.5 truncate" style={{ color: "#6b8aaa" }}>
+                        &ldquo;{midScore.question}&rdquo;
+                      </p>
+                    </div>
+                    <span className="text-sm font-black ml-3 shrink-0" style={{ color: "#b45309" }}>
+                      {midScore.score}/50
+                    </span>
+                  </div>
+                )}
+                {finalScore && (
+                  <div className="flex items-center justify-between">
+                    <div className="flex-1">
+                      <p className="text-xs font-bold" style={{ color: "#7c3aed" }}>
+                        🎓 최종 질문 · {finalScore.level}
+                      </p>
+                      <p className="text-xs mt-0.5 truncate" style={{ color: "#6b8aaa" }}>
+                        &ldquo;{finalScore.question}&rdquo;
+                      </p>
+                    </div>
+                    <span className="text-sm font-black ml-3 shrink-0" style={{ color: "#7c3aed" }}>
+                      {finalScore.score}/50
+                    </span>
+                  </div>
+                )}
+              </div>
+            </div>
+          )}
 
           {/* 총평 */}
           <div

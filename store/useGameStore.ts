@@ -1,7 +1,7 @@
 "use client";
 
 import { create } from "zustand";
-import { Character, Choice, ChoiceRecord, GamePhase } from "@/types/game";
+import { Character, Choice, ChoiceRecord, GamePhase, QuestionScore } from "@/types/game";
 import { allAreas } from "@/data/areas";
 import { endings } from "@/data/endings";
 
@@ -15,6 +15,7 @@ export interface RankingEntry {
   name: string;
   score: number;
   accuracy: number;
+  questionScore: number;
   date: string;
 }
 
@@ -33,17 +34,20 @@ function saveRankings(rankings: RankingEntry[]) {
   localStorage.setItem("safety-life-rankings", JSON.stringify(rankings));
 }
 
-// 캐릭터별 정답 보너스 - 균형적 스탯 회복
+// 캐릭터별 정답 보너스
 const CHARACTER_LIFE_BONUS: Record<string, number> = {
-  minjun: 8,    // 활발/용감 → 체력 우선 회복
-  seoyeon: 3,   // 꼼꼼함 → 약간의 체력도 회복
-  hyunwoo: 8,   // 운동신경 → 체력 강한 회복
+  minjun: 8,
+  seoyeon: 3,
+  hyunwoo: 8,
 };
 const CHARACTER_MENTAL_BONUS: Record<string, number> = {
-  minjun: 3,    // 호기심 → 약간의 판단력도 회복
-  seoyeon: 8,   // 책임감 → 판단력 우선 회복
-  hyunwoo: 5,   // 사교성 → 균형 있게 판단력도 회복
+  minjun: 3,
+  seoyeon: 8,
+  hyunwoo: 5,
 };
+
+// 중간점 — 상황 총 개수의 절반 (20개 기준 10번째 완료 후)
+const MIDPOINT_RATIO = 0.5;
 
 interface GameStore {
   phase: GamePhase;
@@ -70,6 +74,9 @@ interface GameStore {
   quizAnswers: Record<string, string>;
   rankings: RankingEntry[];
   serverRankings: RankingEntry[];
+  // 질문 만들기 관련
+  questionScores: Record<string, QuestionScore>;   // key: "{areaId}-mid" | "{areaId}-final"
+  midQuizDone: Record<string, boolean>;            // areaId → true if mid-quiz already shown
 
   setPhase: (phase: GamePhase) => void;
   setPlayerName: (name: string) => void;
@@ -80,11 +87,13 @@ interface GameStore {
   makeChoice: (situationId: string, choice: Choice) => void;
   revealTip: () => void;
   proceedAfterFeedback: () => void;
-  submitQuizAnswer: (answer: string) => void;
+  // 질문 만들기 제출 (GPT 평가 결과를 컴포넌트에서 받아서 전달)
+  submitQuizQuestion: (areaId: string, question: string, score: QuestionScore, isMidpoint: boolean) => void;
   proceedFromAreaComplete: () => void;
   saveScore: () => void;
   saveAreaScore: (areaId: string) => Promise<void>;
   fetchServerRankings: () => Promise<void>;
+  recordQuestionScore: (key: string, score: QuestionScore) => void;
   resetGame: () => void;
   getCurrentArea: () => (typeof allAreas)[number] | undefined;
   getCurrentSituation: () => ReturnType<GameStore["getCurrentArea"]> extends undefined
@@ -92,6 +101,7 @@ interface GameStore {
     : (typeof allAreas)[number]["situations"][number] | undefined;
   getEnding: () => (typeof endings)[number];
   getProgress: () => { current: number; total: number; percent: number };
+  getTotalQuestionScore: (areaId: string) => number;
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -119,6 +129,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
   quizAnswers: {},
   rankings: loadRankings(),
   serverRankings: [],
+  questionScores: {},
+  midQuizDone: {},
 
   setPhase: (phase) => set({ phase }),
   setPlayerName: (name) => set({ playerName: name }),
@@ -133,10 +145,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
       phase: "intro",
     }),
 
-  startGame: () =>
-    set({
-      phase: "area-select",
-    }),
+  startGame: () => set({ phase: "area-select" }),
 
   selectArea: (areaIndex: number) =>
     set({
@@ -159,7 +168,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
   makeChoice: (situationId, choice) => {
     const state = get();
     const charId = state.selectedCharacter?.id ?? "";
-    // 정답 시 캐릭터 보너스 적용
     const lifeBonus = choice.isCorrect ? (CHARACTER_LIFE_BONUS[charId] ?? 0) : 0;
     const mentalBonus = choice.isCorrect ? (CHARACTER_MENTAL_BONUS[charId] ?? 0) : 0;
 
@@ -168,7 +176,6 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const gameOver = newLife <= 0 || newMental <= 0;
     const currentArea = allAreas[state.currentAreaIndex];
 
-    // 보너스가 반영된 델타를 lastChoice에 저장 → FeedbackOverlay 표시에 보너스가 나타남
     const effectiveChoice: Choice = {
       ...choice,
       lifeDelta: choice.lifeDelta + lifeBonus,
@@ -199,12 +206,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
     });
   },
 
-  // 안전 팁 공개 시 판단력 +5 보너스
   revealTip: () => {
     const state = get();
     if (state.tipRevealed) return;
-    const bonusMental = 5;
-    const newMental = Math.min(state.maxMental, state.mental + bonusMental);
+    const newMental = Math.min(state.maxMental, state.mental + 5);
     set({ tipRevealed: true, mental: newMental });
   },
 
@@ -223,8 +228,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
 
     const nextSitIdx = state.currentSituationIndex + 1;
+    const midPoint = Math.floor(area.situations.length * MIDPOINT_RATIO);
 
     if (nextSitIdx >= area.situations.length) {
+      // 영역 완료 → 최종 질문 만들기
       const newCompleted = [...state.completedAreas];
       if (!newCompleted.includes(area.id)) {
         newCompleted.push(area.id);
@@ -240,7 +247,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
       set({
         completedAreas: newCompleted,
         areaResults: newAreaResults,
-        phase: "area-quiz",   // ← 에어리어 완료 후 IB 탐구 질문으로
+        phase: "area-quiz",
+      });
+    } else if (nextSitIdx === midPoint && !state.midQuizDone[area.id]) {
+      // 중간 도달 → 중간 질문 만들기
+      set({
+        currentSituationIndex: nextSitIdx,
+        midQuizDone: { ...state.midQuizDone, [area.id]: true },
+        phase: "area-midquiz",
       });
     } else {
       set({
@@ -250,17 +264,26 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
-  // IB 탐구 질문 제출 — 답변 저장 + 판단력 보너스 + area-complete로 전환
-  submitQuizAnswer: (answer: string) => {
+  // 질문 만들기 제출 — GPT 평가 결과 포함
+  submitQuizQuestion: (areaId, question, score, isMidpoint) => {
     const state = get();
-    const area = allAreas[state.currentAreaIndex];
-    const bonusMental = 15;
-    const newMental = Math.min(state.maxMental, state.mental + bonusMental);
+    const key = `${areaId}-${isMidpoint ? "mid" : "final"}`;
+    // 질문 점수에 비례한 판단력 보너스 (0-50점 → 0-20 판단력)
+    const mentalBonus = Math.round((score.score / 50) * 20);
+    const newMental = Math.min(state.maxMental, state.mental + mentalBonus);
+
     set({
-      quizAnswers: { ...state.quizAnswers, [area?.id ?? ""]: answer },
+      questionScores: { ...state.questionScores, [key]: score },
+      quizAnswers: { ...state.quizAnswers, [key]: question },
       mental: newMental,
-      phase: "area-complete",
+      phase: isMidpoint ? "playing" : "area-complete",
     });
+  },
+
+  recordQuestionScore: (key, score) => {
+    set((state) => ({
+      questionScores: { ...state.questionScores, [key]: score },
+    }));
   },
 
   proceedFromAreaComplete: () => {
@@ -276,11 +299,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const state = get();
     const accuracy = state.totalChoices > 0
       ? Math.round((state.correctCount / state.totalChoices) * 100) : 0;
-    const score = state.life + state.mental + (state.correctCount * 10);
+    // 전체 질문 점수 합산
+    const totalQScore = Object.values(state.questionScores).reduce((sum, q) => sum + q.score, 0);
+    const score = state.life + state.mental + (state.correctCount * 10) + totalQScore;
     const entry: RankingEntry = {
       name: state.playerName || "익명",
       score,
       accuracy,
+      questionScore: totalQScore,
       date: new Date().toLocaleDateString("ko-KR"),
     };
     const updated = [...loadRankings(), entry]
@@ -295,11 +321,15 @@ export const useGameStore = create<GameStore>((set, get) => ({
     const result = state.areaResults.find((r) => r.areaId === areaId);
     const accuracy = result && result.totalChoices > 0
       ? Math.round((result.correctCount / result.totalChoices) * 100) : 0;
-    const areaScore = state.life + state.mental + ((result?.correctCount ?? 0) * 10);
+    const midScore = state.questionScores[`${areaId}-mid`]?.score ?? 0;
+    const finalScore = state.questionScores[`${areaId}-final`]?.score ?? 0;
+    const questionScore = midScore + finalScore;
+    const areaScore = state.life + state.mental + ((result?.correctCount ?? 0) * 10) + questionScore;
     const entry: RankingEntry = {
       name: state.playerName || "익명",
       score: areaScore,
       accuracy,
+      questionScore,
       date: new Date().toLocaleDateString("ko-KR"),
     };
     try {
@@ -329,6 +359,13 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
+  getTotalQuestionScore: (areaId: string) => {
+    const state = get();
+    const mid = state.questionScores[`${areaId}-mid`]?.score ?? 0;
+    const final = state.questionScores[`${areaId}-final`]?.score ?? 0;
+    return mid + final;
+  },
+
   resetGame: () =>
     set({
       phase: "title",
@@ -353,8 +390,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
       tipRevealed: false,
       gameOverAreaId: null,
       quizAnswers: {},
+      questionScores: {},
+      midQuizDone: {},
       rankings: loadRankings(),
-      // serverRankings persists across resets
+      // serverRankings persists
     }),
 
   getCurrentArea: () => allAreas[get().currentAreaIndex],

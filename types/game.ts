@@ -72,9 +72,20 @@ export type GamePhase =
   | "area-intro"
   | "playing"
   | "feedback"
+  | "area-midquiz"
   | "area-quiz"
   | "area-complete"
   | "ending";
+
+export interface QuestionScore {
+  score: number;
+  relevance: number;
+  depth: number;
+  originality: number;
+  feedback: string;
+  level: string;
+  question: string;
+}
 
 export interface QuizQuestion {
   areaId: string;

@@ -30,6 +30,8 @@ export default function GameScreen() {
       return <SituationView />;
     case "feedback":
       return <FeedbackOverlay />;
+    case "area-midquiz":
+      return <AreaQuiz isMidpoint />;
     case "area-quiz":
       return <AreaQuiz />;
     case "area-complete":
