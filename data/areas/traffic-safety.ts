@@ -18,8 +18,8 @@ export const trafficSafety: Area = {
     // ────────── 보행안전 (7개) ──────────
     {
       id: "ts-01", areaId: "traffic-safety", subAreaId: "pedestrian", order: 1,
-      title: "깜빡이는 초록불",
-      body: "횡단보도 앞에 섰는데 보행 신호가 초록불에서 깜빡이기 시작합니다. 건너편까지 거리가 꽤 있습니다. 뛰면 건널 수 있을 것 같기도 합니다.",
+      title: "등굣길 횡단보도, 깜빡이는 초록불",
+      body: "민준이는 아침마다 걸어서 등교합니다. 오늘도 서두르던 중 횡단보도 앞에 섰는데 보행 신호가 초록불에서 깜빡이기 시작합니다. 건너편까지 거리가 꽤 있고, 뛰면 건널 수 있을 것 같기도 합니다.",
       image: "/images/situations/area2/s01.png",
       choices: [
         { id: "ts-01-a", text: "다음 신호를 기다린다", lifeDelta: 0, mentalDelta: 5, feedback: "정답입니다! 깜빡이는 초록불은 곧 빨간불로 바뀐다는 뜻입니다. 무리하게 뛰어 건너다 사고를 당할 수 있어요.", isCorrect: true },
@@ -29,8 +29,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-02", areaId: "traffic-safety", subAreaId: "pedestrian", order: 2,
-      title: "무단횡단의 유혹",
-      body: "버스 시간이 촉박합니다. 횡단보도는 100m 앞에 있지만, 지금 차도를 건너면 바로 정류장입니다. 차가 잠시 안 보이는 것 같습니다.",
+      title: "버스 시간 놓칠 뻔, 무단횡단의 유혹",
+      body: "이어서 학원 수업을 마친 민준이는 버스 시간이 촉박했습니다. 횡단보도는 100m 앞에 있지만, 지금 차도를 건너면 바로 정류장입니다. 차가 잠시 안 보이는 것 같습니다.",
       image: "/images/situations/area2/s01.png",
       choices: [
         { id: "ts-02-a", text: "횡단보도까지 걸어가서 건넌다", lifeDelta: 0, mentalDelta: 5, feedback: "올바른 선택입니다! 무단횡단은 교통사고 사망 원인 1위입니다. 버스 한 대 놓치는 것보다 안전이 중요해요.", isCorrect: true },
@@ -40,8 +40,8 @@ export const trafficSafety: Area = {
     },
     {
       id: "ts-03", areaId: "traffic-safety", subAreaId: "pedestrian", order: 3,
-      title: "스마트폰 보행",
-      body: "친구에게 온 메시지를 확인하며 걷고 있습니다. 재밌는 영상 링크를 보내왔는데, 지금 걸어가면서 보고 싶습니다. 앞에 교차로가 있습니다.",
+      title: "길 걸으며 영상 보고 싶어진 민준",
+      body: "계속해서 걷던 민준이에게 친구가 재밌는 영상 링크를 보내왔습니다. 스마트폰을 꺼내 메시지를 확인하며 걷고 있는데, 마침 앞에 교차로가 나타났습니다.",
       image: "/images/situations/area2/s02.png",
       choices: [
         { id: "ts-03-a", text: "멈춰서 메시지를 확인하고 다시 걷는다", lifeDelta: 0, mentalDelta: 5, feedback: "훌륭합니다! '스몸비(스마트폰+좀비)' 사고가 매년 증가하고 있습니다. 걸을 때는 전방을 주시하세요.", isCorrect: true },
