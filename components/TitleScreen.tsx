@@ -25,6 +25,7 @@ export default function TitleScreen() {
 
   useEffect(() => {
     fetchServerRankings();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Show server rankings if available, fall back to local rankings

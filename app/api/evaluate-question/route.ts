@@ -61,7 +61,7 @@ function localEvaluate(
   // 1. 안전 관련성 (0–20)
   const areaKws = AREA_KEYWORDS[areaTitle] ?? [];
   const generalSafetyKws = ["안전", "위험", "사고", "예방", "보호", "규칙", "수칙"];
-  const allKws = [...new Set([...areaKws, ...generalSafetyKws])];
+  const allKws = Array.from(new Set([...areaKws, ...generalSafetyKws]));
   const kwHits = allKws.filter((k) => q.includes(k)).length;
   const relevance = Math.min(20, 6 + Math.min(kwHits * 3, 10) + (chars >= 20 ? 2 : 0) + (chars >= 30 ? 2 : 0));
 
