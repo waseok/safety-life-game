@@ -100,7 +100,6 @@ export default function AreaQuiz({ isMidpoint = false }: Props) {
   const [result, setResult]           = useState<EvaluateResponse | null>(null);
   const [activeW, setActiveW]         = useState<string | null>(null);
   const [showScore, setShowScore]     = useState(false);
-
   const area = allAreas[currentAreaIndex];
   if (!area) return null;
 
@@ -173,18 +172,9 @@ export default function AreaQuiz({ isMidpoint = false }: Props) {
   const totalColor  = result ? scoreColor(result.score, 50) : "#0284c7";
   const mentalBonus = result ? Math.round((result.score / 50) * 20) : 0;
 
-  // ── 육하원칙 버튼 클릭 ─────────────────────────────────
+  // ── 육하원칙 버튼 클릭 (토글만, 자동 적용 없음) ───────────
   const handleWClick = (w: typeof SIX_W[0]) => {
-    if (activeW === w.key) {
-      setActiveW(null);
-      return;
-    }
-    setActiveW(w.key);
-  };
-
-  const applyTemplate = (template: string) => {
-    setQuestion(template);
-    setActiveW(null);
+    setActiveW((prev) => (prev === w.key ? null : w.key));
   };
 
   // ─────────────────────────────────────────────────────────────
@@ -357,18 +347,19 @@ export default function AreaQuiz({ isMidpoint = false }: Props) {
                       <p className="text-xs mb-2 font-semibold" style={{ color: "#4a7090" }}>
                         예시 질문:
                       </p>
-                      <button
-                        onClick={() => applyTemplate(w.template(area.title))}
-                        className="w-full text-left text-xs px-3 py-2 rounded-lg transition-all hover:scale-[1.01] font-semibold"
+                      <div
+                        className="w-full text-xs px-3 py-2.5 rounded-lg font-semibold"
                         style={{
-                          background: "rgba(255,255,255,0.8)",
+                          background: "rgba(255,255,255,0.85)",
                           border: `1px solid ${w.border}`,
                           color: "#0d2a4a",
                         }}
                       >
                         💬 &ldquo;{w.template(area.title)}&rdquo;
-                        <span className="ml-2 text-[10px]" style={{ color: w.color }}>← 클릭하여 사용</span>
-                      </button>
+                      </div>
+                      <p className="text-[10px] mt-1.5 font-semibold text-center" style={{ color: "#9ab0c8" }}>
+                        참고만 하고, 직접 나만의 질문을 만들어보세요! ✍️
+                      </p>
                     </div>
                   );
                 })()}
@@ -468,6 +459,11 @@ export default function AreaQuiz({ isMidpoint = false }: Props) {
                 <p className="text-xs font-semibold" style={{ color: "#6b8aaa" }}>
                   🧠 판단력 +{mentalBonus} 보너스 획득!
                 </p>
+                {result.isLocalFallback && (
+                  <p className="text-[10px] mt-1.5 font-semibold" style={{ color: "#9ab0c8" }}>
+                    ※ 오프라인 채점 (AI 서버 미연결)
+                  </p>
+                )}
               </div>
 
               {/* B. 세부 점수 */}
