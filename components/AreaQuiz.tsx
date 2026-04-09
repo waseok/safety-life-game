@@ -9,6 +9,86 @@ import { EvaluateResponse } from "@/app/api/evaluate-question/route";
 const MIN_CHARS = 15;
 type EvalState = "idle" | "loading" | "done" | "error";
 
+// ── Gemini 레벨 라벨 ───────────────────────────────────────────
+const LEVEL_LABELS = [
+  { min: 45, label: "탁월한 탐구자 🌟" },
+  { min: 35, label: "우수한 질문자 ⭐" },
+  { min: 25, label: "성장하는 탐구자 📈" },
+  { min: 10, label: "탐구 시작 중 🌱" },
+  { min: 0,  label: "더 발전해보세요 💪" },
+];
+
+function getLevel(score: number) {
+  return LEVEL_LABELS.find((l) => score >= l.min) ?? LEVEL_LABELS[4];
+}
+
+// ── 브라우저 → Gemini 직접 호출 ────────────────────────────────
+async function callGemini(
+  question: string,
+  areaTitle: string,
+  isMidpoint: boolean,
+  situationTitles: string[],
+): Promise<EvaluateResponse> {
+  const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY;
+  if (!apiKey) throw new Error("No Gemini key");
+
+  const situationContext = situationTitles.length > 0
+    ? `\n학생이 경험한 상황들: ${situationTitles.join(", ")}`
+    : "";
+
+  const prompt = `당신은 안전 교육 전문가이자 IB 탐구 학습 평가자입니다.
+${isMidpoint ? "중간 탐구 질문" : "최종 탐구 질문"}입니다.
+학습 영역: "${areaTitle}"${situationContext}
+
+【평가 기준】
+1. 안전 관련성 (0-20점): "${areaTitle}" 주제와 관련성
+2. 탐구 깊이 (0-20점): 비판적·분석적 사고 요구 수준
+3. 독창성 (0-10점): 학생 관점의 독창성
+
+반드시 아래 JSON만 출력 (다른 텍스트 없이):
+{"score":<0-50>,"relevance":<0-20>,"depth":<0-20>,"originality":<0-10>,"feedback":"<2-3문장 한국어 피드백>","safetyExplanation":"<2-3문장 안전 지식 설명>"}
+
+학생 질문: "${question}"`;
+
+  const res = await fetch(
+    `https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key=${apiKey}`,
+    {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        contents: [{ parts: [{ text: prompt }] }],
+        generationConfig: { temperature: 0.4, maxOutputTokens: 500 },
+      }),
+      signal: AbortSignal.timeout(15000),
+    },
+  );
+
+  if (!res.ok) throw new Error(`Gemini HTTP ${res.status}`);
+
+  const data = await res.json();
+  const text: string = data.candidates?.[0]?.content?.parts?.[0]?.text ?? "{}";
+
+  let parsed: Partial<EvaluateResponse>;
+  try {
+    parsed = JSON.parse(text);
+  } catch {
+    const match = text.match(/\{[\s\S]*\}/);
+    parsed = match ? JSON.parse(match[0]) : {};
+  }
+
+  const score = Math.min(50, Math.max(0, Number(parsed.score ?? 25)));
+  return {
+    score,
+    relevance:         Math.min(20, Math.max(0, Number(parsed.relevance ?? 10))),
+    depth:             Math.min(20, Math.max(0, Number(parsed.depth ?? 10))),
+    originality:       Math.min(10, Math.max(0, Number(parsed.originality ?? 5))),
+    feedback:          typeof parsed.feedback === "string" ? parsed.feedback : "잘 만들었어요!",
+    safetyExplanation: typeof parsed.safetyExplanation === "string" ? parsed.safetyExplanation : "",
+    level:             getLevel(score).label,
+    isLocalFallback:   false,
+  };
+}
+
 interface Props {
   isMidpoint?: boolean;
 }
@@ -121,10 +201,22 @@ export default function AreaQuiz({ isMidpoint = false }: Props) {
   const hasEnoughChars = charCount >= MIN_CHARS;
   const canSubmit    = hasEnoughChars && evalState === "idle";
 
-  // ── GPT 평가 호출 ──────────────────────────────────────
+  // ── 평가 호출: Gemini(브라우저) → 서버 폴백 ───────────────
   const handleEvaluate = async () => {
     if (!canSubmit) return;
     setEvalState("loading");
+
+    // 1순위: 브라우저에서 Gemini 직접 호출
+    try {
+      const data = await callGemini(question.trim(), area.title, isMidpoint, situationTitles);
+      setResult(data);
+      setEvalState("done");
+      return;
+    } catch (err) {
+      console.warn("Gemini 직접 호출 실패, 서버 폴백 시도:", err);
+    }
+
+    // 2순위: 서버 API 라우트 (로컬 폴백 채점)
     try {
       const res = await fetch("/api/evaluate-question", {
         method: "POST",
@@ -137,7 +229,7 @@ export default function AreaQuiz({ isMidpoint = false }: Props) {
           situationTitles,
         }),
       });
-      if (!res.ok) throw new Error("API error");
+      if (!res.ok) throw new Error("Server error");
       const data: EvaluateResponse = await res.json();
       setResult(data);
       setEvalState("done");
