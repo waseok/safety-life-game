@@ -52,6 +52,7 @@ export default function SituationView() {
   const shuffledChoices = useMemo(() => {
     if (!situation) return [];
     return [...situation.choices].sort(() => Math.random() - 0.5);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [situation?.id]);
 
   if (!area || !situation) return null;
