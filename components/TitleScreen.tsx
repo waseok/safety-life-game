@@ -121,6 +121,11 @@ export default function TitleScreen() {
                     <div className="text-right">
                       <p className="font-black text-primary text-xl">{r.score}점</p>
                       <p className="text-xs text-on-surface/50">정답률 {r.accuracy}%</p>
+                      {(r as any).questionScore > 0 && (
+                        <p className="text-xs font-bold" style={{ color: "#7c3aed" }}>
+                          ✏️ 질문 {(r as any).questionScore}점
+                        </p>
+                      )}
                     </div>
                   </div>
                 ))}

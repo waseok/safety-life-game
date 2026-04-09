@@ -3,46 +3,92 @@
 import { useState } from "react";
 import { useGameStore } from "@/store/useGameStore";
 import { allAreas } from "@/data/areas";
-import { getQuizQuestion } from "@/data/quizQuestions";
+import { QuestionScore } from "@/types/game";
+import { EvaluateResponse } from "@/app/api/evaluate-question/route";
 
-// 레벨별 색상 (1→파랑 → 7→보라, 점점 깊어지는 사고)
-const LEVEL_COLORS: Record<number, { color: string; bg: string; border: string; glow: string }> = {
-  1: { color: "#0284c7", bg: "rgba(2,132,199,0.08)",   border: "rgba(2,132,199,0.35)",   glow: "rgba(2,132,199,0.18)" },
-  2: { color: "#0d9488", bg: "rgba(13,148,136,0.08)",  border: "rgba(13,148,136,0.35)",  glow: "rgba(13,148,136,0.18)" },
-  3: { color: "#16a34a", bg: "rgba(22,163,74,0.08)",   border: "rgba(22,163,74,0.35)",   glow: "rgba(22,163,74,0.18)" },
-  4: { color: "#ca8a04", bg: "rgba(202,138,4,0.08)",   border: "rgba(202,138,4,0.35)",   glow: "rgba(202,138,4,0.18)" },
-  5: { color: "#ea580c", bg: "rgba(234,88,12,0.08)",   border: "rgba(234,88,12,0.35)",   glow: "rgba(234,88,12,0.18)" },
-  6: { color: "#dc2626", bg: "rgba(220,38,38,0.08)",   border: "rgba(220,38,38,0.35)",   glow: "rgba(220,38,38,0.18)" },
-  7: { color: "#7c3aed", bg: "rgba(124,58,237,0.08)",  border: "rgba(124,58,237,0.35)",  glow: "rgba(124,58,237,0.18)" },
-};
+const MIN_CHARS = 15; // 최소 질문 길이
 
-const MIN_CHARS = 30; // 최소 글자 수
+type EvalState = "idle" | "loading" | "done" | "error";
 
-export default function AreaQuiz() {
+interface Props {
+  isMidpoint?: boolean;
+}
+
+// 질문 만들기 예시 힌트
+const QUESTION_STARTERS = [
+  "만약 ~한다면 어떻게 될까?",
+  "왜 ~는 중요할까?",
+  "~와 ~의 차이는 무엇일까?",
+  "어떻게 하면 ~를 더 안전하게 할 수 있을까?",
+  "~가 없다면 어떤 문제가 생길까?",
+];
+
+export default function AreaQuiz({ isMidpoint = false }: Props) {
   const currentAreaIndex = useGameStore((s) => s.currentAreaIndex);
-  const submitQuizAnswer = useGameStore((s) => s.submitQuizAnswer);
+  const submitQuizQuestion = useGameStore((s) => s.submitQuizQuestion);
+  const life = useGameStore((s) => s.life);
+  const mental = useGameStore((s) => s.mental);
+  const areaSessionCorrect = useGameStore((s) => s.areaSessionCorrect);
+  const areaSessionTotal = useGameStore((s) => s.areaSessionTotal);
 
-  const [answer, setAnswer] = useState("");
-  const [submitted, setSubmitted] = useState(false);
+  const [question, setQuestion] = useState("");
+  const [evalState, setEvalState] = useState<EvalState>("idle");
+  const [result, setResult] = useState<EvaluateResponse | null>(null);
   const [showHints, setShowHints] = useState(false);
 
   const area = allAreas[currentAreaIndex];
-  const quiz = area ? getQuizQuestion(area.id) : undefined;
+  if (!area) return null;
 
-  if (!area || !quiz) return null;
+  const charCount = question.trim().length;
+  const hasEnoughChars = charCount >= MIN_CHARS;
+  const canSubmit = hasEnoughChars && evalState === "idle";
 
-  const lc = LEVEL_COLORS[quiz.level] ?? LEVEL_COLORS[1];
-  const charCount = answer.length;
-  const canSubmit = charCount >= MIN_CHARS;
-
-  const handleSubmit = () => {
+  const handleEvaluate = async () => {
     if (!canSubmit) return;
-    setSubmitted(true);
+    setEvalState("loading");
+    try {
+      const res = await fetch("/api/evaluate-question", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          question: question.trim(),
+          areaTitle: area.title,
+          areaIcon: area.icon,
+          isMidpoint,
+        }),
+      });
+      if (!res.ok) throw new Error("API error");
+      const data: EvaluateResponse = await res.json();
+      setResult(data);
+      setEvalState("done");
+    } catch {
+      setEvalState("error");
+    }
   };
 
   const handleComplete = () => {
-    submitQuizAnswer(answer);
+    if (!result) return;
+    const score: QuestionScore = {
+      score: result.score,
+      relevance: result.relevance,
+      depth: result.depth,
+      originality: result.originality,
+      feedback: result.feedback,
+      level: result.level,
+      question: question.trim(),
+    };
+    submitQuizQuestion(area.id, question.trim(), score, isMidpoint);
   };
+
+  const scoreColor = (s: number, max: number) => {
+    const pct = s / max;
+    if (pct >= 0.8) return "#16a34a";
+    if (pct >= 0.6) return "#d97706";
+    return "#dc2626";
+  };
+
+  const totalColor = result ? scoreColor(result.score, 50) : "#0284c7";
+  const mentalBonus = result ? Math.round((result.score / 50) * 20) : 0;
 
   return (
     <div
@@ -53,20 +99,19 @@ export default function AreaQuiz() {
         className="max-w-2xl w-full rounded-3xl overflow-hidden"
         style={{
           background: "#ffffff",
-          border: `2px solid ${lc.border}`,
-          boxShadow: `0 20px 60px ${lc.glow}`,
+          border: "2px solid rgba(2,132,199,0.3)",
+          boxShadow: "0 20px 60px rgba(2,132,199,0.12)",
         }}
       >
         {/* ── 헤더 ── */}
         <div
           className="px-6 pt-7 pb-5"
           style={{
-            background: `linear-gradient(135deg, ${lc.bg}, rgba(255,255,255,0))`,
-            borderBottom: `1.5px solid ${lc.border}`,
+            background: "linear-gradient(135deg, rgba(2,132,199,0.08), rgba(255,255,255,0))",
+            borderBottom: "1.5px solid rgba(2,132,199,0.18)",
           }}
         >
-          {/* 에어리어 태그 */}
-          <div className="flex items-center justify-between mb-4">
+          <div className="flex items-center justify-between mb-3">
             <span
               className="text-xs font-black px-3 py-1 rounded-full"
               style={{
@@ -77,176 +122,257 @@ export default function AreaQuiz() {
             >
               {area.icon} {area.title}
             </span>
-
-            {/* 사고 수준 뱃지 */}
             <span
               className="text-xs font-black px-3 py-1 rounded-full"
               style={{
-                background: lc.bg,
-                color: lc.color,
-                border: `1.5px solid ${lc.border}`,
+                background: isMidpoint ? "rgba(245,158,11,0.1)" : "rgba(124,58,237,0.1)",
+                color: isMidpoint ? "#b45309" : "#7c3aed",
+                border: isMidpoint ? "1.5px solid rgba(245,158,11,0.4)" : "1.5px solid rgba(124,58,237,0.4)",
               }}
             >
-              {quiz.levelLabel}
+              {isMidpoint ? "✏️ 중간 질문 만들기" : "🎓 최종 질문 만들기"}
             </span>
           </div>
 
-          {/* 타이틀 */}
-          <div className="flex items-center gap-2 mb-1">
-            <p className="text-sm font-black" style={{ color: lc.color }}>
-              💭 탐구 질문 · {quiz.commandTerm}
-            </p>
-          </div>
-          <p className="text-xs font-semibold" style={{ color: "#6b8aaa" }}>
-            정답이 없는 질문입니다. 솔직하게 자신의 생각을 써보세요.
+          <h2 className="text-xl font-black mb-1" style={{ color: "#0d2a4a" }}>
+            {isMidpoint
+              ? "절반을 왔어요! 탐구 질문을 만들어보세요 🔍"
+              : "영역 완료! 나만의 탐구 질문을 만들어보세요 🎯"}
+          </h2>
+          <p className="text-sm font-semibold" style={{ color: "#6b8aaa" }}>
+            {isMidpoint
+              ? `${area.title} 상황 ${areaSessionTotal}개를 경험했어요. 더 알고 싶은 것이 있나요?`
+              : `${area.title} 전체 ${areaSessionTotal}문항 완료! 배운 내용에서 탐구하고 싶은 질문을 만들어보세요.`}
           </p>
+
+          {/* 현재 스탯 미니 표시 */}
+          <div className="flex gap-3 mt-3">
+            <span className="text-xs font-bold px-2 py-1 rounded-lg bg-red-50 text-red-600">
+              ❤️ {life}
+            </span>
+            <span className="text-xs font-bold px-2 py-1 rounded-lg bg-blue-50 text-blue-600">
+              🧠 {mental}
+            </span>
+            <span className="text-xs font-bold px-2 py-1 rounded-lg bg-green-50 text-green-600">
+              ✅ {areaSessionCorrect}/{areaSessionTotal} 정답
+            </span>
+          </div>
         </div>
 
-        {/* ── 질문 + 입력 ── */}
         <div className="p-6">
-          {!submitted ? (
+          {evalState !== "done" ? (
             <>
-              {/* 질문 본문 */}
+              {/* 질문 만들기 안내 */}
               <div
-                className="p-4 rounded-2xl mb-4 leading-relaxed"
-                style={{ background: lc.bg, border: `1.5px solid ${lc.border}` }}
+                className="p-4 rounded-2xl mb-4"
+                style={{ background: "rgba(2,132,199,0.05)", border: "1.5px solid rgba(2,132,199,0.15)" }}
               >
-                <p className="text-base font-bold" style={{ color: "#0d2a4a", lineHeight: 1.7 }}>
-                  {quiz.question}
+                <p className="text-sm font-bold mb-2" style={{ color: "#0d2a4a" }}>
+                  💡 좋은 탐구 질문이란?
                 </p>
+                <ul className="space-y-1">
+                  {[
+                    `"${area.title}"와 관련이 있어요`,
+                    "단순한 사실 확인보다 깊이 생각하게 해요",
+                    "여러 관점에서 살펴볼 수 있어요",
+                  ].map((tip, i) => (
+                    <li key={i} className="text-xs flex gap-2" style={{ color: "#4a7090" }}>
+                      <span style={{ color: "#0284c7" }}>•</span>{tip}
+                    </li>
+                  ))}
+                </ul>
               </div>
 
-              {/* 보조 질문 (힌트) */}
+              {/* 질문 시작 힌트 */}
               <div className="mb-4">
                 <button
                   onClick={() => setShowHints((v) => !v)}
                   className="flex items-center gap-1.5 text-xs font-bold transition-opacity hover:opacity-70"
-                  style={{ color: lc.color }}
+                  style={{ color: "#0284c7" }}
                 >
                   <span>{showHints ? "▾" : "▸"}</span>
-                  생각을 돕는 힌트 {showHints ? "접기" : "펼치기"}
+                  질문 시작 문구 예시 {showHints ? "접기" : "보기"}
                 </button>
-
                 {showHints && (
-                  <ul className="mt-2 space-y-1.5 pl-1">
-                    {quiz.subPrompts.map((prompt, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm" style={{ color: "#4a7090" }}>
-                        <span style={{ color: lc.color, flexShrink: 0 }}>•</span>
-                        {prompt}
-                      </li>
+                  <div className="mt-2 flex flex-wrap gap-2">
+                    {QUESTION_STARTERS.map((s, i) => (
+                      <button
+                        key={i}
+                        onClick={() => setQuestion((prev) => prev ? prev : s.replace("~", ""))}
+                        className="text-xs px-3 py-1.5 rounded-full border transition-all hover:scale-[1.02]"
+                        style={{
+                          background: "rgba(2,132,199,0.07)",
+                          border: "1px solid rgba(2,132,199,0.25)",
+                          color: "#0369a1",
+                        }}
+                      >
+                        {s}
+                      </button>
                     ))}
-                  </ul>
+                  </div>
                 )}
               </div>
 
-              {/* 텍스트 입력 */}
+              {/* 질문 입력 */}
               <div className="mb-4">
                 <textarea
-                  value={answer}
-                  onChange={(e) => setAnswer(e.target.value)}
-                  placeholder="여기에 자유롭게 생각을 적어보세요..."
-                  rows={6}
+                  value={question}
+                  onChange={(e) => setQuestion(e.target.value)}
+                  placeholder={`${area.title}에 대해 탐구하고 싶은 질문을 직접 만들어보세요...`}
+                  rows={4}
+                  disabled={evalState === "loading"}
                   className="w-full rounded-xl p-4 text-sm leading-relaxed resize-none outline-none transition-all duration-200"
                   style={{
                     background: "#f8fbff",
-                    border: `1.5px solid ${canSubmit ? lc.border : "rgba(2,132,199,0.15)"}`,
+                    border: `1.5px solid ${charCount >= MIN_CHARS ? "rgba(2,132,199,0.4)" : "rgba(2,132,199,0.15)"}`,
                     color: "#0d2a4a",
-                    boxShadow: canSubmit ? `0 0 0 3px ${lc.glow}` : "none",
+                    boxShadow: charCount >= MIN_CHARS ? "0 0 0 3px rgba(2,132,199,0.08)" : "none",
                   }}
                 />
                 <div className="flex items-center justify-between mt-1.5">
                   <span className="text-xs" style={{ color: "#6b8aaa" }}>
                     {charCount < MIN_CHARS
-                      ? `${MIN_CHARS - charCount}자 더 쓰면 제출 가능`
-                      : "제출 준비 완료 ✓"}
+                      ? `${MIN_CHARS - charCount}자 더 입력하면 제출 가능`
+                      : "✓ 제출 준비 완료"}
                   </span>
-                  <span
-                    className="text-xs font-semibold"
-                    style={{ color: canSubmit ? lc.color : "#aaa" }}
-                  >
+                  <span className="text-xs font-semibold" style={{ color: charCount >= MIN_CHARS ? "#0284c7" : "#aaa" }}>
                     {charCount}자
                   </span>
                 </div>
               </div>
 
-              {/* 제출 버튼 */}
+              {/* 평가 버튼 */}
               <button
-                onClick={handleSubmit}
+                onClick={handleEvaluate}
                 disabled={!canSubmit}
-                className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200"
+                className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 flex items-center justify-center gap-2"
                 style={{
-                  background: canSubmit
-                    ? `linear-gradient(135deg, ${lc.color}, ${lc.color}cc)`
+                  background: hasEnoughChars
+                    ? "linear-gradient(135deg, #0284c7, #0ea5e9)"
                     : "rgba(180,200,220,0.4)",
-                  boxShadow: canSubmit ? `0 6px 20px ${lc.glow}` : "none",
+                  boxShadow: hasEnoughChars ? "0 6px 20px rgba(2,132,199,0.3)" : "none",
                   cursor: canSubmit ? "pointer" : "not-allowed",
-                  transform: canSubmit ? undefined : "none",
                 }}
               >
-                {canSubmit ? "생각 제출하기 →" : `${MIN_CHARS - charCount}자 더 작성해주세요`}
+                {evalState === "loading" ? (
+                  <>
+                    <span className="animate-spin">⚙️</span>
+                    <span>AI가 질문을 평가 중이에요...</span>
+                  </>
+                ) : hasEnoughChars ? (
+                  <>
+                    <span>🤖</span>
+                    <span>AI에게 질문 평가받기 →</span>
+                  </>
+                ) : (
+                  `${MIN_CHARS - charCount}자 더 입력해주세요`
+                )}
               </button>
+
+              {evalState === "error" && (
+                <p className="text-center text-xs mt-3 text-red-500">
+                  평가 중 오류가 발생했어요.{" "}
+                  <button
+                    onClick={() => setEvalState("idle")}
+                    className="underline font-bold"
+                  >
+                    다시 시도
+                  </button>
+                </p>
+              )}
             </>
           ) : (
-            /* ── 제출 완료 화면 ── */
-            <>
-              {/* 제출 완료 헤더 */}
-              <div
-                className="p-4 rounded-2xl mb-5 text-center"
-                style={{ background: lc.bg, border: `1.5px solid ${lc.border}` }}
-              >
-                <p className="text-2xl mb-1">✍️</p>
-                <p className="text-base font-black" style={{ color: lc.color }}>
-                  생각을 기록했어요!
-                </p>
-                <p className="text-xs mt-1" style={{ color: "#4a7090" }}>
-                  판단력 +15 획득
-                </p>
-              </div>
+            /* ── 평가 결과 화면 ── */
+            result && (
+              <>
+                {/* 점수 헤더 */}
+                <div
+                  className="p-5 rounded-2xl mb-5 text-center"
+                  style={{
+                    background: `${totalColor}10`,
+                    border: `2px solid ${totalColor}30`,
+                  }}
+                >
+                  <p className="text-4xl font-black mb-1" style={{ color: totalColor }}>
+                    {result.score}
+                    <span className="text-lg font-semibold text-on-surface/40"> / 50</span>
+                  </p>
+                  <p className="text-base font-black mb-0.5" style={{ color: totalColor }}>
+                    {result.level}
+                  </p>
+                  <p className="text-xs" style={{ color: "#6b8aaa" }}>
+                    🧠 판단력 +{mentalBonus} 보너스 획득!
+                  </p>
+                </div>
 
-              {/* 내 답변 미리보기 */}
-              <div
-                className="p-4 rounded-xl mb-4"
-                style={{
-                  background: "rgba(2,132,199,0.04)",
-                  border: "1px solid rgba(2,132,199,0.12)",
-                }}
-              >
-                <p className="text-xs font-black mb-2" style={{ color: "#6b8aaa" }}>
-                  나의 생각
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: "#0d2a4a" }}>
-                  {answer}
-                </p>
-              </div>
+                {/* 세부 점수 */}
+                <div className="grid grid-cols-3 gap-3 mb-5">
+                  {[
+                    { label: "안전 관련성", val: result.relevance, max: 20 },
+                    { label: "탐구 깊이", val: result.depth, max: 20 },
+                    { label: "독창성", val: result.originality, max: 10 },
+                  ].map(({ label, val, max }) => {
+                    const c = scoreColor(val, max);
+                    return (
+                      <div
+                        key={label}
+                        className="p-3 rounded-xl text-center"
+                        style={{ background: `${c}10`, border: `1px solid ${c}30` }}
+                      >
+                        <p className="text-xl font-black" style={{ color: c }}>
+                          {val}
+                          <span className="text-xs font-normal text-on-surface/30">/{max}</span>
+                        </p>
+                        <p className="text-xs font-bold mt-0.5" style={{ color: "#4a7090" }}>
+                          {label}
+                        </p>
+                      </div>
+                    );
+                  })}
+                </div>
 
-              {/* 핵심 관점 (reflection) */}
-              <div
-                className="p-4 rounded-xl mb-5"
-                style={{
-                  background: lc.bg,
-                  border: `1.5px solid ${lc.border}`,
-                }}
-              >
-                <p className="text-xs font-black mb-2" style={{ color: lc.color }}>
-                  💡 함께 생각해볼 관점
-                </p>
-                <p className="text-sm leading-relaxed" style={{ color: "#0d2a4a" }}>
-                  {quiz.reflection}
-                </p>
-              </div>
+                {/* 내 질문 */}
+                <div
+                  className="p-4 rounded-xl mb-4"
+                  style={{ background: "rgba(2,132,199,0.04)", border: "1px solid rgba(2,132,199,0.12)" }}
+                >
+                  <p className="text-xs font-black mb-2" style={{ color: "#6b8aaa" }}>나의 질문</p>
+                  <p className="text-sm font-semibold leading-relaxed" style={{ color: "#0d2a4a" }}>
+                    &ldquo;{question.trim()}&rdquo;
+                  </p>
+                </div>
 
-              {/* 다음으로 버튼 */}
-              <button
-                onClick={handleComplete}
-                className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
-                style={{
-                  background: "linear-gradient(135deg, #0284c7, #0ea5e9)",
-                  boxShadow: "0 6px 20px rgba(2,132,199,0.35)",
-                }}
-              >
-                에어리어 완료 화면으로 →
-              </button>
-            </>
+                {/* AI 피드백 */}
+                <div
+                  className="p-4 rounded-xl mb-5"
+                  style={{ background: "rgba(2,132,199,0.06)", border: "1.5px solid rgba(2,132,199,0.2)" }}
+                >
+                  <p className="text-xs font-black mb-2" style={{ color: "#0284c7" }}>
+                    🤖 AI 피드백
+                  </p>
+                  <p className="text-sm leading-relaxed" style={{ color: "#0d2a4a" }}>
+                    {result.feedback}
+                  </p>
+                </div>
+
+                {/* 다음 버튼 */}
+                <button
+                  onClick={handleComplete}
+                  className="w-full py-4 rounded-2xl font-black text-base text-white transition-all duration-200 hover:scale-[1.02] active:scale-[0.98]"
+                  style={{
+                    background: isMidpoint
+                      ? "linear-gradient(135deg, #f59e0b, #fbbf24)"
+                      : "linear-gradient(135deg, #0284c7, #0ea5e9)",
+                    boxShadow: isMidpoint
+                      ? "0 6px 20px rgba(245,158,11,0.3)"
+                      : "0 6px 20px rgba(2,132,199,0.35)",
+                    color: isMidpoint ? "#451a03" : "#ffffff",
+                  }}
+                >
+                  {isMidpoint ? "계속 탐험하기 🚀" : "영역 완료 화면으로 →"}
+                </button>
+              </>
+            )
           )}
         </div>
       </div>
