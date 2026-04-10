@@ -28,8 +28,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 1,
-      title: "지진 발생 (실내)",
-      body: "집에서 TV를 보다가 갑자기 바닥이 흔들리기 시작했습니다. 서랍장이 넘어지고 유리창이 흔들립니다. 지진이 발생한 것 같습니다.",
+      title: "집에서 TV 보다 갑자기 발생한 지진",
+      body: "민준이는 학교 재난 대비 훈련 주간을 맞아 각종 재난 대처법을 배우고 있습니다. 어느 날 집에서 TV를 보다가 갑자기 바닥이 흔들리기 시작했습니다. 서랍장이 넘어지고 유리창이 흔들립니다.",
       image: "/images/situations/area5/s01.png",
       choices: [
         {
@@ -66,8 +66,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 2,
-      title: "지진 발생 (실외)",
-      body: "길을 걷다가 갑자기 땅이 흔들리기 시작했습니다. 주변 건물들이 흔들리고 사람들이 비명을 지릅니다. 지진이 발생했습니다.",
+      title: "외출 중 길 위에서 갑작스러운 지진 발생",
+      body: "이어서 다음 날, 민준이가 외출 중 걷고 있을 때 갑자기 땅이 흔들리기 시작했습니다. 주변 건물들이 흔들리고 사람들이 비명을 지릅니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -104,8 +104,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 3,
-      title: "태풍 대비",
-      body: "태풍이 24시간 후 우리 지역을 강타할 예정입니다. 뉴스에서 비상용품을 준비하라고 합니다. 집에 비상용품이 거의 없습니다.",
+      title: "태풍이 24시간 후 상륙 예정, 준비가 필요한 민준네 집",
+      body: "계속해서 뉴스를 보던 민준이는 태풍이 24시간 후 우리 지역을 강타할 예정이라는 것을 알게 됐습니다. 비상용품을 준비하라고 하는데, 집에 비상용품이 거의 없습니다.",
       image: "/images/situations/area5/s02.png",
       choices: [
         {
@@ -142,8 +142,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 4,
-      title: "폭우/침수",
-      body: "갑자기 폭우가 쏟아지고, 지하철역 계단으로 물이 쏟아져 들어오기 시작합니다. 수위가 빠르게 올라가고 있습니다.",
+      title: "폭우 속 지하철역에 물이 쏟아져 들어오다",
+      body: "그 다음 날, 민준이가 지하철역 계단을 내려가는 중 갑자기 폭우가 쏟아지면서 계단으로 물이 쏟아져 들어오기 시작했습니다. 수위가 빠르게 올라가고 있습니다.",
       image: "/images/situations/area5/s02.png",
       choices: [
         {
@@ -180,8 +180,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 5,
-      title: "폭설/빙판길",
-      body: "폭설이 내린 다음 날, 등하교길이 눈과 얼음으로 미끄럽습니다. 앞으로 가는 사람이 넘어지는 것을 봤습니다.",
+      title: "폭설 다음 날 빙판이 된 등굣길",
+      body: "계속해서 겨울에 폭설이 내린 다음 날, 민준이의 등굣길은 눈과 얼음으로 미끄럽게 변했습니다. 민준이 앞으로 가던 사람이 넘어지는 것을 봤습니다.",
       image: "/images/situations/area5/s03.png",
       choices: [
         {
@@ -218,8 +218,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 6,
-      title: "낙뢰",
-      body: "공원에서 운동하다가 갑자기 하늘이 어두워지고 천둥소리가 들립니다. 비가 오기 시작했고, 주변에 나무와 넓은 운동장이 있습니다.",
+      title: "공원에서 운동 중 갑자기 천둥번개가 치다",
+      body: "그 다음 날, 민준이는 공원에서 운동을 하다가 갑자기 하늘이 어두워지고 천둥소리가 들리기 시작했습니다. 비가 오기 시작했고, 주변에는 나무와 넓은 운동장이 있습니다.",
       image: "/images/situations/area5/s03.png",
       choices: [
         {
@@ -256,8 +256,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 7,
-      title: "폭염/열사병",
-      body: "한낮에 야외 행사에 참가했습니다. 날씨가 매우 더워서 땀을 뻘뻘 흘리고 있습니다. 갑자기 어지럽고 구역질이 납니다.",
+      title: "한여름 야외 행사 참가 중 어지러움과 구역질",
+      body: "이어서 한여름에 민준이는 야외 행사에 참가했습니다. 날씨가 매우 더워서 땀을 뻘뻘 흘리던 중, 갑자기 어지럽고 구역질이 납니다.",
       image: "/images/situations/area5/s04.png",
       choices: [
         {
@@ -294,8 +294,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 8,
-      title: "한파/저체온증",
-      body: "겨울에 등산을 하다가 길을 잃었습니다. 날씨가 매우 추워지고, 손발이 저리고 생각이 띵해지기 시작합니다.",
+      title: "겨울 등산 중 길을 잃고 저체온증 위기",
+      body: "계속해서 겨울 방학에 민준이는 가족과 등산을 하다가 길을 잃었습니다. 날씨가 매우 추워지고, 손발이 저리며 생각이 띵해지기 시작합니다.",
       image: "/images/situations/area5/s04.png",
       choices: [
         {
@@ -332,8 +332,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 9,
-      title: "해일경보",
-      body: "해변에서 놀다가 스마트폰에 해일경보가 울렸습니다. '지진 해일 경보 3m 예상'이라고 합니다. 바다가 평소와 다르게 조금씩 물러나고 있습니다.",
+      title: "해변에서 놀다 받은 해일경보 알림",
+      body: "이어서 여름 여행 중 해변에서 놀던 민준이의 스마트폰에 해일경보가 울렸습니다. '지진 해일 경보 3m 예상'이라고 합니다. 바다가 평소와 다르게 조금씩 물러나고 있습니다.",
       image: "/images/situations/area5/s02.png",
       choices: [
         {
@@ -370,8 +370,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "natural-disaster",
       order: 10,
-      title: "산사태",
-      body: "폭우가 계속된 뒤 산에 있는 할머니 댁으로 가는 중입니다. 산길에서 흙과 돌이 흔들리는 소리가 들리고, 바위가 굴러내리기 시작합니다.",
+      title: "폭우 후 할머니 댁 가는 길에 산사태 징후",
+      body: "계속해서 폭우가 계속된 뒤, 민준이는 산에 있는 할머니 댁으로 가는 중이었습니다. 산길에서 흙과 돌이 흔들리는 소리가 들리고, 바위가 굴러내리기 시작합니다.",
       image: "/images/situations/area5/s02.png",
       choices: [
         {
@@ -410,8 +410,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 11,
-      title: "화학물질 유출",
-      body: "공장 근처를 지나가는데, 갑자기 매캐한 냄새가 나고 눈과 목이 따가워집니다. '화학물질 유출' 경보가 울리고 사람들이 기침하며 뛰어갑니다.",
+      title: "공장 근처에서 화학물질 유출 경보",
+      body: "이번엔 다른 상황에서, 민준이가 공장 근처를 지나가다 갑자기 매캐한 냄새가 나고 눈과 목이 따가워졌습니다. '화학물질 유출' 경보가 울리고 사람들이 기침하며 뛰어갑니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -448,8 +448,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 12,
-      title: "고농도 미세먼지",
-      body: "미세먼지 '매우 나쁨' 경보가 발령되었습니다. 오늘은 체육 대회가 있는 날인데, 선생님은 그대로 진행하자고 합니다.",
+      title: "체육 대회 날 미세먼지 매우 나쁨 경보 발령",
+      body: "이어서 학교에서 체육 대회가 있는 날, 미세먼지 '매우 나쁨' 경보가 발령되었습니다. 선생님은 그대로 진행하자고 합니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -486,8 +486,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 13,
-      title: "테러 의심물체",
-      body: "지하철역에서 이상한 가방이 한동안 방치되어 있는 것을 발견했습니다. 주변에 주인 같은 사람이 보이지 않고, 뭔가 삐 소리가 난다고 합니다.",
+      title: "지하철역에서 주인 없는 의심스러운 가방 발견",
+      body: "계속해서 민준이는 지하철역에서 이상한 가방이 한동안 방치되어 있는 것을 발견했습니다. 주변에 주인 같은 사람이 보이지 않고, 뭔가 삐 소리가 난다고 합니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -524,8 +524,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 14,
-      title: "장기 정전",
-      body: "갑자기 전기가 끊겼습니다. 밤인데 한동안 복구될 기미가 없습니다. 냉장고에 음식이 있고, 휴대폰 배터리도 얼마 안 남았습니다.",
+      title: "밤에 갑자기 전기가 끊긴 민준네 집",
+      body: "그 다음 날 밤, 민준이 집에 갑자기 전기가 끊겼습니다. 한동안 복구될 기미가 없고, 냉장고에 음식이 있는데 휴대폰 배터리도 얼마 안 남았습니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -562,8 +562,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 15,
-      title: "수도 오염",
-      body: "아파트 관리사무소에서 '급수 오염 의심' 공지가 붙었습니다. 수도물을 마시지 말고, 끓여서도 사용하지 말라고 합니다.",
+      title: "아파트에 붙은 급수 오염 의심 공지문",
+      body: "계속해서 민준이는 아파트 게시판에 관리사무소에서 올린 '급수 오염 의심' 공지가 붙어 있는 것을 발견했습니다. 수도물을 마시지 말고, 끓여서도 사용하지 말라고 합니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -600,8 +600,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 16,
-      title: "엘리베이터 정전",
-      body: "아파트 엘리베이터를 타고 올라가는 중, 갑자기 정전으로 엘리베이터가 멈췄습니다. 안에 혼자 있고, 조명도 꺼져 어둡습니다.",
+      title: "정전으로 갑자기 멈춘 엘리베이터 안에 혼자",
+      body: "이어서 민준이는 아파트 엘리베이터를 타고 올라가던 중, 갑자기 정전으로 엘리베이터가 멈췄습니다. 안에 혼자 있고, 조명도 꺼져 어둡습니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -638,8 +638,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 17,
-      title: "군중 밀집/압사",
-      body: "축제에 왔는데 사람이 너무 많습니다. 앞으로 갈수록 더 밀리고, 숨이 막히기 시작합니다. 주변 사람들이 비명을 지릅니다.",
+      title: "축제에서 사람들이 몰리기 시작, 숨이 막히다",
+      body: "그 다음 날, 민준이는 친구들과 축제에 왔습니다. 사람이 너무 많아 앞으로 갈수록 더 밀리고, 숨이 막히기 시작합니다. 주변 사람들이 비명을 지릅니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -676,8 +676,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 18,
-      title: "방사능 사고",
-      body: "뉴스에서 '원자력 시설 비상사고' 경보가 나왔습니다. 실내에 들어가고 창문을 닫으라고 합니다. 밖에 있는데 집까지 10분 거리입니다.",
+      title: "밖에 있을 때 방사능 비상사고 경보가 울리다",
+      body: "계속해서 민준이가 밖을 걷고 있을 때 스마트폰에서 '원자력 시설 비상사고' 경보가 울렸습니다. 실내에 들어가고 창문을 닫으라고 합니다. 집까지 10분 거리인데 가까운 건물도 있습니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -714,8 +714,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 19,
-      title: "건물 붕괴",
-      body: "건물 안에 있는데 갑자기 큰 '쿵' 소리와 함께 천장에서 먼지가 떨어집니다. 건물이 흔들리기 시작합니다. 붕괴가 시작된 것 같습니다.",
+      title: "건물 안에서 갑자기 붕괴 징후가 나타나다",
+      body: "이어서 민준이가 건물 안에 있는데 갑자기 큰 '쿵' 소리와 함께 천장에서 먼지가 떨어졌습니다. 건물이 흔들리기 시작합니다. 붕괴가 시작된 것 같습니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {
@@ -752,8 +752,8 @@ export const disasterSafety: Area = {
       areaId: "disaster-safety",
       subAreaId: "social-disaster",
       order: 20,
-      title: "가스 폭발",
-      body: "아파트 복도에서 강한 가스 냄새가 납니다. 갑자기 '펑!' 하는 폭발음과 함께 불꽃이 퍼지기 시작합니다. 가스 폭발이 발생했습니다.",
+      title: "아파트 복도에서 가스 냄새와 함께 폭발 발생",
+      body: "계속해서 민준이가 아파트 복도를 걷던 중 강한 가스 냄새가 나더니, 갑자기 '펑!' 하는 폭발음과 함께 불꽃이 퍼지기 시작했습니다. 가스 폭발이 발생했습니다.",
       image: "/images/situations/area5/s05.png",
       choices: [
         {

@@ -8,6 +8,15 @@ import IllustrationCard from "./IllustrationCard";
 import ResourceBar from "./ResourceBar";
 import { useSound } from "@/hooks/useSound";
 
+// 이름의 마지막 글자에 받침이 있으면 "이" 추가
+function personalizeBody(text: string, name: string): string {
+  if (!name) return text;
+  const lastCode = name.charCodeAt(name.length - 1);
+  const hasJongseong = lastCode >= 0xAC00 && lastCode <= 0xD7A3 && (lastCode - 0xAC00) % 28 !== 0;
+  const nameWithI = hasJongseong ? `${name}이` : name;
+  return text.replace(/민준이/g, nameWithI).replace(/민준/g, name);
+}
+
 const CHOICE_STYLES = [
   {
     bg:      "linear-gradient(135deg, #1565c0, #1e88e5)",
@@ -41,6 +50,7 @@ export default function SituationView() {
   const resetGame          = useGameStore((s) => s.resetGame);
   const currentAreaIndex   = useGameStore((s) => s.currentAreaIndex);
   const currentSituationIndex = useGameStore((s) => s.currentSituationIndex);
+  const playerName         = useGameStore((s) => s.playerName);
   const [isChoosing, setIsChoosing]     = useState(false);
   const [showQuitConfirm, setShowQuitConfirm] = useState(false);
   const [showHomeConfirm, setShowHomeConfirm] = useState(false);
@@ -167,7 +177,7 @@ export default function SituationView() {
 
                 <div className="p-5 md:p-6 bg-white">
                   <p className="text-sm md:text-base lg:text-lg leading-relaxed text-on-surface font-medium whitespace-pre-line">
-                    {situation.body}
+                    {personalizeBody(situation.body, playerName)}
                   </p>
                 </div>
               </div>

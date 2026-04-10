@@ -33,8 +33,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 1,
-      title: "놀이공원 롤러코스터",
-      body: "친구들과 놀이공원에 왔습니다. 기대하던 롤러코스터에 탑승했는데, 안전바를 내렸을 때 뭔가 헐거운 느낌이 듭니다. 옆 친구는 \"빨리 출발해!\"라며 신나 있습니다.",
+      title: "놀이공원 롤러코스터의 헐거운 안전바",
+      body: "민준이는 학교 체험 활동으로 친구들과 놀이공원에 왔습니다. 기대하던 롤러코스터에 탑승했는데, 안전바를 내렸을 때 뭔가 헐거운 느낌이 듭니다. 옆 친구는 \"빨리 출발해!\"라며 신나 있습니다.",
       image: "/images/situations/area1/s01.png",
       choices: [
         {
@@ -71,8 +71,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 2,
-      title: "쇼핑몰 에스컬레이터",
-      body: "쇼핑몰에서 에스컬레이터를 타고 올라가는 중입니다. 갑자기 친구가 에스컬레이터 위에서 뛰어다니며 장난을 칩니다. 주변 사람들이 불안한 표정을 짓고 있습니다.",
+      title: "쇼핑몰 에스컬레이터에서 장난치는 친구",
+      body: "이어서 민준이 일행은 기념품을 사러 쇼핑몰로 이동했습니다. 에스컬레이터를 타고 올라가는 중, 갑자기 친구가 에스컬레이터 위에서 뛰어다니며 장난을 칩니다. 주변 사람들이 불안한 표정을 짓고 있습니다.",
       image: "/images/situations/area1/s02.png",
       choices: [
         {
@@ -109,8 +109,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 3,
-      title: "학교 체육관 낡은 농구대",
-      body: "체육 시간에 농구를 하고 있습니다. 슛을 넣으려는 순간, 농구대 기둥이 녹슬어 흔들리는 것이 눈에 들어옵니다. 당장은 괜찮아 보이지만 걱정이 됩니다.",
+      title: "체육관 낡은 농구대의 수상한 흔들림",
+      body: "학교로 돌아온 민준이는 방과 후 체육 시간에 친구들과 농구를 하게 됐습니다. 슛을 넣으려는 순간, 농구대 기둥이 녹슬어 흔들리는 것이 눈에 들어옵니다. 당장은 괜찮아 보이지만 걱정이 됩니다.",
       image: "/images/situations/area1/s01.png",
       choices: [
         {
@@ -147,8 +147,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 4,
-      title: "건물 옥상 출입금지",
-      body: "점심시간, 학교 옥상으로 올라가는 문이 열려 있습니다. 친구가 \"야, 올라가서 경치 보면서 밥 먹자!\"라고 합니다. 옥상에는 '출입금지' 팻말이 붙어 있습니다.",
+      title: "옥상 출입금지 문이 열린 학교",
+      body: "계속해서 점심시간, 민준이는 학교 옥상으로 올라가는 문이 열려 있는 것을 발견했습니다. 친구가 \"야, 올라가서 경치 보면서 밥 먹자!\"라고 합니다. 옥상에는 '출입금지' 팻말이 붙어 있습니다.",
       image: "/images/situations/area1/s02.png",
       choices: [
         {
@@ -185,8 +185,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 5,
-      title: "워터파크 수영장",
-      body: "무더운 여름, 친구들과 워터파크에 왔습니다. 모두 빨리 물에 들어가고 싶어 안달이 나 있습니다. 점심을 먹은 지 20분밖에 안 됐습니다.",
+      title: "워터파크 수영장, 점심 직후의 유혹",
+      body: "며칠 후 민준이 일행은 여름 체험 활동으로 워터파크에 왔습니다. 모두 빨리 물에 들어가고 싶어 안달이 나 있습니다. 점심을 먹은 지 20분밖에 안 됐습니다.",
       image: "/images/situations/area1/s01.png",
       choices: [
         {
@@ -223,8 +223,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 6,
-      title: "엘리베이터 고장",
-      body: "아파트 엘리베이터를 타고 15층으로 올라가는 중, 갑자기 '쿵' 소리와 함께 엘리베이터가 멈췄습니다. 전등이 깜빡이고, 혼자 갇힌 상황입니다.",
+      title: "집으로 가는 길, 갑자기 멈춘 엘리베이터",
+      body: "체험 활동을 마치고 집에 돌아온 민준이는 아파트 엘리베이터를 타고 15층으로 올라가던 중 갑자기 '쿵' 소리와 함께 엘리베이터가 멈췄습니다. 전등이 깜빡이고, 혼자 갇힌 상황입니다.",
       image: "/images/situations/area1/s02.png",
       choices: [
         {
@@ -261,8 +261,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "facility",
       order: 7,
-      title: "공사현장 근처",
-      body: "등하교길, 큰 건물 공사현장이 있습니다. 가림막 펜스에 구멍이 뚫려 있어서 통과하면 5분이나 지름길입니다. 이미 몇몇 사람이 그 길을 이용하고 있습니다.",
+      title: "등굣길의 공사현장 펜스 구멍",
+      body: "다음 날 아침, 민준이는 등굣길에 큰 건물 공사현장을 지나쳤습니다. 가림막 펜스에 구멍이 뚫려 있어서 통과하면 5분이나 지름길입니다. 이미 몇몇 사람이 그 길을 이용하고 있습니다.",
       image: "/images/situations/area1/s01.png",
       choices: [
         {
@@ -301,8 +301,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 8,
-      title: "화재경보기 배터리",
-      body: "밤중에 집 거실 화재경보기에서 '삐... 삐...' 소리가 납니다. 30초마다 한 번씩 울리는 것을 보니 배터리 부족 신호인 것 같습니다. 잠이 올 수가 없습니다.",
+      title: "밤중에 울리는 화재경보기 배터리 경고음",
+      body: "한편, 어느 날 밤 민준이는 집 거실 화재경보기에서 '삐... 삐...' 소리가 나는 것을 듣게 됐습니다. 30초마다 한 번씩 울리는 것을 보니 배터리 부족 신호인 것 같습니다. 잠이 올 수가 없습니다.",
       image: "/images/situations/area1/s03.png",
       choices: [
         {
@@ -339,8 +339,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 9,
-      title: "기름 화재 발생!",
-      body: "집에서 혼자 라면을 끓이던 중, 옆에 놓아둔 프라이팬의 기름에서 갑자기 불이 붙었습니다! 불꽃이 높이 올라오고 있습니다. 어떻게 해야 할까요?",
+      title: "혼자 요리하다 갑자기 기름 화재 발생!",
+      body: "이어서 다음 날 저녁, 혼자 집을 지키던 민준이는 라면을 끓이던 중 옆 프라이팬의 기름에서 갑자기 불이 붙었습니다! 불꽃이 높이 올라오고 있습니다. 어떻게 해야 할까요?",
       image: "/images/situations/area1/s05.png",
       choices: [
         {
@@ -377,8 +377,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 10,
-      title: "학교 화재 대피",
-      body: "수업 중 갑자기 화재 경보가 울렸습니다. 창밖을 보니 1층 과학실 쪽에서 연기가 피어오르고 있습니다. 복도에도 서서히 연기가 차오르기 시작합니다.",
+      title: "수업 중 울린 학교 화재 경보",
+      body: "그 다음 날, 민준이가 수업을 듣던 중 갑자기 화재 경보가 울렸습니다. 창밖을 보니 1층 과학실 쪽에서 연기가 피어오르고 있습니다. 복도에도 서서히 연기가 차오르기 시작합니다.",
       image: "/images/situations/area1/s04.png",
       choices: [
         {
@@ -415,8 +415,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 11,
-      title: "소화기 사용",
-      body: "복도의 쓰레기통에서 작은 불이 났습니다. 아직 초기 단계이고, 바로 옆 벽에 소화기가 비치되어 있습니다. 이 불을 직접 진화할 수 있을 것 같습니다.",
+      title: "복도 쓰레기통에 붙은 작은 불과 소화기",
+      body: "계속해서 대피 도중, 민준이는 복도 쓰레기통에서 작은 불이 난 것을 발견했습니다. 아직 초기 단계이고, 바로 옆 벽에 소화기가 비치되어 있습니다. 이 불을 직접 진화할 수 있을 것 같습니다.",
       image: "/images/situations/area1/s03.png",
       choices: [
         {
@@ -453,8 +453,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 12,
-      title: "영화관 비상구",
-      body: "친구와 영화를 보러 대형 멀티플렉스에 왔습니다. 상영관 안이 어둡고, 자리가 중앙 쪽이라 출구가 멀어 보입니다. 영화 시작 전 5분이 남았습니다.",
+      title: "영화관에서 비상구를 확인하지 않은 민준",
+      body: "주말에 민준이는 친구와 영화를 보러 대형 멀티플렉스에 왔습니다. 상영관 안이 어둡고, 자리가 중앙 쪽이라 출구가 멀어 보입니다. 영화 시작 전 5분이 남았습니다.",
       image: "/images/situations/area1/s02.png",
       choices: [
         {
@@ -491,8 +491,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 13,
-      title: "전열기구 관리",
-      body: "급하게 외출해야 합니다. 현관에서 신발을 신는데, 방에 전기히터를 켜놓은 것이 갑자기 떠올랐습니다. 약속 시간에 이미 늦고 있습니다.",
+      title: "급하게 나서다 깜빡한 전기히터",
+      body: "이어서 그날 저녁, 민준이는 급하게 외출해야 했습니다. 현관에서 신발을 신는데, 방에 전기히터를 켜놓은 것이 갑자기 떠올랐습니다. 약속 시간에 이미 늦고 있습니다.",
       image: "/images/situations/area1/s03.png",
       choices: [
         {
@@ -529,8 +529,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "fire",
       order: 14,
-      title: "연기 속 대피",
-      body: "한밤중에 잠에서 깼습니다. 복도에서 매캐한 연기 냄새가 납니다. 문 아래로 연기가 스며들어오고 있습니다. 아래층에서 불이 난 것 같습니다.",
+      title: "한밤중 연기 냄새에 잠든 민준이 깨어나다",
+      body: "그날 밤 민준이는 한밤중에 잠에서 깼습니다. 복도에서 매캐한 연기 냄새가 납니다. 문 아래로 연기가 스며들어오고 있습니다. 아래층에서 불이 난 것 같습니다.",
       image: "/images/situations/area1/s04.png",
       choices: [
         {
@@ -569,8 +569,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "electric-gas",
       order: 15,
-      title: "문어발 콘센트",
-      body: "방에 충전할 기기가 너무 많습니다. 스마트폰, 태블릿, 노트북, 게임기, 선풍기... 멀티탭에 또 멀티탭을 연결하면 모두 충전할 수 있을 것 같습니다.",
+      title: "방 안 가득한 기기와 문어발 콘센트의 유혹",
+      body: "이번엔 다른 날, 민준이 방에는 충전할 기기가 너무 많습니다. 스마트폰, 태블릿, 노트북, 게임기, 선풍기... 멀티탭에 또 멀티탭을 연결하면 모두 충전할 수 있을 것 같습니다.",
       image: "/images/situations/area1/s05.png",
       choices: [
         {
@@ -607,8 +607,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "electric-gas",
       order: 16,
-      title: "젖은 손과 전기기구",
-      body: "목욕을 마치고 나왔습니다. 머리를 빨리 말려야 하는데, 손이 아직 물기로 젖어 있습니다. 드라이어 콘센트가 바로 앞에 있습니다.",
+      title: "목욕 후 젖은 손으로 드라이어를 잡으려는 민준",
+      body: "계속해서 목욕을 마치고 나온 민준이는 머리를 빨리 말려야 했습니다. 손이 아직 물기로 젖어 있는데, 드라이어 콘센트가 바로 앞에 있습니다.",
       image: "/images/situations/area1/s05.png",
       choices: [
         {
@@ -645,8 +645,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "electric-gas",
       order: 17,
-      title: "집에서 가스 냄새!",
-      body: "학원을 마치고 집에 돌아왔습니다. 현관문을 열자 가스 냄새가 확 밀려옵니다. 부엌 쪽에서 냄새가 나는 것 같습니다. 집 안이 어둡습니다.",
+      title: "학원 마치고 집에 돌아왔더니 가스 냄새!",
+      body: "그 다음 날, 학원을 마치고 집에 돌아온 민준이는 현관문을 열자 가스 냄새가 확 밀려오는 것을 느꼈습니다. 부엌 쪽에서 냄새가 나는 것 같습니다. 집 안이 어둡습니다.",
       image: "/images/situations/area1/s05.png",
       choices: [
         {
@@ -683,8 +683,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "electric-gas",
       order: 18,
-      title: "손상된 충전기 케이블",
-      body: "스마트폰 충전기 케이블의 피복이 벗겨져서 내부 구리선이 보입니다. 아직 충전은 되긴 하는데... 새 케이블을 사기엔 귀찮습니다.",
+      title: "민준이 스마트폰 충전기 케이블 피복이 벗겨지다",
+      body: "이어서 어느 날 민준이는 스마트폰 충전기 케이블의 피복이 벗겨져 내부 구리선이 보이는 것을 발견했습니다. 아직 충전은 되긴 하는데, 새 케이블을 사기엔 귀찮습니다.",
       image: "/images/situations/area1/s05.png",
       choices: [
         {
@@ -721,8 +721,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "electric-gas",
       order: 19,
-      title: "가스레인지 사용 후",
-      body: "야식으로 볶음밥을 만들어 먹었습니다. 맛있게 먹고 설거지도 했습니다. 이제 방에 들어가 쉬려고 합니다. 그런데 뭔가 빠뜨린 것 같은 느낌이 듭니다.",
+      title: "야식 볶음밥 후 가스레인지 밸브 확인",
+      body: "계속해서 민준이는 야식으로 볶음밥을 만들어 먹고 설거지도 했습니다. 이제 방에 들어가 쉬려는데, 뭔가 빠뜨린 것 같은 느낌이 듭니다.",
       image: "/images/situations/area1/s05.png",
       choices: [
         {
@@ -759,8 +759,8 @@ export const dailySafety: Area = {
       areaId: "daily-safety",
       subAreaId: "electric-gas",
       order: 20,
-      title: "친구가 감전되었다!",
-      body: "과학 실험실에서 실습 중, 옆자리 친구가 전기 장비를 만지다 감전되어 쓰러졌습니다! 친구의 손이 아직 장비에 닿아 있고, 몸이 경직되어 있습니다.",
+      title: "과학 실험 중 친구가 감전되었다!",
+      body: "그 다음 날 과학 실험실에서 실습 중, 민준이 옆자리 친구가 전기 장비를 만지다 감전되어 쓰러졌습니다! 친구의 손이 아직 장비에 닿아 있고, 몸이 경직되어 있습니다.",
       image: "/images/situations/area1/s05.png",
       choices: [
         {

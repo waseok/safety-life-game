@@ -332,6 +332,14 @@ export const useGameStore = create<GameStore>((set, get) => ({
       questionScore,
       date: new Date().toLocaleDateString("ko-KR"),
     };
+    // Always save to local rankings as fallback
+    const existingLocal = loadRankings();
+    const updatedLocal = [...existingLocal, entry]
+      .sort((a, b) => b.score - a.score)
+      .slice(0, 20);
+    saveRankings(updatedLocal);
+    set({ rankings: updatedLocal });
+    // Try to also save to server
     try {
       const res = await fetch("/api/rankings", {
         method: "POST",
@@ -343,7 +351,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
         set({ serverRankings: data.rankings ?? [] });
       }
     } catch {
-      // Silently fail if server unavailable
+      // Local fallback already saved above
     }
   },
 

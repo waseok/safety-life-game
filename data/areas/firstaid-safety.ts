@@ -33,8 +33,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 1,
-      title: "쓰러진 사람 발견",
-      body: "길을 걷다가 누군가가 바닥에 쓰러져 있는 것을 발견했습니다. 주변에 다른 사람은 없습니다. 어떻게 해야 할까요?",
+      title: "봉사활동 중 공원에서 쓰러진 어르신 발견",
+      body: "민준이는 주말 응급처치 봉사 활동으로 공원을 순찰하다가 벤치 옆에 한 어르신이 바닥에 쓰러져 있는 것을 발견했습니다. 주변에 다른 사람은 없고, 어르신은 움직이지 않습니다.",
       image: "/images/situations/area7/s01.png",
       choices: [
         {
@@ -71,8 +71,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 2,
-      title: "119 신고 요령",
-      body: "쓰러진 사람에게 반응이 없습니다. 119에 신고하려고 합니다. 신고할 때 어떤 정보를 전달해야 할까요?",
+      title: "119 신고, 무슨 말부터 해야 할까",
+      body: "어르신에게 반응이 없습니다. 민준이는 즉시 119에 신고하려고 합니다. 긴장되지만, 구급대원에게 어떤 정보를 먼저 전달해야 할지 생각해야 합니다.",
       image: "/images/situations/area7/s02.png",
       choices: [
         {
@@ -109,8 +109,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 3,
-      title: "가슴 압박 위치와 깊이",
-      body: "의식이 없고 호흡도 없습니다. 가슴 압박(심장 마사지)을 시작하려고 합니다. 어디를, 얼마나 세게 눌러야 할까요?",
+      title: "CPR 시작, 가슴 어디를 어떻게 눌러야 할까",
+      body: "119 신고를 마친 민준이는 바로 CPR을 시작해야 합니다. 훈련에서 배운 내용을 떠올립니다. 가슴 압박을 할 때 어디를, 얼마나 깊이 눌러야 할까요?",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -147,8 +147,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 4,
-      title: "인공호흡과 기도 확보",
-      body: "가슴 압박을 30회 한 뒤 인공호흡을 하려고 합니다. 기도를 확보하는 올바른 방법은 무엇인가요?",
+      title: "가슴 압박 30회 후, 인공호흡으로 넘어갈 차례",
+      body: "가슴 압박 30회를 마친 민준이는 이제 인공호흡으로 넘어가야 합니다. 숨을 불어넣기 전에 기도를 확보하는 것이 먼저인데, 어떻게 해야 올바른 자세가 될까요?",
       image: "/images/situations/area7/s04.png",
       choices: [
         {
@@ -185,8 +185,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 5,
-      title: "AED와 CPR 연계",
-      body: "AED(자동심장충격기)를 가져왔습니다. AED를 사용할 때 CPR과 어떻게 연계해야 할까요?",
+      title: "AED 도착! CPR과 어떻게 함께 써야 할까",
+      body: "CPR을 계속하고 있던 민준이 곁에 주변 시민 한 분이 AED를 가져왔습니다. AED가 도착했으니 이제 CPR과 어떻게 연계하여 사용해야 할까요?",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -223,8 +223,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 6,
-      title: "영아 질식 대처",
-      body: "갑자기 아기가 음식을 먹다가 목이 막혀 숨을 쉬지 못합니다. 얼굴이 파래지고 있습니다. 어떻게 해야 할까요?",
+      title: "구조 직후, 카페에서 아기가 목이 막혔다",
+      body: "구급대에 어르신을 인계한 뒤 잠시 쉬던 민준이는 근처 카페에서 한 아기가 음식을 먹다가 목이 막혀 숨을 쉬지 못하는 상황을 목격했습니다. 아기의 얼굴이 파래지고 있습니다.",
       image: "/images/situations/area7/s04.png",
       choices: [
         {
@@ -261,8 +261,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "cpr",
       order: 7,
-      title: "회복 자세",
-      body: "쓰러진 사람이 의식이 돌아왔고 호흡도 정상입니다. 구급차가 오기 전까지 어떤 자세로 두어야 할까요?",
+      title: "의식이 돌아왔다, 구급차 올 때까지 어떤 자세로?",
+      body: "봉사 활동 중 또 다른 응급 상황에서 CPR 끝에 쓰러진 분이 의식을 되찾았습니다. 호흡도 정상으로 돌아왔지만, 민준이는 구급차가 올 때까지 이 분을 어떤 자세로 두어야 할지 생각합니다.",
       image: "/images/situations/area7/s04.png",
       choices: [
         {
@@ -300,8 +300,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 8,
-      title: "출혈과 지혈법",
-      body: "친구가 넘어지면서 팔을 베었습니다. 피가 많이 나고 있습니다. 어떻게 지혈해야 할까요?",
+      title: "봉사 활동 중 친구가 유리에 팔을 베다",
+      body: "다음 날 민준이는 학교 환경 봉사 활동에 참여했습니다. 그때 함께 일하던 친구가 깨진 유리에 팔을 베는 사고가 났고, 피가 많이 흐르고 있습니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -338,8 +338,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 9,
-      title: "골절과 부목",
-      body: "친구가 계단에서 굴러 다리가 부러진 것 같습니다. 다리가 부자연스럽게 휘어져 있고 움직이지 못합니다. 구급차를 부른 상태입니다.",
+      title: "이어서, 계단에서 굴러 다리가 골절된 친구",
+      body: "같은 날 이번에는 다른 친구가 급하게 계단을 내려가다가 굴러 다리가 부러진 것 같습니다. 다리가 부자연스럽게 휘어져 있고 움직이지 못합니다. 민준이가 이미 구급차를 불렀습니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -376,8 +376,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 10,
-      title: "화상 응급처치",
-      body: "친구가 뜨거운 물에 손을 데었습니다. 손바닥이 빨갛게 되었고 통증을 호소합니다. 어떻게 해야 할까요?",
+      title: "요리 봉사 중 뜨거운 물에 손을 데인 친구",
+      body: "이어서 민준이는 급식 봉사에서 도움을 주다가 친구가 끓는 물에 손을 데는 사고를 목격했습니다. 손바닥이 빨갛게 부어오르고 친구가 통증을 호소합니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -414,8 +414,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 11,
-      title: "열사병 대처",
-      body: "더운 날 운동을 하다가 친구가 갑자기 쓰러졌습니다. 피부가 뜨겁고 건조하며, 의식이 혼미합니다. 열사병으로 보입니다.",
+      title: "야외 체육 행사 중 친구가 열사병으로 쓰러지다",
+      body: "무더운 여름, 민준이는 야외 체육 행사에서 안전 자원봉사를 하고 있었습니다. 그때 운동 중이던 친구가 갑자기 쓰러졌는데, 피부가 뜨겁고 건조하며 의식이 혼미합니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -452,8 +452,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 12,
-      title: "저체온증 대처",
-      body: "겨울에 친구가 물에 빠졌다가 구조되었습니다.전신이 떨리고 말이 어눌합니다. 저체온증으로 보입니다.",
+      title: "겨울 캠프에서 물에 빠진 친구가 저체온증에",
+      body: "민준이는 학교 겨울 캠프의 안전 봉사팀으로 참여했습니다. 그때 친구 한 명이 얼어붙은 호수 가장자리에서 미끄러져 물에 빠졌다가 구조되었는데, 전신이 떨리고 말이 어눌합니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -490,8 +490,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 13,
-      title: "독극물 섭취",
-      body: "어린 동생이 세제를 마신 것 같습니다. 입 주변에 거품이 있고 울고 있습니다. 어떻게 해야 할까요?",
+      title: "봉사 마치고 귀가했더니 동생이 세제를 마셨다",
+      body: "봉사 활동을 마치고 집에 돌아온 민준이는 어린 동생이 세제를 마신 것 같다는 사실을 발견했습니다. 동생의 입 주변에 거품이 있고 울고 있습니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -528,8 +528,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "emergency",
       order: 14,
-      title: "동물 물림과 뱀 물림",
-      body: "등산 중에 친구가 뱀에 물렸습니다. 다리에 뱀 이빨 자국이 두 개 보입니다. 어떻게 해야 할까요?",
+      title: "봉사 캠프 등산 중 친구가 뱀에 물리다",
+      body: "민준이 일행은 봉사 캠프 마지막 날 등산을 갔습니다. 그런데 앞서 가던 친구가 갑자기 비명을 질렀습니다. 뱀에 물린 것으로, 다리에 이빨 자국이 두 개 선명합니다.",
       image: "/images/situations/area7/s05.png",
       choices: [
         {
@@ -567,8 +567,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "aed",
       order: 15,
-      title: "AED 위치 확인 습관",
-      body: "학교, 공공장소, 지하철역 등에서 AED가 어디에 있는지 평소에 알고 있나요? AED 위치를 아는 것이 왜 중요한가요?",
+      title: "응급처치 교육: AED 위치를 미리 알아야 하는 이유",
+      body: "봉사 활동 경험을 살려 민준이는 학교 응급처치 교육에 참여했습니다. 강사가 묻습니다. \"학교, 공공장소, 지하철역에서 AED가 어디에 있는지 알고 있나요?\" 평소에 위치를 아는 것이 왜 중요할까요?",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -605,8 +605,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "aed",
       order: 16,
-      title: "AED 패드 부착 위치",
-      body: "AED 패드를 부착할 때 올바른 위치는 어디인가요?",
+      title: "AED 실습: 패드를 어디에 붙여야 할까",
+      body: "이어서 민준이는 마네킹을 이용한 AED 실습을 하게 됐습니다. 강사가 AED 패드를 들고 묻습니다. \"자, 패드를 어디에 붙여야 할까요?\" 민준이는 배운 내용을 떠올립니다.",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -643,8 +643,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "aed",
       order: 17,
-      title: "AED 음성 지시 따르기",
-      body: "AED 전원을 켰고 패드를 부착했습니다. AED가 \"심장 분석 중\"이라고 말합니다. 이때 무엇을 해야 할까요?",
+      title: "AED 실습: '심장 분석 중' 음성이 나왔을 때",
+      body: "실습이 계속됩니다. 민준이가 AED 전원을 켜고 패드를 부착하자 \"심장 분석 중\"이라는 음성이 흘러나왔습니다. 강사가 묻습니다. \"이 순간, 어떻게 해야 할까요?\"",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -681,8 +681,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "aed",
       order: 18,
-      title: "전기 충격 시 주의사항",
-      body: "AED가 \"충격을 가합니다. 손대지 마세요\"라고 말합니다. 충격 전후로 무엇을 주의해야 할까요?",
+      title: "AED 실습: 충격 전후에 무엇을 주의해야 할까",
+      body: "다음 실습 상황으로, AED가 \"충격을 가합니다. 손대지 마세요\"라고 안내하는 상황입니다. 강사가 민준이에게 묻습니다. \"충격 전과 후에 각각 무엇을 주의해야 할까요?\"",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -719,8 +719,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "aed",
       order: 19,
-      title: "AED 특수 상황: 물과 금속",
-      body: "비가 오는 날, 물웅덩이 옆에 쓰러진 사람이 있습니다. 가슴이 젖어 있습니다. AED를 사용할 수 있을까요?",
+      title: "AED 특수 상황 실습: 비 오는 날 젖은 가슴",
+      body: "마지막 실습으로 강사가 특수 상황을 제시합니다. 비가 내리는 날 물웅덩이 옆에 쓰러진 사람이 있고, 가슴이 흠뻑 젖어 있습니다. 민준이는 이런 상황에서 AED를 사용할 수 있는지 판단해야 합니다.",
       image: "/images/situations/area7/s03.png",
       choices: [
         {
@@ -757,8 +757,8 @@ export const firstaidSafety: Area = {
       areaId: "firstaid-safety",
       subAreaId: "aed",
       order: 20,
-      title: "구급대 도착까지 CPR 지속",
-      body: "CPR과 AED를 사용하고 있습니다. 119 구급대가 아직 도착하지 않았습니다. 어떻게 해야 할까요?",
+      title: "실전! 구급대 도착까지 CPR을 절대 멈추지 마라",
+      body: "교육을 마친 민준이는 다시 봉사 현장에서 실제 심정지 상황에 마주쳤습니다. CPR과 AED를 함께 사용하고 있지만, 119 구급대가 아직 도착하지 않았습니다. 이제 민준이는 어떻게 해야 할지 압니다.",
       image: "/images/situations/area7/s02.png",
       choices: [
         {
