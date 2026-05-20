@@ -10,12 +10,13 @@ interface RankingRow {
 }
 
 function rowToEntry(row: RankingRow): RankingEntry {
+  const date = row.created_at ? new Date(row.created_at).toLocaleDateString("ko-KR") : new Date().toLocaleDateString("ko-KR");
   return {
     name: row.name,
     score: row.score,
     accuracy: row.accuracy,
     questionScore: row.question_score,
-    date: new Date(row.created_at).toLocaleDateString("ko-KR"),
+    date,
   };
 }
 
@@ -48,6 +49,7 @@ export async function insertRankingToDb(entry: RankingEntry): Promise<boolean> {
     score: Math.round(entry.score),
     accuracy: Math.min(100, Math.max(0, Math.round(entry.accuracy))),
     question_score: Math.max(0, Math.round(entry.questionScore ?? 0)),
+    created_at: new Date().toISOString(),
   });
 
   if (error) {
