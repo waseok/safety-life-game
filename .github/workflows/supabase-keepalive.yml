@@ -1,0 +1,29 @@
+# Supabase 무료 플랜 pause 방지 (1주일 비활성 시 pause)
+# GitHub → Settings → Secrets → Actions 에 아래 2개 등록:
+#   SUPABASE_URL          예: https://zlvpklxczmcdmyzcasnp.supabase.co
+#   SUPABASE_SERVICE_ROLE_KEY  (Supabase Dashboard → Settings → API → Secret)
+
+name: Supabase Keep Alive
+
+on:
+  schedule:
+    # 매일 03:00 UTC — 7일 inactivity 한도보다 훨씬 자주
+    - cron: "0 3 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase rankings table
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: |
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "SUPABASE_URL secret이 설정되지 않았습니다. Supabase를 사용하지 않으면 이 워크플로를 비활성화하세요."
+            exit 0
+          fi
+          curl -sf "${SUPABASE_URL}/rest/v1/rankings?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_SERVICE_ROLE_KEY}"
