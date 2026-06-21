@@ -16,7 +16,14 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping Supabase rankings table
+        env:
+          SUPABASE_URL: ${{ secrets.SUPABASE_URL }}
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
         run: |
-          curl -sf "${{ secrets.SUPABASE_URL }}/rest/v1/rankings?select=id&limit=1" \
-            -H "apikey: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}" \
-            -H "Authorization: Bearer ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}"
+          if [ -z "$SUPABASE_URL" ]; then
+            echo "SUPABASE_URL secret이 설정되지 않았습니다. Supabase를 사용하지 않으면 이 워크플로를 비활성화하세요."
+            exit 0
+          fi
+          curl -sf "${SUPABASE_URL}/rest/v1/rankings?select=id&limit=1" \
+            -H "apikey: ${SUPABASE_SERVICE_ROLE_KEY}" \
+            -H "Authorization: Bearer ${SUPABASE_SERVICE_ROLE_KEY}"
