@@ -2,68 +2,90 @@ import { NextRequest, NextResponse } from "next/server";
 import path from "path";
 import fs from "fs/promises";
 import { tmpdir } from "os";
+import { isSupabaseRankingsEnabled } from "@/lib/supabase-server";
+import { fetchRankingsFromDb, insertRankingToDb } from "@/lib/rankings-db";
+import type { RankingEntry } from "@/lib/rankings-types";
 
 export const dynamic = "force-dynamic";
+export type { RankingEntry } from "@/lib/rankings-types";
 
-export interface RankingEntry {
-  name: string;
-  score: number;
-  accuracy: number;
-  questionScore?: number;
-  date: string;
-}
-
-// /tmp 는 항상 쓰기 가능 (서버 재시작 전까지 유지)
 const TMP_FILE = path.join(tmpdir(), "safety-life-rankings.json");
-// data/ 는 권한이 있을 때 영구 보관용
 const DATA_FILE = path.join(process.cwd(), "data", "rankings.json");
 
-// ── 모듈 레벨 메모리 캐시 ─────────────────────────────────────
-let cache: RankingEntry[] | null = null;
+let fileCache: RankingEntry[] | null = null;
 
-async function loadFromDisk(): Promise<RankingEntry[]> {
-  // 1순위: data/rankings.json (재부팅 후에도 유지)
+async function loadFromFile(): Promise<RankingEntry[]> {
   try {
     const raw = await fs.readFile(DATA_FILE, "utf-8");
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed) && parsed.length > 0) return parsed;
-  } catch {}
-  // 2순위: /tmp (서버 재시작 전까지 유지)
+  } catch {
+    /* ignore */
+  }
   try {
     const raw = await fs.readFile(TMP_FILE, "utf-8");
     const parsed = JSON.parse(raw);
     if (Array.isArray(parsed)) return parsed;
-  } catch {}
+  } catch {
+    /* ignore */
+  }
   return [];
 }
 
-async function getRankings(): Promise<RankingEntry[]> {
-  if (cache !== null) return cache;
-  cache = await loadFromDisk();
-  return cache;
+async function getFileRankings(): Promise<RankingEntry[]> {
+  if (fileCache !== null) return fileCache;
+  fileCache = await loadFromFile();
+  return fileCache;
 }
 
-async function persistRankings(entries: RankingEntry[]): Promise<void> {
-  cache = entries;
-  // /tmp 쓰기 (항상 성공)
+async function persistFileRankings(entries: RankingEntry[]): Promise<void> {
+  fileCache = entries;
   try {
     await fs.writeFile(TMP_FILE, JSON.stringify(entries, null, 2), "utf-8");
   } catch (e) {
     console.error("[rankings] /tmp write failed:", e);
   }
-  // data/ 쓰기 (권한이 있으면 영구 보관)
   try {
     await fs.mkdir(path.dirname(DATA_FILE), { recursive: true });
     await fs.writeFile(DATA_FILE, JSON.stringify(entries, null, 2), "utf-8");
   } catch {
-    // 권한 없으면 무시 (메모리 + /tmp 로 충분)
+    /* 권한 없으면 /tmp만 사용 */
   }
+}
+
+async function getRankings(): Promise<RankingEntry[]> {
+  if (isSupabaseRankingsEnabled()) {
+    const fromDb = await fetchRankingsFromDb();
+    if (fromDb) return fromDb;
+  }
+  return getFileRankings();
+}
+
+async function addRanking(entry: RankingEntry): Promise<RankingEntry[]> {
+  if (isSupabaseRankingsEnabled()) {
+    const ok = await insertRankingToDb(entry);
+    if (ok) {
+      const fromDb = await fetchRankingsFromDb();
+      if (fromDb) return fromDb;
+    }
+  }
+
+  const existing = await getFileRankings();
+  const updated = [...existing, entry]
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 200);
+  await persistFileRankings(updated);
+  return updated.slice(0, 50);
 }
 
 export async function GET() {
   const rankings = await getRankings();
   const top = [...rankings].sort((a, b) => b.score - a.score).slice(0, 50);
-  return NextResponse.json(top);
+  return NextResponse.json(top, {
+    headers: {
+      "Cache-Control": "no-store",
+    },
+  });
 }
 
 export async function POST(req: NextRequest) {
@@ -78,12 +100,19 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Invalid entry" }, { status: 400 });
   }
 
-  const existing = await getRankings();
-  const updated = [...existing, body]
-    .sort((a, b) => b.score - a.score)
-    .slice(0, 200);
+  const entry: RankingEntry = {
+    name: String(body.name).trim().slice(0, 32) || "익명",
+    score: Math.round(body.score),
+    accuracy: Math.min(100, Math.max(0, Math.round(body.accuracy ?? 0))),
+    questionScore: Math.max(0, Math.round(body.questionScore ?? 0)),
+    date: body.date || new Date().toLocaleDateString("ko-KR"),
+  };
 
-  await persistRankings(updated);
+  const rankings = await addRanking(entry);
 
-  return NextResponse.json({ ok: true, rankings: updated.slice(0, 50) });
+  return NextResponse.json({
+    ok: true,
+    storage: isSupabaseRankingsEnabled() ? "database" : "file",
+    rankings,
+  });
 }

@@ -28,8 +28,17 @@ export default function TitleScreen() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Show server rankings if available, fall back to local rankings
-  const displayRankings = serverRankings.length > 0 ? serverRankings : rankings;
+  // 서버/로컬 랭킹을 합쳐서 보여주면 저장 직후에도 사용자가 바로 결과를 확인할 수 있다.
+  const displayRankings = [...serverRankings, ...rankings]
+    .sort((a, b) => b.score - a.score)
+    .filter((entry, index, arr) =>
+      index === arr.findIndex((candidate) =>
+        candidate.name === entry.name &&
+        candidate.score === entry.score &&
+        candidate.date === entry.date
+      )
+    )
+    .slice(0, 50);
 
   const handleStart = () => {
     if (!name.trim()) return;

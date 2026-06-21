@@ -32,7 +32,7 @@ export default function EndingScreen() {
 
   useEffect(() => {
     if (!saved.current) {
-      saveScore();
+      void saveScore();
       saved.current = true;
     }
   }, [saveScore]);
@@ -50,7 +50,10 @@ export default function EndingScreen() {
   }, [ending.type]);
 
   const accuracy = totalChoices > 0 ? Math.round((correctCount / totalChoices) * 100) : 0;
-  const finalScore = life + mental + (correctCount * 10);
+  const totalQuestionScore = useGameStore((s) =>
+    Object.values(s.questionScores).reduce((sum, q) => sum + q.score, 0)
+  );
+  const finalScore = life + mental + (correctCount * 10) + totalQuestionScore;
 
   const theme = {
     good:     { border: "rgba(22,163,74,0.4)",  bg: "rgba(22,163,74,0.06)",   btnGrad: "linear-gradient(135deg,#16a34a,#0d9488)",  btnShadow: "rgba(22,163,74,0.35)",   labelColor: "#15803d" },

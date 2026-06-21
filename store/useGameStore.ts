@@ -90,7 +90,7 @@ interface GameStore {
   // 질문 만들기 제출 (GPT 평가 결과를 컴포넌트에서 받아서 전달)
   submitQuizQuestion: (areaId: string, question: string, score: QuestionScore, isMidpoint: boolean) => void;
   proceedFromAreaComplete: () => void;
-  saveScore: () => void;
+  saveScore: () => Promise<void>;
   saveAreaScore: (areaId: string) => Promise<void>;
   fetchServerRankings: () => Promise<void>;
   recordQuestionScore: (key: string, score: QuestionScore) => void;
@@ -295,7 +295,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     }
   },
 
-  saveScore: () => {
+  saveScore: async () => {
     const state = get();
     const accuracy = state.totalChoices > 0
       ? Math.round((state.correctCount / state.totalChoices) * 100) : 0;
@@ -314,6 +314,22 @@ export const useGameStore = create<GameStore>((set, get) => ({
       .slice(0, 20);
     saveRankings(updated);
     set({ rankings: updated });
+
+    // 로컬 저장만 되면 메인에서 서버 랭킹에 가려져 보이지 않을 수 있으므로
+    // 최종 점수도 동일하게 서버 랭킹에 반영한다.
+    try {
+      const res = await fetch("/api/rankings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(entry),
+      });
+      if (res.ok) {
+        const data = await res.json();
+        set({ serverRankings: data.rankings ?? [] });
+      }
+    } catch {
+      // 로컬 랭킹은 이미 저장되었으므로 서버 저장 실패는 무시한다.
+    }
   },
 
   saveAreaScore: async (areaId: string) => {

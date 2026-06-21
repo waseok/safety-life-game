@@ -15,13 +15,18 @@
    `npm install`
 
 2. 환경 변수 설정  
-   `.env.local.example`을 참고해 `.env.local`을 만들고 Supabase URL/Anon Key를 넣습니다.  
+   `.env.local.example`을 참고해 `.env.local`을 만듭니다.  
    - `NEXT_PUBLIC_SUPABASE_URL`  
    - `NEXT_PUBLIC_SUPABASE_ANON_KEY`  
-   (미설정 시에도 앱은 실행되며, 각 영역 진입 시 "이 영역은 아직 준비 중입니다"로 표시됩니다.)
+   - `SUPABASE_SERVICE_ROLE_KEY` (서버 API에서 랭킹 저장·조회용, **브라우저에 노출 금지**)  
+   Vercel 등에 배포할 때도 위 변수를 Production 환경에 동일하게 등록하세요.
 
-3. Supabase 테이블 생성 및 데이터 삽입  
-   `supabase/migrations/001_game_scenarios.sql` 내용을 Supabase SQL Editor에서 실행합니다.
+3. Supabase 테이블 생성  
+   Supabase 대시보드 → **SQL Editor**에서 아래 파일 내용을 실행합니다.  
+   - **전역 랭킹 (필수, 계속 보이게 하려면):** `supabase/migrations/002_rankings.sql`  
+   - (선택) 시나리오 DB: `supabase/migrations/001_game_scenarios.sql`  
+
+   `SUPABASE_SERVICE_ROLE_KEY`가 없으면 랭킹은 임시 파일 저장으로만 동작하며, **재배포 시 사라질 수 있습니다.**
 
 4. 개발 서버 실행  
    `npm run dev`  
@@ -33,9 +38,9 @@
 - `app/game/[areaId]/page.tsx` — 영역별 게임 페이지
 - `components/` — StatusHeader, GameScene, ActionButtons, AreaCard, GameOverModal, EndingModal
 - `store/useGameStore.ts` — Zustand 게임 상태
-- `lib/supabase.ts` — Supabase 클라이언트 및 fetch
-- `lib/types.ts` — 타입 및 7영역 목록
-- `supabase/migrations/001_game_scenarios.sql` — 테이블 및 과학실 안전 시나리오
+- `lib/supabase-server.ts` — 서버 API용 Supabase (service role)
+- `app/api/rankings/route.ts` — 전역 랭킹 GET/POST (DB 우선, 미설정 시 파일 폴백)
+- `supabase/migrations/002_rankings.sql` — 랭킹 테이블
 
 ## 플레이 가능 영역
 

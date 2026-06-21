@@ -83,9 +83,9 @@ const config: Config = {
         full:    "9999px",
       },
       fontFamily: {
-        headline: ["'Plus Jakarta Sans'", "Noto Sans KR", "sans-serif"],
-        body:     ["'Plus Jakarta Sans'", "Noto Sans KR", "sans-serif"],
-        label:    ["'Plus Jakarta Sans'", "Noto Sans KR", "sans-serif"],
+        headline: ["Maplestory", "Noto Sans KR", "sans-serif"],
+        body:     ["Maplestory", "Noto Sans KR", "sans-serif"],
+        label:    ["Maplestory", "Noto Sans KR", "sans-serif"],
       },
       animation: {
         "fade-in":    "fadeIn 0.5s ease-out",
